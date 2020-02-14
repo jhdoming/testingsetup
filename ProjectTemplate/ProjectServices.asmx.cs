@@ -19,9 +19,9 @@ namespace ProjectTemplate
 		////////////////////////////////////////////////////////////////////////
 		///replace the values of these variables with your database credentials
 		////////////////////////////////////////////////////////////////////////
-		private string dbID = "cis440template";
-		private string dbPass = "!!Cis440";
-		private string dbName = "cis440template";
+		private string dbID = "byteme";
+		private string dbPass = "!!Byteme";
+		private string dbName = "byteme";
 		////////////////////////////////////////////////////////////////////////
 		
 		////////////////////////////////////////////////////////////////////////
@@ -43,7 +43,8 @@ namespace ProjectTemplate
 		{
 			try
 			{
-				string testQuery = "select * from test";
+                // replace login with the name of the table in the database
+				string testQuery = "select * from login";
 
 				////////////////////////////////////////////////////////////////////////
 				///here's an example of using the getConString method!
@@ -70,11 +71,12 @@ namespace ProjectTemplate
             bool success = false;
 
             //our connection string comes from our web.config file like we talked about earlier
+            // use the method used up top
             string sqlConnectString = getConString();
             //here's our query.  A basic select with nothing fancy.  Note the parameters that begin with @
             //NOTICE: we added admin to what we pull, so that we can store it along with the id in the session
             //string sqlSelect = "SELECT id, admin FROM accounts WHERE userid=@idValue and pass=@passValue";
-            string sqlSelect = "SELECT id, FROM users WHERE userid=@idValue and pass=@passValue";
+            string sqlSelect = "SELECT id FROM users WHERE userid=@idValue and pass=@passValue";
 
             //set up our connection object to be ready to use our connection string
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
