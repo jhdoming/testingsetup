@@ -53,7 +53,7 @@
             var id = document.getElementById("logonId").value;
             var pass = document.getElementById("logonPass").value;
 
-            var webMethod = "ProjectServices.asmx/TestConnection";
+            var webMethod = "ProjectServices.asmx/LogOn";
             var parameters = "{\"uid\":\""+encodeURI(id)+"\", \"pass\":\""+encodeURI(pass)+"\"}";
 
             //jQuery ajax method
@@ -89,6 +89,8 @@
 <body>
 	<button onclick="javascript: TestButtonHandler();">Click here to test connection!</button>
     <br/>
-    <input type="text" id="logonId" /><input type="text" id="logonPass"/><button onclick="javascript: logon();">Log On</button>
+    <input type="text" id="logonId" />
+    <input type="text" id="logonPass"/>
+    <button onclick="javascript: logon();">Log On</button>
 </body>
 </html >
