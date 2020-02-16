@@ -116,64 +116,36 @@ namespace ProjectTemplate
         [WebMethod] //NOTICE: gotta enable session on each individual method
         public String CreateAccount(string uid, string pass)
         {
-            //we return this flag to tell them if they successfully created account
-            bool success = false;
 
-            //our connection string comes from our web.config file like we talked about earlier
-            // use the method used up top
             string sqlConnectString = getConString();
 
-            // Select pulls the User table so that we can compare to the Inserted Values
-
-            string sqlSelect = "SELECT * FROM users";
+            // Select pulls the User table so that we can compare to the desired username
             string sqlSelectUserCheck = "SELECT id FROM users WHERE userid=@idValue";
-            string sqlInsert = "INSERT INTO users(userid,pass) VALUES(@idValue,@passValue)";
+            string sqlInsertNewUser = "INSERT INTO users(userid,pass) VALUES(@idValue,@passValue)";
 
-
-            //set up our connection object to be ready to use our connection string
+            //COMMAND SET UP
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
-            //set up our command object to use our connection, and our query
-            MySqlCommand sqlSelectCommand = new MySqlCommand(sqlSelect, sqlConnection);
-            MySqlCommand sqlSelectUserNameCommand = new MySqlCommand(sqlSelect, sqlConnection);
-            MySqlCommand sqlInsertCommand = new MySqlCommand(sqlInsert, sqlConnection);
+            MySqlCommand sqlSelectUserCheckCommand = new MySqlCommand(sqlSelectUserCheck, sqlConnection);
+            MySqlCommand sqlInsertCommand = new MySqlCommand(sqlInsertNewUser, sqlConnection);
 
-            //tell our command to replace the @parameters with real values
-            //we decode them because they came to us via the web so they were encoded
-            //for transmission (funky characters escaped, mostly)
-            sqlSelectCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(uid));
-            sqlSelectCommand.Parameters.AddWithValue("@passValue", HttpUtility.UrlDecode(pass));
-
-            sqlSelectUserNameCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(uid));
-
+            // SETTING PARAMETERS
+            sqlSelectUserCheckCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(uid));
             sqlInsertCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(uid));
             sqlInsertCommand.Parameters.AddWithValue("@passValue", HttpUtility.UrlDecode(pass));
 
-
-            //a data adapter acts like a bridge between our command object and
-            //the data we are trying to get back and put in a table object
-            MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlSelectCommand);
-            //here's the table we want to fill with the results from our query
+            // opens up pathway to database and fills data table with user names
+            // If rows are returned, that means that the desired user name is in use already
+            MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlSelectUserCheckCommand);
             DataTable sqlDt = new DataTable();
-            //here we go filling it!
             sqlDa.Fill(sqlDt);
-            //check to see if any rows were returned.  If they were, it means it's
-            //a legit account
+
             if (sqlDt.Rows.Count > 0)
             {
-                //if we found an account, store the id and admin status in the session
-                //so we can check those values later on other method calls to see if they
-                //are 1) logged in at all, and 2) and admin or not
-
-                //checks if the Usernames are different 
-                if (String.Equals(uid, (string)sqlDt.Rows[0]["userid"], StringComparison.OrdinalIgnoreCase)==false)
-                {
-                    if (uid.Length == ((string)sqlDt.Rows[0]["userid"]).Length)
-                    {
-                        return "User name is in use, please choose another name and try again";
-                    }
-                }
-
+                return "User name is in use, please choose another name and try again";
             }
+
+
+            // establishing check variables for the password
             bool upperLetter = false;
             bool numberCheck = false;
 
@@ -191,9 +163,10 @@ namespace ProjectTemplate
                 }
             }
             //Checks that both an Upper Case Letter and Number are used in the password
+            //If either fails, tells user to try again
             if (upperLetter == false || numberCheck == false)
             {
-                return $"Please make another password that has at least 1 upper case letter and >One number {upperLetter} {numberCheck}";
+                return "Please make another password that has at least 1 upper case letter and >One number";
             }
 
             // Opens Connection to execute query, then closes once finished
@@ -204,7 +177,7 @@ namespace ProjectTemplate
             // checks to see that a row is affected. If the change is made, Alerts user to log in.
             if (check == 1)
             {
-                return $"Account Successfully Created, You can now log in {upperLetter} {numberCheck}";
+                return "Account Successfully Created, You can now log in";
             }
             else
             {
