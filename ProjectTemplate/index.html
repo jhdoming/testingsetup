@@ -78,7 +78,7 @@
             });
 
 
-           
+
         }
 
          function CreateAccount() {
@@ -103,7 +103,7 @@
                      alert("this code will only execute if javascript is unable to access the webservice");
                  }
              });
-        
+
          }
 	</script>
 	<!--END OF YOUR OWN JAVASCRIPT-->
@@ -130,13 +130,15 @@
 
         <table>
             <th>
-            <td><p>This is the Account Creation Form</p></td>
+                <p>This is the Account Creation Form</p>
             </th>
             <tr>
+                <td><label for="createUser">User name: </label></td>
                 <td><input type="text" id="createUser" /></td>
             </tr>
             <tr>
-                <td><input type="text" id="createPass" /></td>
+                <td><label for="createPass">Password (>One Capital + >One Letter)</label></td>
+                <td><input type="password" id="createPass" /></td>
                 <td><button onclick="javascript: CreateAccount();">Create Account</button></td>
             </tr>
 

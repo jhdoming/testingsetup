@@ -126,6 +126,7 @@ namespace ProjectTemplate
             // Select pulls the User table so that we can compare to the Inserted Values
 
             string sqlSelect = "SELECT * FROM users";
+            string sqlSelectUserCheck = "SELECT id FROM users WHERE userid=@idValue";
             string sqlInsert = "INSERT INTO users(userid,pass) VALUES(@idValue,@passValue)";
 
 
@@ -133,6 +134,7 @@ namespace ProjectTemplate
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
             //set up our command object to use our connection, and our query
             MySqlCommand sqlSelectCommand = new MySqlCommand(sqlSelect, sqlConnection);
+            MySqlCommand sqlSelectUserNameCommand = new MySqlCommand(sqlSelect, sqlConnection);
             MySqlCommand sqlInsertCommand = new MySqlCommand(sqlInsert, sqlConnection);
 
             //tell our command to replace the @parameters with real values
@@ -140,6 +142,8 @@ namespace ProjectTemplate
             //for transmission (funky characters escaped, mostly)
             sqlSelectCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(uid));
             sqlSelectCommand.Parameters.AddWithValue("@passValue", HttpUtility.UrlDecode(pass));
+
+            sqlSelectUserNameCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(uid));
 
             sqlInsertCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(uid));
             sqlInsertCommand.Parameters.AddWithValue("@passValue", HttpUtility.UrlDecode(pass));
@@ -160,41 +164,47 @@ namespace ProjectTemplate
                 //so we can check those values later on other method calls to see if they
                 //are 1) logged in at all, and 2) and admin or not
 
-                if (uid == (String)sqlDt.Rows[0]["userid"])
+                //checks if the Usernames are different 
+                if (String.Equals(uid, (string)sqlDt.Rows[0]["userid"], StringComparison.OrdinalIgnoreCase)==false)
                 {
-                    return "User name is in use, please choose another name and try again";
-                }
-
-                bool upperLetter = false;
-                bool numberCheck = false;
-
-                // Tests each character in the password for validity. If all tests pass, password is valid
-                foreach (char c in pass)
-                {
-                    if (char.IsUpper(c))
+                    if (uid.Length == ((string)sqlDt.Rows[0]["userid"]).Length)
                     {
-                        upperLetter = true;
+                        return "User name is in use, please choose another name and try again";
                     }
-
-                    if (char.IsDigit(c))
-                    {
-                        numberCheck = true;
-                    }
-                }
-                //Checks that both an Upper Case Letter and Number are used in the password
-                if (upperLetter && numberCheck == false)
-                {
-                    return "Please make another password that has at least 1 upper case letter and >One number";
                 }
 
             }
+            bool upperLetter = false;
+            bool numberCheck = false;
+
+            // Tests each character in the password for validity. If all tests pass, password is valid
+            foreach (char c in pass)
+            {
+                if (char.IsUpper(c))
+                {
+                    upperLetter = true;
+                }
+
+                if (char.IsDigit(c))
+                {
+                    numberCheck = true;
+                }
+            }
+            //Checks that both an Upper Case Letter and Number are used in the password
+            if (upperLetter == false || numberCheck == false)
+            {
+                return $"Please make another password that has at least 1 upper case letter and >One number {upperLetter} {numberCheck}";
+            }
+
+            // Opens Connection to execute query, then closes once finished
             sqlConnection.Open();
             int check = sqlInsertCommand.ExecuteNonQuery();
             sqlConnection.Close();
 
+            // checks to see that a row is affected. If the change is made, Alerts user to log in.
             if (check == 1)
             {
-                return $"Account Successfully Created, You can now log in";
+                return $"Account Successfully Created, You can now log in {upperLetter} {numberCheck}";
             }
             else
             {
