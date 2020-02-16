@@ -76,7 +76,35 @@
                     alert("this code will only execute if javascript is unable to access the webservice");
                 }
             });
+
+
+           
         }
+
+         function CreateAccount() {
+            var id = document.getElementById("createUser").value;
+            var pass = document.getElementById("createPass").value;
+
+            var webMethod = "ProjectServices.asmx/CreateAccount";
+            var parameters = "{\"uid\":\""+encodeURI(id)+"\", \"pass\":\""+encodeURI(pass)+"\"}";
+
+            //jQuery ajax method
+             $.ajax({
+                 type: "POST",
+                 url: webMethod,
+                 data: parameters,
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (msg) {
+                     var responseFromServer = msg.d;
+                     alert(responseFromServer);
+                 },
+                 error: function (e) {
+                     alert("this code will only execute if javascript is unable to access the webservice");
+                 }
+             });
+        
+         }
 	</script>
 	<!--END OF YOUR OWN JAVASCRIPT-->
 
@@ -89,8 +117,32 @@
 <body>
 	<button onclick="javascript: TestButtonHandler();">Click here to test connection!</button>
     <br/>
+    <br/>
     <input type="text" id="logonId" />
     <input type="text" id="logonPass"/>
     <button onclick="javascript: logon();">Log On</button>
+
+    <!-- Making form for Account Creation - Can be moved later #Max-->
+    <div accountCreate>
+        <br />
+        <br />
+        <br />
+
+        <table>
+            <th>
+            <td><p>This is the Account Creation Form</p></td>
+            </th>
+            <tr>
+                <td><input type="text" id="createUser" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="createPass" /></td>
+                <td><button onclick="javascript: CreateAccount();">Create Account</button></td>
+            </tr>
+
+
+        </table>
+
+    </div>
 </body>
 </html >
