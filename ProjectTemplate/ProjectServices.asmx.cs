@@ -99,6 +99,7 @@ namespace ProjectTemplate
             sqlDa.Fill(sqlDt);
             //check to see if any rows were returned.  If they were, it means it's
             //a legit account
+
             if (sqlDt.Rows.Count > 0)
             {
                 //if we found an account, store the id and admin status in the session
@@ -165,7 +166,7 @@ namespace ProjectTemplate
                 }
 
                 bool upperLetter = false;
-                bool number = false;
+                bool numberCheck = false;
 
                 // Tests each character in the password for validity. If all tests pass, password is valid
                 foreach (char c in pass)
@@ -177,23 +178,23 @@ namespace ProjectTemplate
 
                     if (char.IsDigit(c))
                     {
-                        number = true;
+                        numberCheck = true;
                     }
                 }
                 //Checks that both an Upper Case Letter and Number are used in the password
-                if (upperLetter | number == false)
+                if (upperLetter && numberCheck == false)
                 {
                     return "Please make another password that has at least 1 upper case letter and >One number";
                 }
 
             }
-
+            sqlConnection.Open();
             int check = sqlInsertCommand.ExecuteNonQuery();
+            sqlConnection.Close();
 
-            success = LogOn(uid, pass);
-            if (success == true)
+            if (check == 1)
             {
-                return $"Account Successfully Created - {check} row returned";
+                return $"Account Successfully Created, You can now log in";
             }
             else
             {
