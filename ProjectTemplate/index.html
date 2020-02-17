@@ -95,23 +95,25 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="loginForm">
+        <!-- d-flex creates a container, can justify content center, h-100 (can be 25, 50, 75, 0r 100) -->
         <div class="d-flex justify-content-center h-100">
+            <!-- card is a content container, can have header, body, footer. can also edit -->
             <div class="card">
                 <div class="card-header">
                     <h3>Sign In</h3>
-                    <!-- <div class="d-flex justify-content-end social_icon">
-                        <span><i class="fab fa-facebook-square"></i></span>
-                        <span><i class="fab fa-google-plus-square"></i></span>
-                        <span><i class="fab fa-twitter-square"></i></span>
-                    </div> -->
                 </div>
                 <div class="card-body">
                     <form action="www.google.com" method="post">
+                        <!-- input group allows profile icon and input box to be next to eachother with same dimensions
+                             form group does automatic spacing vertically-->
                         <div class="input-group form-group">
+                            <!-- input-group-prepend puts icon div the beginning, input-group-text centers profile icon
+                                 <i> is the actual profile icon-->
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
+                            <!-- form-control is for textual like inputs. makes with 100% -->
                             <input type="text" class="form-control" placeholder="username" id="logonId">
 
                         </div>
@@ -124,13 +126,13 @@
                         <!-- <div class="row align-items-center remember">
                             <input type="checkbox">Remember Me
                         </div> -->
-                        <div class="form-group">
+                        <div class="form-group login_btn">
                             <button type="button" onclick="javascript: logon();">Log On</button>
                         </div>
                     </form>
                 </div>
                 <div class="card-footer">
-                    <div class="d-flex justify-content-center links">
+                    <div class="d-flex justify-content-center signUp">
                         Don't have an account?<a href="#">Sign Up</a>
                     </div>
                     <!-- <div class="d-flex justify-content-center">
