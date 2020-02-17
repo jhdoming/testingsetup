@@ -77,7 +77,7 @@ namespace ProjectTemplate
             //here's our query.  A basic select with nothing fancy.  Note the parameters that begin with @
             //NOTICE: we added admin to what we pull, so that we can store it along with the id in the session
             //string sqlSelect = "SELECT id, admin FROM accounts WHERE userid=@idValue and pass=@passValue";
-            string sqlSelect = "SELECT id FROM users WHERE userid=@idValue and pass=@passValue";
+            string sqlSelect = "SELECT UserId FROM Login WHERE Username=@idValue and Pass=@passValue";
 
             //set up our connection object to be ready to use our connection string
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
@@ -105,7 +105,7 @@ namespace ProjectTemplate
                 //if we found an account, store the id and admin status in the session
                 //so we can check those values later on other method calls to see if they
                 //are 1) logged in at all, and 2) and admin or not
-                Session["id"] = sqlDt.Rows[0]["id"];
+                Session["UserId"] = sqlDt.Rows[0]["UserId"];
                 //Session["admin"] = sqlDt.Rows[0]["admin"];
                 success = true;
             }
@@ -120,8 +120,8 @@ namespace ProjectTemplate
             string sqlConnectString = getConString();
 
             // Select pulls the User table so that we can compare to the desired username
-            string sqlSelectUserCheck = "SELECT id FROM users WHERE userid=@idValue";
-            string sqlInsertNewUser = "INSERT INTO users(userid,pass) VALUES(@idValue,@passValue)";
+            string sqlSelectUserCheck = "SELECT UserID FROM Login WHERE Username=@idValue";
+            string sqlInsertNewUser = "INSERT INTO Login(Username,Pass) VALUES(@idValue,@passValue)";
 
             //COMMAND SET UP
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
@@ -166,7 +166,7 @@ namespace ProjectTemplate
             //If either fails, tells user to try again
             if (upperLetter == false || numberCheck == false)
             {
-                return "Please make another password that has at least 1 upper case letter and >One number";
+                return "Please make another password that has >One upper case letter and >One number";
             }
 
             // Opens Connection to execute query, then closes once finished
