@@ -43,6 +43,7 @@ namespace ProjectTemplate
 		{
 			try
 			{
+
 				string testQuery = "select * from Login";
 
 				////////////////////////////////////////////////////////////////////////
@@ -70,6 +71,7 @@ namespace ProjectTemplate
             bool success = false;
 
             //our connection string comes from our web.config file like we talked about earlier
+            // use the method used up top
             string sqlConnectString = getConString();
             //here's our query.  A basic select with nothing fancy.  Note the parameters that begin with @
             //NOTICE: we added admin to what we pull, so that we can store it along with the id in the session

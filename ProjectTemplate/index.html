@@ -40,7 +40,7 @@
         }
 
         function TestButtonHandler() {
-            var webMethod = "ProjectServices.asmx/TestConnection";
+            var webMethod = "ProjectServices.asmx/LogOn";
             var parameters = "{}";
 
             //jQuery ajax method
@@ -64,7 +64,9 @@
             var pass = document.getElementById("logonPass").value;
 
             var webMethod = "ProjectServices.asmx/LogOn";
+
             var parameters = "{\"uid\":\"" + encodeURI(id) + "\", \"pass\":\"" + encodeURI(pass) + "\"}";
+
 
             //jQuery ajax method
             $.ajax({
