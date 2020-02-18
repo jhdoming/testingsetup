@@ -1,0 +1,53 @@
+
+html,body{
+background-image: url('http://getwallpapers.com/wallpaper/full/1/4/c/119797.jpg#.XkiLAPM4QZY.link');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+}
+
+.loginForm{
+align-content: center;
+height: 100%;
+}
+
+.card{
+width: 375px;
+height: 400px;
+margin-bottom: auto;
+margin-top: auto;
+background-color: rgba(0,0,0,0.5);
+}
+
+.card-header h3{
+font-size: 300%;
+text-align: center;
+text-decoration: underline;
+color: white;
+}
+
+.input-group-prepend span{
+border:0;
+width: 45px;
+color: black;
+background-color: #00BFFF;
+}
+
+.login_btn{
+background-color: #00BFFF;
+color: black;
+width: 125px;
+}
+
+.login_btn:hover{
+background-color: white;
+color: black;
+}
+
+.signUp{
+color: white;
+}
+
+.signUp a{
+margin-left: 4px;
+}
