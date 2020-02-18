@@ -43,8 +43,8 @@ namespace ProjectTemplate
 		{
 			try
 			{
-                // replace login with the name of the table in the database
-				string testQuery = "select * from login";
+
+				string testQuery = "select * from Login";
 
 				////////////////////////////////////////////////////////////////////////
 				///here's an example of using the getConString method!
@@ -76,7 +76,7 @@ namespace ProjectTemplate
             //here's our query.  A basic select with nothing fancy.  Note the parameters that begin with @
             //NOTICE: we added admin to what we pull, so that we can store it along with the id in the session
             //string sqlSelect = "SELECT id, admin FROM accounts WHERE userid=@idValue and pass=@passValue";
-            string sqlSelect = "SELECT id FROM users WHERE userid=@idValue and pass=@passValue";
+            string sqlSelect = "SELECT UserId FROM Login WHERE Username=@idValue and pass=@passValue";
 
             //set up our connection object to be ready to use our connection string
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
@@ -103,7 +103,7 @@ namespace ProjectTemplate
                 //if we found an account, store the id and admin status in the session
                 //so we can check those values later on other method calls to see if they 
                 //are 1) logged in at all, and 2) and admin or not
-                Session["id"] = sqlDt.Rows[0]["id"];
+                Session["UserId"] = sqlDt.Rows[0]["UserId"];
                 //Session["admin"] = sqlDt.Rows[0]["admin"];
                 success = true;
             }
