@@ -36,6 +36,7 @@ background-color: #00BFFF;
 .login_btn{
 background-color: #00BFFF;
 color: black;
+float: right;
 width: 125px;
 }
 
@@ -48,6 +49,6 @@ color: black;
 color: white;
 }
 
-.signUp a{
+.signUp{
 margin-left: 4px;
 }
