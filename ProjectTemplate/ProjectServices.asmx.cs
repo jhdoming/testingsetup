@@ -76,7 +76,7 @@ namespace ProjectTemplate
             //here's our query.  A basic select with nothing fancy.  Note the parameters that begin with @
             //NOTICE: we added admin to what we pull, so that we can store it along with the id in the session
             //string sqlSelect = "SELECT id, admin FROM accounts WHERE userid=@idValue and pass=@passValue";
-            string sqlSelect = "SELECT UserId FROM Login WHERE Username=@idValue and pass=@passValue";
+            string sqlSelect = "SELECT UserId FROM Login WHERE Username=@idValue and Pass=@passValue";
 
             //set up our connection object to be ready to use our connection string
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
@@ -89,19 +89,20 @@ namespace ProjectTemplate
             sqlCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(uid));
             sqlCommand.Parameters.AddWithValue("@passValue", HttpUtility.UrlDecode(pass));
 
-            //a data adapter acts like a bridge between our command object and 
+            //a data adapter acts like a bridge between our command object and
             //the data we are trying to get back and put in a table object
             MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
             //here's the table we want to fill with the results from our query
             DataTable sqlDt = new DataTable();
             //here we go filling it!
             sqlDa.Fill(sqlDt);
-            //check to see if any rows were returned.  If they were, it means it's 
+            //check to see if any rows were returned.  If they were, it means it's
             //a legit account
+
             if (sqlDt.Rows.Count > 0)
             {
                 //if we found an account, store the id and admin status in the session
-                //so we can check those values later on other method calls to see if they 
+                //so we can check those values later on other method calls to see if they
                 //are 1) logged in at all, and 2) and admin or not
                 Session["UserId"] = sqlDt.Rows[0]["UserId"];
                 //Session["admin"] = sqlDt.Rows[0]["admin"];
@@ -109,6 +110,79 @@ namespace ProjectTemplate
             }
             //return the result!
             return success;
+        }
+
+        [WebMethod] //NOTICE: gotta enable session on each individual method
+        public String CreateAccount(string uid, string pass)
+        {
+
+            string sqlConnectString = getConString();
+
+            // Select pulls the User table so that we can compare to the desired username
+            string sqlSelectUserCheck = "SELECT UserID FROM Login WHERE Username=@idValue";
+            string sqlInsertNewUser = "INSERT INTO Login(Username,Pass) VALUES(@idValue,@passValue)";
+
+            //COMMAND SET UP
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            MySqlCommand sqlSelectUserCheckCommand = new MySqlCommand(sqlSelectUserCheck, sqlConnection);
+            MySqlCommand sqlInsertCommand = new MySqlCommand(sqlInsertNewUser, sqlConnection);
+
+            // SETTING PARAMETERS
+            sqlSelectUserCheckCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(uid));
+            sqlInsertCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(uid));
+            sqlInsertCommand.Parameters.AddWithValue("@passValue", HttpUtility.UrlDecode(pass));
+
+            // opens up pathway to database and fills data table with user names
+            // If rows are returned, that means that the desired user name is in use already
+            MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlSelectUserCheckCommand);
+            DataTable sqlDt = new DataTable();
+            sqlDa.Fill(sqlDt);
+
+            if (sqlDt.Rows.Count > 0)
+            {
+                return "User name is in use, please choose another name and try again";
+            }
+
+
+            // establishing check variables for the password
+            bool upperLetter = false;
+            bool numberCheck = false;
+
+            // Tests each character in the password for validity. If all tests pass, password is valid
+            foreach (char c in pass)
+            {
+                if (char.IsUpper(c))
+                {
+                    upperLetter = true;
+                }
+
+                if (char.IsDigit(c))
+                {
+                    numberCheck = true;
+                }
+            }
+            //Checks that both an Upper Case Letter and Number are used in the password
+            //If either fails, tells user to try again
+            if (upperLetter == false || numberCheck == false)
+            {
+                return "Please make another password that has >One upper case letter and >One number";
+            }
+
+            // Opens Connection to execute query, then closes once finished
+            sqlConnection.Open();
+            int check = sqlInsertCommand.ExecuteNonQuery();
+            sqlConnection.Close();
+
+            // checks to see that a row is affected. If the change is made, Alerts user to log in.
+            if (check == 1)
+            {
+                return "Account Successfully Created, You can now log in";
+            }
+            else
+            {
+                return "Account Creation Failed";
+            }
+
         }
     }
 }
