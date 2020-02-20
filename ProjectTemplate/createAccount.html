@@ -1,8 +1,7 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <title>Create Account</title>
     <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -12,8 +11,8 @@
     <!--Fontawesome CDN-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-    <!--Custom styles-->
-    <link rel="stylesheet" type="text/css" href="login-style.css">
+    <!-- midieval font -->
+    <link href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap" rel="stylesheet">
 
     <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
     <script type="text/javascript">
@@ -39,31 +38,11 @@
             });
         }
 
-        function TestButtonHandler() {
-            var webMethod = "ProjectServices.asmx/LogOn";
-            var parameters = "{}";
+        function createAccount() {
+            var id = document.getElementById("createId").value;
+            var pass = document.getElementById("createPass").value;
 
-            //jQuery ajax method
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    alert(responseFromServer);
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-        }
-        function logon() {
-            var id = document.getElementById("logonId").value;
-            var pass = document.getElementById("logonPass").value;
-
-            var webMethod = "ProjectServices.asmx/LogOn";
+            var webMethod = "ProjectServices.asmx/createAccount";
 
             var parameters = "{\"uid\":\"" + encodeURI(id) + "\", \"pass\":\"" + encodeURI(pass) + "\"}";
 
@@ -78,75 +57,125 @@
                 success: function (msg) {
                     var responseFromServer = msg.d;
                     if (responseFromServer == true) {
-                        alert("logged in!");
+                        alert(responseFromServer);
+                        //window.location.replace("index.html");
                     }
                     else {
-                        alert("bad credentials");
+                        alert(responseFromServer);
                     }
+                    //after creating an account, sends you back to the login page (works here but also works when password isnt set right)
+                    //window.location.replace("index.html");
                 },
                 error: function (e) {
                     alert("this code will only execute if javascript is unable to access the webservice");
                 }
             });
-
-
-
         }
     </script>
-    <!--END OF YOUR OWN JAVASCRIPT-->
-    <!--AND YOUR OWN CSS CAN GO HERE AS WELL-->
-    <style>
-    </style>
-    <!--END OF YOUR OWN CSS-->
-</head>
-<body>
 
-    <div class="loginForm">
+    <style type="text/css">
+
+        html, body {
+            background-image: url('http://getwallpapers.com/wallpaper/full/5/d/a/59857.jpg#.Xk2UTrtIIdU.link');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: MedievalSharp;
+            height: 100%;
+        }
+
+        .createAccoutForm {
+            align-content: center;
+            height: 100%;
+        }
+
+        .card {
+            width: 375px;
+            height: 350px;
+            margin-bottom: auto;
+            margin-top: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .card-header h3 {
+            font-size: 300%;
+            text-align: center;
+            text-decoration: underline;
+            color: white;
+        }
+
+        .input-group-prepend span {
+            border: 0;
+            width: 45px;
+            color: black;
+            background-color: #ffb84d;
+        }
+
+        .createAccount_btn {
+            background-color: #ffb84d;
+            color: black;
+            font-size: 90%;
+            font-weight: bold;
+            float: right;
+            width: 125px;
+        }
+
+            .createAccount_btn:hover {
+                background-color: white;
+                color: black;
+            }
+
+        .returnToLogin {
+            color: white;
+            margin-left: 5px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+	    <div class="createAccoutForm">
         <!-- d-flex creates a container, can justify content center, h-100 (can be 25, 50, 75, 0r 100) -->
         <div class="d-flex justify-content-center h-100">
             <!-- card is a content container, can have header, body, footer. can also edit -->
             <div class="card">
                 <div class="card-header">
-                    <h3>Sign In</h3>
+                    <h3>Create Account</h3>
                 </div>
-                <div class="card-body">
-                    <form action="" method="post">
+                <div class="card-body cardBody">
+                    <form action="www.google.com" method="post">
                         <!-- input group allows profile icon and input box to be next to eachother with same dimensions
-                             form group does automatic spacing vertically-->
+                 form group does automatic spacing vertically-->
                         <div class="input-group form-group">
                             <!-- input-group-prepend puts icon div the beginning, input-group-text centers profile icon
-                                 <i> is the actual profile icon-->
+                     <i> is the actual profile icon-->
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
                             <!-- form-control is for textual like inputs. makes with 100% -->
-                            <input type="text" class="form-control" placeholder="username" id="logonId">
+                            <input type="text" class="form-control" placeholder="username" id="createId">
 
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="password" id="logonPass">
+                            <input type="password" class="form-control" placeholder="password" id="createPass">
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn login_btn" onclick="javascript: logon();">Log On</button>
+                            <button type="button" class="btn createAccount_btn" onclick="javascript: createAccount();">Create Account</button>
                         </div>
                     </form>
                 </div>
+                <!-- add a footer to allow user to go back to the login page after making an account -->
                 <div class="card-footer">
-                    <div class="d-flex justify-content-center signUp">
-                        Don't have an account? <a href="createAccount.html" target="_self" style="color: #00BFFF">Sign Up</a>
+                    <div class="d-flex justify-content-center returnToLogin">
+                        Created an Account? <a href="index.html" target="_self" style="color: #ffb84d">Return to Login</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!--<button onclick="javascript: TestButtonHandler();">Click here to test connection!</button>
-    <br />
-    <input type="text" id="logonId" />
-    <input type="text" id="logonPass" />
-    <button onclick="javascript: logon();">Log On</button>-->
 </body>
-</html >
+</html>

@@ -90,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="createAccount.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="login-style.css" />
