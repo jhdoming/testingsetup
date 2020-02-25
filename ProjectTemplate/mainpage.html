@@ -69,6 +69,10 @@
                     alert("this code will only execute if javascript is unable to access the webservice");
                 }
             });
+
+            function newLocation(file) {
+                location.replace(file)
+            }
         }</script>
 
     <style type="text/css">
@@ -235,7 +239,7 @@
                 <div class="card-footer">
                     <div class="row">
                         <div>
-                            <button type="button", ONCLICK="javascript:goToURL('charactersheet.html')">Create New Character</button>
+                            <button type="button", onclick="window.location.href = 'characterSheet.html';">Create New Character</button>
                         </div>
                     </div>
             </div>
