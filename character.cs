@@ -22,7 +22,10 @@ namespace Character
     private int _wis;
     private int _cha;
     private int _armorClass;
-    private list<string> equipment = new List<string>();
+    private list<string> _equipment = new List<string>();
+    private list<string> _otherProf = new List<string>();
+    private list<string> _languages = new List<string>();
+    private list<string> _knownSkills = new List<string>();
     
 
 
