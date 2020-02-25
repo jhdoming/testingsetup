@@ -90,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="characterSheet.html" />
     <Content Include="createAccount.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
