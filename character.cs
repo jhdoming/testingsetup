@@ -26,8 +26,7 @@ namespace Character
     private list<string> _otherProf = new List<string>();
     private list<string> _languages = new List<string>();
     private list<string> _knownSkills = new List<string>();
+
+
     
-
-
-
 }
