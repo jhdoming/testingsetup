@@ -23,7 +23,7 @@ namespace ProjectTemplate
 		private string dbPass = "!!Byteme";
 		private string dbName = "byteme";
 		////////////////////////////////////////////////////////////////////////
-		
+
 		////////////////////////////////////////////////////////////////////////
 		///call this method anywhere that you need the connection string!
 		////////////////////////////////////////////////////////////////////////
@@ -184,5 +184,61 @@ namespace ProjectTemplate
             }
 
         }
+
+    //EXAMPLE OF A SELECT, AND RETURNING "COMPLEX" DATA TYPES
+		[WebMethod(EnableSession = true)]
+		public Character[] GetCharacters(string userId)
+		{
+			//check out the return type.  It's an array of Character objects.  You can look at our custom Chracter class in this solution to see that it's
+			//just a container for public class-level variables.  It's a simple container that asp.net will have no trouble converting into json.  When we return
+			//sets of information, it's a good idea to create a custom container class to represent instances (or rows) of that information, and then return an array of those objects.
+			//Keeps everything simple.
+
+			//WE ONLY SHARE ACCOUNTS WITH LOGGED IN USERS!
+
+				DataTable sqlDt = new DataTable("characters");
+
+				string sqlConnectString = getConString();
+				string sqlSelect = "SELECT * FROM byteme.Character WHERE UserID=@userId";
+
+                MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+				MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@userId", HttpUtility.UrlDecode(userId));
+
+                //gonna use this to fill a data table
+                MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+				//filling the data table
+				sqlDa.Fill(sqlDt);
+
+				//loop through each row in the dataset, creating instances
+				//of our container class Account.  Fill each acciount with
+				//data from the rows, then dump them in a list.
+				List<Character> characters = new List<Character>();
+				for (int i = 0; i < sqlDt.Rows.Count; i++)
+				{
+                    characters.Add(new Character
+                    {
+                        _charName = sqlDt.Rows[i]["charName"].ToString(),
+                        _class = sqlDt.Rows[i]["class"].ToString(),
+                        _race = sqlDt.Rows[i]["race"].ToString(),
+                        _attackOne = sqlDt.Rows[i]["attackOne"].ToString(),
+                        _attackTwo = sqlDt.Rows[i]["attackTwo"].ToString(),
+                        _attackThree = sqlDt.Rows[i]["attackThree"].ToString(),
+                        _level =Convert.ToInt32(sqlDt.Rows[i]["level"]),
+                        _str = Convert.ToInt32(sqlDt.Rows[i]["str"]),
+                        _dex = Convert.ToInt32(sqlDt.Rows[i]["dex"]),
+                        _wis = Convert.ToInt32(sqlDt.Rows[i]["wis"]),
+                        _cha = Convert.ToInt32(sqlDt.Rows[i]["cha"]),
+                        _armorClass = Convert.ToInt32(sqlDt.Rows[i]["armorClass"]),
+                        _equipment = sqlDt.Rows[i]["equipment"].ToString().Split(','),
+                        _otherProf = sqlDt.Rows[i]["otherProf"].ToString().Split(','),
+                        _languages = sqlDt.Rows[i]["languages"].ToString().Split(','),
+                        _knownSkills = sqlDt.Rows[i]["knownSkills"].ToString().Split(','),
+                    });
+				}
+				//convert the list of accounts to an array and return!
+				return characters.ToArray();
+		}
     }
 }
