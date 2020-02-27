@@ -52,7 +52,7 @@ function logon() {
             var responseFromServer = msg.d;
             if (responseFromServer == true) {
 
-                location.href ="/mainpage.html";
+                location.href ="mainpage.html";
             }
             else {
                 alert("bad credentials");
@@ -67,14 +67,16 @@ function logon() {
 function postCharacter() 
 {
     var webMethod = "ProjectServices.asmx/GetCharacters";
+    var characterArray;
 
     $.ajax({
         type: "POST",
-        url: webmethod,
+        url: webMethod,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function(msg, charName) {
-            console.log(data.charName["Hagar"].class);
+        success: function(data) {
+            characterArray = data.d;
+            console.log(characterArray);
         }
     })
 }
