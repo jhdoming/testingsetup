@@ -104,8 +104,7 @@ namespace ProjectTemplate
                 //if we found an account, store the id and admin status in the session
                 //so we can check those values later on other method calls to see if they
                 //are 1) logged in at all, and 2) and admin or not
-                Session["UserId"] = sqlDt.Rows[0]["UserId"];
-                //Session["admin"] = sqlDt.Rows[0]["admin"];
+                Session["userId"] = sqlDt.Rows[0]["userId"];
                 success = true;
             }
             //return the result!
@@ -187,7 +186,7 @@ namespace ProjectTemplate
 
     //EXAMPLE OF A SELECT, AND RETURNING "COMPLEX" DATA TYPES
 		[WebMethod(EnableSession = true)]
-		public Character[] GetCharacters(string userId)
+		public Character[] GetCharacters()
 		{
 			//check out the return type.  It's an array of Character objects.  You can look at our custom Chracter class in this solution to see that it's
 			//just a container for public class-level variables.  It's a simple container that asp.net will have no trouble converting into json.  When we return
@@ -204,7 +203,7 @@ namespace ProjectTemplate
                 MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
 				MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
 
-                sqlCommand.Parameters.AddWithValue("@userId", HttpUtility.UrlDecode(userId));
+                sqlCommand.Parameters.AddWithValue("@userId", Session["userId"]);
 
                 //gonna use this to fill a data table
                 MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
