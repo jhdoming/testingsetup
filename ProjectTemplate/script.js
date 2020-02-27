@@ -1,18 +1,3 @@
-function postCharacter() 
-{
-    var data = jsonRetun.data.children[i].data;
-
-    $.ajax({
-        type: "POST",
-        url: webmethod,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function(msg, charName) {
-            
-        }
-    })
-}
-
 function createAccount() {
     var id = document.getElementById("createId").value;
     var pass = document.getElementById("createPass").value;
@@ -66,6 +51,7 @@ function logon() {
         success: function (msg) {
             var responseFromServer = msg.d;
             if (responseFromServer == true) {
+
                 location.href ="/mainpage.html";
             }
             else {
@@ -76,4 +62,19 @@ function logon() {
             alert("this code will only execute if javascript is unable to access the webservice");
         }
     });
+}
+
+function postCharacter() 
+{
+    var webMethod = "ProjectServices.asmx/GetCharacters";
+
+    $.ajax({
+        type: "POST",
+        url: webmethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(msg, charName) {
+            console.log(data.charName["Hagar"].class);
+        }
+    })
 }
