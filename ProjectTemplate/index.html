@@ -17,48 +17,7 @@
 
     <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
     <script type="text/javascript">
-        function TestButtonHandler() {
-            var webMethod = "ProjectServices.asmx/TestConnection";
-            var parameters = "{}";
 
-            //jQuery ajax method
-            //adding comment to test
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    alert(responseFromServer);
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-        }
-
-        function TestButtonHandler() {
-            var webMethod = "ProjectServices.asmx/LogOn";
-            var parameters = "{}";
-
-            //jQuery ajax method
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    alert(responseFromServer);
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-        }
         function logon() {
             var id = document.getElementById("logonId").value;
             var pass = document.getElementById("logonPass").value;
@@ -78,8 +37,8 @@
                 success: function (msg) {
                     var responseFromServer = msg.d;
                     if (responseFromServer == true) {
-                        alert("logged in!");
-                        window.location.href = "mainpage.html"
+                        alert("peanutbutter");
+                        location.href ="/mainpage.html";
                     }
                     else {
                         alert("bad credentials");
@@ -131,7 +90,7 @@
                             <input type="password" class="form-control" placeholder="password" id="logonPass">
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn login_btn" onclick="javascript: logon();">Log On</button>
+                            <button type="button" class="btn login_btn" onclick="logon()">Log On</button>
                         </div>
                     </form>
                 </div>
