@@ -4,75 +4,13 @@
     <title>Create Account</title>
     <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    <script src="script.js"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
     <!--Fontawesome CDN-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
     <!-- midieval font -->
     <link href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap" rel="stylesheet">
-
-    <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
-    <script type="text/javascript">
-        function TestButtonHandler() {
-            var webMethod = "ProjectServices.asmx/TestConnection";
-            var parameters = "{}";
-
-            //jQuery ajax method
-            //adding comment to test
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    alert(responseFromServer);
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-        }
-
-        function createAccount() {
-            var id = document.getElementById("createId").value;
-            var pass = document.getElementById("createPass").value;
-
-            var webMethod = "ProjectServices.asmx/createAccount";
-
-            var parameters = "{\"uid\":\"" + encodeURI(id) + "\", \"pass\":\"" + encodeURI(pass) + "\"}";
-
-
-            //jQuery ajax method
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    if (responseFromServer == true) {
-                        alert(responseFromServer);
-                        //window.location.replace("index.html");
-                    }
-                    else {
-                        alert(responseFromServer);
-                    }
-                    //after creating an account, sends you back to the login page (works here but also works when password isnt set right)
-                    //window.location.replace("index.html");
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-        }
-    </script>
-
     <style type="text/css">
 
         html, body {
@@ -162,23 +100,23 @@
                     <div class="row">
                         <div class="col-4 ">
                             <label class="topics">Character Name:</label>
-                            <input type="text" disabled>
+                            <input type="text" id="charName" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Class:</label>
-                            <input type="text" disabled>
+                            <input type="text" id ="class" disabled>
 
                         </div>
                         <div class="col-4">
                             <label class="topics">level:</label>
-                            <input type="text" disabled>
+                            <input type="text" id="level" disabled>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-4">
                             <label class="topics">Armor Class</label>
-                            <input type="text" disabled>
+                            <input type="text" id="armorClass" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Initiative</label>
@@ -197,7 +135,7 @@
                         </div>
                         <div class="col-4">
                             <label class="topics">Proficiency</label>
-                            <input type="text" disabled>
+                            <input type="text" id="otherProf" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Death Saves</label>
@@ -216,30 +154,30 @@
                     <div class="row">
                         <div class="col-4">
                             <label class="topics">Strength</label>
-                            <input type="text" disabled>
+                            <input type="text" id="str" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Dexterity</label>
-                            <input type="text" disabled>
+                            <input type="text" id="dex" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Constitution</label>
-                            <input type="text" disabled>
+                            <input type="text" id="con" disabled>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-4">
                             <label class="topics">Intelligence</label>
-                            <input type="text" disabled>
+                            <input type="text" id="int" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Wisdom</label>
-                            <input type="text" disabled>
+                            <input type="text" id="wis"disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Charisma</label>
-                            <input type="text" disabled>
+                            <input type="text" id="cha" disabled>
                         </div>
                     </div>
 
@@ -258,6 +196,9 @@
                         </div>
                         <div class="col-3">
                             <button type="button">Traits</button>
+                        </div>
+                        <div class="col-3">
+                            <button type="button" onclick="postCharacter()">Fill Character</button>
                         </div>
                     </div>
                 </div>
