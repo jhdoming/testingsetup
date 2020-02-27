@@ -68,6 +68,7 @@ function postCharacter()
 {
     var webMethod = "ProjectServices.asmx/GetCharacters";
     var characterArray;
+    var characterID;
 
     $.ajax({
         type: "POST",
@@ -75,8 +76,20 @@ function postCharacter()
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function(data) {
-            characterArray = data.d;
-            console.log(characterArray);
+            characterArray = data;
+            characterID = 0;
+            $("#charName").val(characterArray.d[characterID]._charName);
+            $("#class").val(characterArray.d[characterID]._class);
+            $("#level").val(characterArray.d[characterID]._level);
+            $("#armorClass").val(characterArray.d[characterID]._armorClass);
+            $("#otherProf").val(characterArray.d[characterID]._otherProf);
+            $("#str").val(characterArray.d[characterID]._str);
+            $("#dex").val(characterArray.d[characterID]._dex);
+            $("#con").val(characterArray.d[characterID]._con);
+            $("#int").val(characterArray.d[characterID]._int);
+            $("#wis").val(characterArray.d[characterID]._wis);
+            $("#cha").val(characterArray.d[characterID]._cha);
+
         }
     })
 }

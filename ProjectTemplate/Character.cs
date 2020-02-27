@@ -21,6 +21,7 @@ namespace ProjectTemplate
         public int _level {get; set;}
         public int _str {get; set;}
         public int _dex {get; set;}
+        public int _int {get; set;}
         public int _wis {get; set;}
         public int _cha {get; set;}
         public int _armorClass {get; set;}

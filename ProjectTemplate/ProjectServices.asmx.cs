@@ -227,6 +227,7 @@ namespace ProjectTemplate
                         _level =Convert.ToInt32(sqlDt.Rows[i]["level"]),
                         _str = Convert.ToInt32(sqlDt.Rows[i]["str"]),
                         _dex = Convert.ToInt32(sqlDt.Rows[i]["dex"]),
+                        _int = Convert.ToInt32(sqlDt.Rows[i]["int"]),
                         _wis = Convert.ToInt32(sqlDt.Rows[i]["wis"]),
                         _cha = Convert.ToInt32(sqlDt.Rows[i]["cha"]),
                         _armorClass = Convert.ToInt32(sqlDt.Rows[i]["armorClass"]),
