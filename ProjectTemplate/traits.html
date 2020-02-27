@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Features & Traits</title>
+    <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- midieval font -->
+    <link href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap" rel="stylesheet">
+
+    <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
+    <script type="text/javascript">function TestButtonHandler() {
+            var webMethod = "ProjectServices.asmx/TestConnection";
+            var parameters = "{}";
+
+            //jQuery ajax method
+            //adding comment to test
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    var responseFromServer = msg.d;
+                    alert(responseFromServer);
+                },
+                error: function (e) {
+                    alert("this code will only execute if javascript is unable to access the webservice");
+                }
+            });
+        }
+
+        function createAccount() {
+            var id = document.getElementById("createId").value;
+            var pass = document.getElementById("createPass").value;
+
+            var webMethod = "ProjectServices.asmx/createAccount";
+
+            var parameters = "{\"uid\":\"" + encodeURI(id) + "\", \"pass\":\"" + encodeURI(pass) + "\"}";
+
+
+            //jQuery ajax method
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    var responseFromServer = msg.d;
+                    if (responseFromServer == true) {
+                        alert(responseFromServer);
+                        //window.location.replace("index.html");
+                    }
+                    else {
+                        alert(responseFromServer);
+                    }
+                    //after creating an account, sends you back to the login page (works here but also works when password isnt set right)
+                    //window.location.replace("index.html");
+                },
+                error: function (e) {
+                    alert("this code will only execute if javascript is unable to access the webservice");
+                }
+            });
+        }</script>
+
+    <style type="text/css">
+
+        html, body {
+            background-image: url('http://getwallpapers.com/wallpaper/full/5/d/a/59857.jpg#.Xk2UTrtIIdU.link');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: MedievalSharp;
+            height: 100%;
+            background-color: black;
+        }
+
+        .characterSheet {
+            align-content: center;
+            height: 100%;
+        }
+
+        .card {
+            width: 600px;
+            height: 600px;
+            margin-bottom: auto;
+            margin-top: auto;
+            background-color: rgba(255, 174, 0, 0.6);
+            border-color: black;
+            border-width: 1em;
+        }
+
+        .card-header h3 {
+            font-size: 300%;
+            text-align: center;
+            text-decoration: underline;
+            color: black;
+        }
+
+        .input-group-prepend span {
+            border: 0;
+            width: 45px;
+            color: black;
+            background-color: #ffb84d;
+        }
+
+        .createAccount_btn {
+            background-color: #ffb84d;
+            color: black;
+            font-size: 90%;
+            font-weight: bold;
+            float: right;
+            width: 125px;
+        }
+
+            .createAccount_btn:hover {
+                background-color: white;
+                color: black;
+            }
+
+        .returnToLogin {
+            color: white;
+            margin-left: 5px;
+        }
+
+        .row {
+            text-align: center;
+        }
+
+        .topics {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        input {
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <div class="characterSheet">
+        <!-- d-flex creates a container, can justify content center, h-100 (can be 25, 50, 75, 0r 100) -->
+        <div class="d-flex justify-content-center h-100">
+            <!-- card is a content container, can have header, body, footer. can also edit -->
+            <div class="card justify-content-around">
+
+                <div class="card-header">
+                    <h3>Class Features & Traits</h3>
+                </div>
+                <div class="row">
+                    <div class="col-4 ">
+                        <label class="topics">Race:</label>
+                        <input type="text" disabled>
+                    </div>
+                    <div class="col-4">
+                        <label class="topics">Attacks:</label>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+
+                    </div>
+                    <div class="col-4">
+                        <label class="topics">Class:</label>
+                        <input type="text" disabled>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <label class="topics">Traits</label>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                    </div>
+                    <div class="col-4">
+                        <label class="topics">Equipment</label>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                    </div>
+                    <div class="col-4">
+                        <label class="topics">Features</label>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                        <input type="text" disabled>
+                    </div>
+                </div>
+
+
+                <!-- add a footer to put buttons to be able to edit and see other character information -->
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-3">
+                            <button type="button">Edit</button>
+                        </div>
+                        <div class="col-3">
+                            <button type="button">Character</button>
+                        </div>
+                        <div class="col-3">
+                            <button type="button">Spells</button>
+                        </div>
+                        <div class="col-3">
+                            <button type="button">Skills</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
