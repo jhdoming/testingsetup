@@ -142,6 +142,14 @@
         input {
             text-align: center;
         }
+
+        textarea {
+            overflow-y: scroll;
+            height: 100px;
+            resize: none; /* Remove this if you want the user to resize the textarea */
+        }
+
+
     </style>
 
 </head>
@@ -152,76 +160,86 @@
         <!-- d-flex creates a container, can justify content center, h-100 (can be 25, 50, 75, 0r 100) -->
         <div class="d-flex justify-content-center h-100">
             <!-- card is a content container, can have header, body, footer. can also edit -->
-            <div class="card justify-content-around">
+            <div class="card justify-content-around" style="width:1010px; height:700px; padding-left:10px;">
 
                 <div class="card-header">
                     <h3>Class Features & Traits</h3>
                 </div>
+
                 <div class="row">
-                    <div class="col-4 ">
-                        <label class="topics">Race:</label>
-                        <input type="text" disabled>
+                    <div class="col-6">
+                        <label class="topics"> Race: </label>
+                        <input type="text" id="traits-race" disabled>
                     </div>
-                    <div class="col-4">
+                    <div class="col-6">
+                        <label class="topics"> Class: </label>
+                        <input type="text" id="traits-class" disabled>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <label class="topics">Traits:</label><br>
+                        <textarea id="traits" style="width: 300px; height:300px;" disabled></textarea>
+                    </div>
+                    <div class="col-6">
+                        <label class="topics">Features:</label><br>
+                        <textarea id="features" style="width: 300px; height:300px;" disabled></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
                         <label class="topics">Attacks:</label>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-
                     </div>
-                    <div class="col-4">
-                        <label class="topics">Class:</label>
-                        <input type="text" disabled>
+                    <div class="col-6">
+                        <label class="topics">Equipment:</label>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-4">
-                        <label class="topics">Traits:</label>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
+                    <div class="col-6">
+                        <label class="input">1:</label>&nbsp;
+                        <input type="text" id="attack1">&nbsp;&nbsp;
+                        <input type="text" id="bonus1" size="4">&nbsp;&nbsp;
+                        <input type="text" id="damage1">
+                        <br>
+                        <label class="input">2:</label>&nbsp;
+                        <input type="text" id="attack2">&nbsp;&nbsp;
+                        <input type="text" id="bonus2" size="4">&nbsp;&nbsp;
+                        <input type="text" id="damage2">
+                        <br>
+                        <label class="input">3:</label>&nbsp;
+                        <input type="text" id="attack3">&nbsp;&nbsp;
+                        <input type="text" id="bonus3" size="4">&nbsp;&nbsp;
+                        <input type="text" id="damage3">
+                        <br>
                     </div>
-                    <div class="col-4">
-                        <label class="topics">Equipment:</label>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                    </div>
-                    <div class="col-4">
-                        <label class="topics">Features:</label>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
-                        <input type="text" disabled>
+                    <div class="col-6">
+                        <textarea id="equipment" style="width: 300px;" disabled></textarea>
                     </div>
                 </div>
+
+
 
 
                 <!-- add a footer to put buttons to be able to edit and see other character information -->
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-2">
+                            <button type="button">Home</button>
+                        </div>
+                        <div class="col-2">
                             <button type="button">Edit</button>
                         </div>
-                        <div class="col-3">
+                        <div class="col-2">
                             <button type="button">Character</button>
                         </div>
-                        <div class="col-3">
+                        <div class="col-2">
                             <button type="button">Spells</button>
                         </div>
-                        <div class="col-3">
-                            <button type="button">Skills</button>
+                        <div class="col-2">
+                            <button type="button">Traits</button>
                         </div>
                     </div>
                 </div>
