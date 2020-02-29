@@ -5,6 +5,7 @@
     <title></title>
     <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -14,93 +15,6 @@
 
     <!--Custom styles-->
     <link rel="stylesheet" type="text/css" href="login-style.css">
-
-    <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
-    <script type="text/javascript">
-        function TestButtonHandler() {
-            var webMethod = "ProjectServices.asmx/TestConnection";
-            var parameters = "{}";
-
-            //jQuery ajax method
-            //adding comment to test
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    alert(responseFromServer);
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-        }
-
-        function TestButtonHandler() {
-            var webMethod = "ProjectServices.asmx/LogOn";
-            var parameters = "{}";
-
-            //jQuery ajax method
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    alert(responseFromServer);
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-        }
-        function logon() {
-            var id = document.getElementById("logonId").value;
-            var pass = document.getElementById("logonPass").value;
-
-            var webMethod = "ProjectServices.asmx/LogOn";
-
-            var parameters = "{\"uid\":\"" + encodeURI(id) + "\", \"pass\":\"" + encodeURI(pass) + "\"}";
-
-
-            //jQuery ajax method
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    if (responseFromServer == true) {
-                        alert("logged in!");
-                        window.location.href = "skills.html"
-                        // the above code is not the correct redirect from the home page, it's just to test
-                        // final version should redirect to mainpage.html
-                    }
-                    else {
-                        alert("bad credentials");
-                    }
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-
-
-
-        }
-    </script>
-    <!--END OF YOUR OWN JAVASCRIPT-->
-    <!--AND YOUR OWN CSS CAN GO HERE AS WELL-->
-    <style>
-    </style>
-    <!--END OF YOUR OWN CSS-->
 </head>
 <body>
 
@@ -133,7 +47,7 @@
                             <input type="password" class="form-control" placeholder="password" id="logonPass">
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn login_btn" onclick="javascript: logon();">Log On</button>
+                            <button type="button" class="btn login_btn" onclick="logon()">Log On</button>
                         </div>
                     </form>
                 </div>
@@ -145,11 +59,5 @@
             </div>
         </div>
     </div>
-
-    <!--<button onclick="javascript: TestButtonHandler();">Click here to test connection!</button>
-    <br />
-    <input type="text" id="logonId" />
-    <input type="text" id="logonPass" />
-    <button onclick="javascript: logon();">Log On</button>-->
 </body>
 </html >
