@@ -97,6 +97,7 @@
     <Content Include="script.js" />
     <Content Include="Web.config" />
     <Content Include="mainpage.html" />
+    <Content Include="spells.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
