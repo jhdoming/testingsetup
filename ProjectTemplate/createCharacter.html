@@ -90,7 +90,7 @@
         }
 
         .card {
-            width: 1200px;
+            width: 1300px;
             height: 700px;
             margin-bottom: auto;
             margin-top: auto;
@@ -170,7 +170,7 @@
                 </div>
 
                 <!-- Create a form to capture all character information -->
-                <form class="ccForm">
+                <form class="ccForm" >
                     <!-- Row 1: Labels-->
                     <div class="row">
                         <div class="col-3 ">
@@ -192,16 +192,16 @@
                     <!-- Row 1: Inputs-->
                     <div class="row">
                         <div class="col-3">
-                            <input type="text" class="userInput">
+                            <input type="text" class="userInput" id="newNameId">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="userInput">
+                            <input type="text" class="userInput" id="newClassId">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="userInput">
+                            <input type="text" class="userInput" id="newRaceId">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="userInput">
+                            <input type="text" class="userInput" id="newLevelId" value="1" disabled>
                         </div>
                     </div>
 
@@ -224,16 +224,16 @@
                     <!-- Row 2: Inputs-->
                     <div class="row">
                         <div class="col-3">
-                            <input type="text" class="userInput">
+                            <input type="text" class="userInput" id="newHealthId">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="userInput">
+                            <input type="text" class="userInput" id="newStrengthId">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="userInput">
+                            <input type="text" class="userInput" id="newDexterityId">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="userInput">
+                            <input type="text" class="userInput" id="newConsitutionId">
                         </div>
                     </div>
 
@@ -243,7 +243,7 @@
                             <label class="topics">Intelligence</label>
                         </div>
                         <div class="col-3">
-                            <label class="topics">widsdom</label>
+                            <label class="topics">wisdom</label>
                         </div>
                         <div class="col-3">
                             <label class="topics">Charisma</label>
@@ -256,16 +256,16 @@
                     <!-- Row 3: Inputs-->
                     <div class="row">
                         <div class="col-3">
-                            <input type="text" class="userInput">
+                            <input type="text" class="userInput" id="newIntelligenceId">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="userInput">
+                            <input type="text" class="userInput" id="newWisdomId">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="userInput">
+                            <input type="text" class="userInput" id="newCharismaId">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="userInput">
+                            <input type="text" class="userInput" id="newArmorclassId">
                         </div>
                     </div>
 
@@ -285,13 +285,13 @@
                     <!-- Row 4: Attack Inputs-->
                     <div class="row">
                         <div class="col-4">
-                            <input type="text" class="userInput" placeholder="EX: Strength, Great Axe, 1d12+Strength" style="width: 25vw">
+                            <input type="text" class="userInput" id="newAttack1Id" placeholder="EX: Strength, Great Axe, 1d12+Strength" style="width: 25vw">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="userInput" placeholder="EX: Strength, Great Axe, 1d12+Strength" style="width: 25vw">
+                            <input type="text" class="userInput" id="newAttack2Id" placeholder="EX: Strength, Great Axe, 1d12+Strength" style="width: 25vw">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="userInput" placeholder="Ex: Strength, Great Axe, 1d12+Strength" style="width: 25vw">
+                            <input type="text" class="userInput" id="newAttack3Id" placeholder="Ex: Strength, Great Axe, 1d12+Strength" style="width: 25vw">
                         </div>
                     </div>
 
@@ -308,10 +308,10 @@
                     <!-- Row 5: Inputs-->
                     <div class="row">
                         <div class="col-6">
-                            <input type="text" class="userInput" placeholder="EX: Fullplate,Greatsword,Longbow,arrows,dungeoner's pack" style="width: 40vw">
+                            <input type="text" class="userInput" id="newEquipmentId" placeholder="EX: Fullplate,Greatsword,Longbow,arrows,dungeoner's pack" style="width: 40vw">
                         </div>
                         <div class="col-6">
-                            <input type="text" class="userInput" placeholder="EX: All armor,shields,Simple Weapons,Martial Weapons" style="width: 40vw">
+                            <input type="text" class="userInput" id="newOtherproficiencyId" placeholder="EX: All armor,shields,Simple Weapons,Martial Weapons" style="width: 40vw">
                         </div>
                     </div>
 
@@ -328,10 +328,10 @@
                     <!-- Row 6: Inputs-->
                     <div class="row">
                         <div class="col-6">
-                            <input type="text" class="userInput" placeholder="EX: Common,Halfling,Elvish" style="width: 40vw">
+                            <input type="text" class="userInput" id="newLanguageId" placeholder="EX: Common,Halfling,Elvish" style="width: 40vw">
                         </div>
                         <div class="col-6">
-                            <input type="text" class="userInput" placeholder="EX: Strength,Constitution" style="width: 40vw">
+                            <input type="text" class="userInput" id="newKnownsavesId" placeholder="EX: Strength,Constitution" style="width: 40vw">
                         </div>
                     </div>
 
@@ -345,34 +345,34 @@
                     <!-- Row1: Skills Checkboxes and Labels -->
                     <div class="row">
                         <div class="col-2">
-                            <input type="checkbox" value="Acrobatics">
+                            <input type="checkbox" id="newKnownskillsId" value="Acrobatics">
                             <label>Acrobatics</label>
                         </div>
 
 
                         <div class="col-2">
-                            <input type="checkbox" value="Animal Handling">
+                            <input type="checkbox" id="newKnownskillsId" value="Animal Handling">
                             <label>Animal Handling</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" value="Arcana">
+                            <input type="checkbox" id="newKnownskillsId" value="Arcana">
                             <label>Arcana</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" value="Athletics">
+                            <input type="checkbox" id="newKnownskillsId" value="Athletics">
                             <label>Athletics</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" value="Deception">
+                            <input type="checkbox" id="newKnownskillsId" value="Deception">
                             <label>Deception</label>
 
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" value="History">
+                            <input type="checkbox" id="newKnownskillsId" value="History">
                             <label>History</label>
                         </div>
                     </div>
@@ -380,34 +380,34 @@
                     <!-- Row 2: Skills Checkboxes and Labels -->
                     <div class="row">
                         <div class="col-2">
-                            <input type="checkbox" value="Insight">
+                            <input type="checkbox" id="newKnownskillsId" value="Insight">
                             <label>Insight</label>
                         </div>
 
 
                         <div class="col-2">
-                            <input type="checkbox" value="Intimidation">
+                            <input type="checkbox" id="newKnownskillsId" value="Intimidation">
                             <label>Intimidation</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" value="Investigation">
+                            <input type="checkbox" id="newKnownskillsId" value="Investigation">
                             <label>Investigation</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" value="medicine">
+                            <input type="checkbox" id="newKnownskillsId" value="medicine">
                             <label>Medicine</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" value="nature">
+                            <input type="checkbox" id="newKnownskillsId" value="nature">
                             <label>Nature</label>
 
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" value="Perception">
+                            <input type="checkbox" id="newKnownskillsId" value="Perception">
                             <label>Perception</label>
                         </div>
                     </div>
@@ -415,34 +415,34 @@
                     <!-- Row 3: Skills Checkboxes and Labels -->
                     <div class="row">
                         <div class="col-2">
-                            <input type="checkbox" value="Performance">
+                            <input type="checkbox" id="newKnownskillsId" value="Performance">
                             <label>Performance</label>
                         </div>
 
 
                         <div class="col-2">
-                            <input type="checkbox" value="Persuasion">
+                            <input type="checkbox" id="newKnownskillsId" value="Persuasion">
                             <label>Persuasion</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" value="Religion">
+                            <input type="checkbox" id="newKnownskillsId" value="Religion">
                             <label>Religion</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" value="Sleight Of Hand">
+                            <input type="checkbox" id="newKnownskillsId" value="Sleight Of Hand">
                             <label>Sleight Of Hand</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" value="Stealth">
+                            <input type="checkbox" id="newKnownskillsId" value="Stealth">
                             <label>Stealth</label>
 
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" value="Survival">
+                            <input type="checkbox" id="newKnownskillsId" value="Survival">
                             <label>Survival</label>
                         </div>
                     </div>
