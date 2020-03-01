@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Spells</title>
+    <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--Custom styles-->
+    <link rel="stylesheet" type="text/css" href="login-style.css">
+
+    <style type="text/css">
+
+        html, body {
+            background-image: url('http://getwallpapers.com/wallpaper/full/5/d/a/59857.jpg#.Xk2UTrtIIdU.link');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: MedievalSharp;
+            height: 100%;
+            background-color: black;
+        }
+
+        .skillsSheet {
+            align-content: center;
+            height: 100%;
+        }
+
+        .card {
+            width: 600px;
+            height: 600px;
+            margin-bottom: auto;
+            margin-top: auto;
+            background-color: rgba(255, 174, 0, 0.6);
+            border-color: black;
+            border-width: 1em;
+        }
+
+        .card-header h3 {
+            font-size: 300%;
+            text-align: center;
+            text-decoration: underline;
+            color: black;
+        }
+
+        .input-group-prepend span {
+            border: 0;
+            width: 45px;
+            color: black;
+            background-color: #ffb84d;
+        }
+
+        .createAccount_btn {
+            background-color: #ffb84d;
+            color: black;
+            font-size: 90%;
+            font-weight: bold;
+            float: right;
+            width: 125px;
+        }
+
+            .createAccount_btn:hover {
+                background-color: white;
+                color: black;
+            }
+
+        .returnToLogin {
+            color: white;
+            margin-left: 5px;
+        }
+
+        .row {
+            text-align: center;
+        }
+
+
+        .topics {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+
+        input {
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="characterSheet">
+        <!-- d-flex creates a container, can justify content center, h-100 (can be 25, 50, 75, 0r 100) -->
+        <div class="d-flex justify-content-center h-100">
+            <!-- card is a content container, can have header, body, footer. can also edit -->
+            <div class="card justify-content-around" style="width:700px; height:700px; padding-left:10px;">
+
+                <div class="card-header">
+                    <h3>Spells</h3>
+                </div>
+
+                <!-- Row 1: Label and input for spell class-->
+                <div class="row">
+                    <div class="col-12">
+                        <label class="topics"> Spellcasting Class: </label> &nbsp;&nbsp;
+                        <input type="text" id="spell-class" disabled>
+                    </div>
+                </div>
+
+                <!-- Row 2: Lables for headers-->
+                <div class="row">
+                    <div class="col-4">
+                        <label class="topics"> Spell Level: </label>
+                    </div>
+                    <div class="col-4">
+                        <label class="topics"> Slots Total: </label>
+                    </div>
+                    <div class="col-4">
+                        <label class="topics"> Slots Expended: </label>
+                    </div>
+                </div>
+
+                <!-- Row 3: Spell levl 1 inputs-->
+                <div class="row">
+                    <div class="col-4">
+                        <label class="input"> 1: </label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-total-1" size="4" diabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-expended-1" diabled>
+                    </div>
+                </div>
+
+                <!-- Row 4: Spell levl 2 inputs-->
+                <div class="row">
+                    <div class="col-4">
+                        <label class="input"> 2: </label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-total-2" size="4" diabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-expended-2" diabled>
+                    </div>
+                </div>
+
+                <!-- Row 5: Spell levl 3 inputs-->
+                <div class="row">
+                    <div class="col-4">
+                        <label class="input"> 3: </label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-total-3" size="4" diabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-expended-3" diabled>
+                    </div>
+                </div>
+
+                <!-- Row 6: Spell levl 4 inputs-->
+                <div class="row">
+                    <div class="col-4">
+                        <label class="input"> 4: </label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-total-4" size="4" diabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-expended-4" diabled>
+                    </div>
+                </div>
+
+                <!-- Row 7: Spell levl 5 inputs-->
+                <div class="row">
+                    <div class="col-4">
+                        <label class="input"> 5: </label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-total-5" size="4" diabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-expended-5" diabled>
+                    </div>
+                </div>
+
+                <!-- Row 8: Spell levl 6 inputs-->
+                <div class="row">
+                    <div class="col-4">
+                        <label class="input"> 6: </label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-total-6" size="4" diabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-expended-6" diabled>
+                    </div>
+                </div>
+
+                <!-- Row 9: Spell levl 7 inputs-->
+                <div class="row">
+                    <div class="col-4">
+                        <label class="input"> 7: </label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-total-7" size="4" diabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-expended-7" diabled>
+                    </div>
+                </div>
+
+                <!-- Row 10: Spell levl 8 inputs-->
+                <div class="row">
+                    <div class="col-4">
+                        <label class="input"> 8: </label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-total-8" size="4" diabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-expended-8" diabled>
+                    </div>
+                </div>
+
+                <!-- Row 11: Spell levl 9 inputs-->
+                <div class="row">
+                    <div class="col-4">
+                        <label class="input"> 9: </label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-total-9" size="4" diabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="slots-expended-9" diabled>
+                    </div>
+                </div>
+
+
+                <!-- add a footer to put buttons to be able to edit and see other character information -->
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-2">
+                            <button type="button" onclick="mainpage.html">Home</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="button">Edit</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" onclick="characterSheet.html">Character</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" onclick="skills.html">Skills</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" onclick="traits.html">Traits</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
