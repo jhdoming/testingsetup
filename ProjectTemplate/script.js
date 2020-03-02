@@ -63,10 +63,12 @@ function createAccount() {
 
 
 function createCharacter() {
+    // code to concatenate all the checked boxes into one variable
+    // make a variable to store the concatenated string, and a variable to get all the skills into one variable
     var charSkills = '';
-
     var userInput = document.getElementsByName('knownSkills');
 
+    // use for loop to go through all the checkboxes, if input is checkbos and name is knownskills, if it is checked, concatenate the skills
         for (var x = 0; x < userInput.length; x++) {
             if (userInput[x].type == "checkbox" && userInput[x].name == 'knownSkills') {
                 if (userInput[x].checked == true) {
@@ -74,6 +76,7 @@ function createCharacter() {
                 }
             }
         }
+    // might not need this code (alert is just a check)
     if (/,$/.test(charSkills)) {
         charSkills = charSkills.replace(/,$/, "")
         }
