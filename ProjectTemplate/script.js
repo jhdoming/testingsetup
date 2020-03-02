@@ -1,3 +1,32 @@
+
+//$(document).ready(
+//    function () {
+//        $("#test").click(
+//            function () {
+//                concatenateCheckbox();
+//            }
+//        );
+//    }
+//);
+
+//function concatenateCheckbox() {
+//    var string = '';
+
+//    var userInput = document.getElementsByName('knownSkills');
+
+//    for (var x = 0; x < userInput.length; x++) {
+//        if (userInput[x].type == "checkbox" && userInput[x].name == 'knownSkills') {
+//            if (userInput[x].checked == true) {
+//                string += userInput[x].value + ',';
+//            }
+//        }
+//    }
+//    if (/,$/.test(string)) {
+//        string = string.replace(/,$/, "")
+//    }
+//    alert(string);
+//}
+
 function createAccount() {
     var id = document.getElementById("createId").value;
     var pass = document.getElementById("createPass").value;
@@ -34,6 +63,23 @@ function createAccount() {
 
 
 function createCharacter() {
+    var charSkills = '';
+
+    var userInput = document.getElementsByName('knownSkills');
+
+        for (var x = 0; x < userInput.length; x++) {
+            if (userInput[x].type == "checkbox" && userInput[x].name == 'knownSkills') {
+                if (userInput[x].checked == true) {
+                    charSkills += userInput[x].value + ',';
+                }
+            }
+        }
+    if (/,$/.test(charSkills)) {
+        charSkills = charSkills.replace(/,$/, "")
+        }
+    alert(charSkills);
+
+
     var charName = document.getElementById("newNameId").value;
     var charClass = document.getElementById("newClassId").value;
     var charRace = document.getElementById("newRaceId").value;
@@ -59,7 +105,7 @@ function createCharacter() {
 
     var charLanguage = document.getElementById("newLanguageId").value;
     //figure out how to loop through all checkboxes and concatenate all values and save in a variable
-    var charSkills = document.getElementById("newAttack2Id").value;
+    //var charSkills = document.getElementById("newAttack2Id").value;
     var charKnownSaves = document.getElementById("newKnownsavesId").value;
     
 
