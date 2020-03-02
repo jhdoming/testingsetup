@@ -71,6 +71,27 @@
                 }
             });
         }
+
+        function CreateAccount(id, pass, fname, lname, email) {
+            var webMethod = "AccountServices.asmx/RequestAccount";
+            var parameters = "{\"uid\":\"" + encodeURI(id) + "\",\"pass\":\"" + encodeURI(pass) + "\",\"firstName\":\"" + encodeURI(fname) + "\",\"lastName\":\"" + encodeURI(lname) + "\",\"email\":\"" + encodeURI(email) + "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    showPanel('logonPanel');
+                    alert("Account request pending approval...");
+                },
+                error: function (e) {
+                    alert("boo...");
+                }
+            });
+        }
+
     </script>
 
     <style type="text/css">
