@@ -64,10 +64,10 @@ function logon() {
     });
 }
 
-function postCharacter1() 
-{
 
-    window.location.href = 'characterSheet.html'
+// really confused how the .ready function is positioned
+// already have the parameter being passed in
+$('characterSheet.html').ready(function postCharacter(val) {
     
     var webMethod = "ProjectServices.asmx/GetCharacters";
     var characterArray;
@@ -78,38 +78,9 @@ function postCharacter1()
         url: webMethod,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function(data) {
-            characterArray = data;
-            characterID = 0;
-            $("#charName").val(characterArray.d[characterID]._charName);
-            $("#class").val(characterArray.d[characterID]._class);
-            $("#level").val(characterArray.d[characterID]._level);
-            $("#armorClass").val(characterArray.d[characterID]._armorClass);
-            $("#otherProf").val(characterArray.d[characterID]._otherProf);
-            $("#str").val(characterArray.d[characterID]._str);
-            $("#dex").val(characterArray.d[characterID]._dex);
-            $("#con").val(characterArray.d[characterID]._con);
-            $("#int").val(characterArray.d[characterID]._int);
-            $("#wis").val(characterArray.d[characterID]._wis);
-            $("#cha").val(characterArray.d[characterID]._cha);
-
-        }
-    })
-}
-
-function postCharacter2() {
-    var webMethod = "ProjectServices.asmx/GetCharacters";
-    var characterArray;
-    var characterID;
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
         success: function (data) {
             characterArray = data;
-            characterID = 1;
+            characterID = val;
             $("#charName").val(characterArray.d[characterID]._charName);
             $("#class").val(characterArray.d[characterID]._class);
             $("#level").val(characterArray.d[characterID]._level);
@@ -124,62 +95,4 @@ function postCharacter2() {
 
         }
     })
-}
-
-function postCharacter3() {
-    var webMethod = "ProjectServices.asmx/GetCharacters";
-    var characterArray;
-    var characterID;
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            characterArray = data;
-            characterID = 2;
-            $("#charName").val(characterArray.d[characterID]._charName);
-            $("#class").val(characterArray.d[characterID]._class);
-            $("#level").val(characterArray.d[characterID]._level);
-            $("#armorClass").val(characterArray.d[characterID]._armorClass);
-            $("#otherProf").val(characterArray.d[characterID]._otherProf);
-            $("#str").val(characterArray.d[characterID]._str);
-            $("#dex").val(characterArray.d[characterID]._dex);
-            $("#con").val(characterArray.d[characterID]._con);
-            $("#int").val(characterArray.d[characterID]._int);
-            $("#wis").val(characterArray.d[characterID]._wis);
-            $("#cha").val(characterArray.d[characterID]._cha);
-
-        }
-    })
-}
-
-function postCharacter4() {
-    var webMethod = "ProjectServices.asmx/GetCharacters";
-    var characterArray;
-    var characterID;
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            characterArray = data;
-            characterID = 3;
-            $("#charName").val(characterArray.d[characterID]._charName);
-            $("#class").val(characterArray.d[characterID]._class);
-            $("#level").val(characterArray.d[characterID]._level);
-            $("#armorClass").val(characterArray.d[characterID]._armorClass);
-            $("#otherProf").val(characterArray.d[characterID]._otherProf);
-            $("#str").val(characterArray.d[characterID]._str);
-            $("#dex").val(characterArray.d[characterID]._dex);
-            $("#con").val(characterArray.d[characterID]._con);
-            $("#int").val(characterArray.d[characterID]._int);
-            $("#wis").val(characterArray.d[characterID]._wis);
-            $("#cha").val(characterArray.d[characterID]._cha);
-
-        }
-    })
-}
+});
