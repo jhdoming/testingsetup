@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Account</title>
+    <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- midieval font -->
+    <link href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap" rel="stylesheet">
+
+    <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
+    <script type="text/javascript">
+        function TestButtonHandler() {
+            var webMethod = "ProjectServices.asmx/TestConnection";
+            var parameters = "{}";
+
+            //jQuery ajax method
+            //adding comment to test
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    var responseFromServer = msg.d;
+                    alert(responseFromServer);
+                },
+                error: function (e) {
+                    alert("this code will only execute if javascript is unable to access the webservice");
+                }
+            });
+        }
+
+        function createAccount() {
+            var id = document.getElementById("createId").value;
+            var pass = document.getElementById("createPass").value;
+
+            var webMethod = "ProjectServices.asmx/createAccount";
+
+            var parameters = "{\"uid\":\"" + encodeURI(id) + "\", \"pass\":\"" + encodeURI(pass) + "\"}";
+
+
+            //jQuery ajax method
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    var responseFromServer = msg.d;
+                    if (responseFromServer == true) {
+                        alert(responseFromServer);
+                        //window.location.replace("index.html");
+                    }
+                    else {
+                        alert(responseFromServer);
+                    }
+                    //after creating an account, sends you back to the login page (works here but also works when password isnt set right)
+                    //window.location.replace("index.html");
+                },
+                error: function (e) {
+                    alert("this code will only execute if javascript is unable to access the webservice");
+                }
+            });
+        }
+    </script>
+
+    <style type="text/css">
+
+        html, body {
+            background-image: url('http://getwallpapers.com/wallpaper/full/5/d/a/59857.jpg#.Xk2UTrtIIdU.link');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: MedievalSharp;
+            height: 100%;
+            background-color: black;
+        }
+
+        .createCharacterForm {
+            align-content: center;
+            height: 100%;
+        }
+
+        .card {
+            width: 1300px;
+            height: 700px;
+            margin-bottom: auto;
+            margin-top: auto;
+            background-color: rgba(255, 174, 0, 0.6);
+            border-color: black;
+            border-width: 1em;
+        }
+
+        .card-header h3 {
+            font-size: 300%;
+            text-align: center;
+            text-decoration: underline;
+            color: black;
+        }
+
+        .input-group-prepend span {
+            border: 0;
+            width: 45px;
+            color: black;
+            background-color: #ffb84d;
+        }
+
+        .createAccount_btn {
+            background-color: #ffb84d;
+            color: black;
+            font-size: 90%;
+            font-weight: bold;
+            float: right;
+            width: 125px;
+        }
+
+            .createAccount_btn:hover {
+                background-color: white;
+                color: black;
+            }
+
+        .returnToLogin {
+            color: white;
+            margin-left: 5px;
+        }
+
+        .row{
+            text-align: left;
+        }
+
+        .topics{
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        /*.userInput {
+            text-align: center;
+        }*/
+        input {
+            text-align: center;
+
+        }
+
+        .ccForm{
+            margin-left: 5px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+        <div class="createCharacterForm">
+        <!-- d-flex creates a container, can justify content center, h-100 (can be 25, 50, 75, 0r 100) -->
+        <div class="d-flex justify-content-center h-100">
+            <!-- card is a content container, can have header, body, footer. can also edit -->
+            <div class="card justify-content-around">
+
+                <!-- Header for the form -->
+                <div class="card-header">
+                    <h3>Create A Character</h3>
+                </div>
+
+                <!-- Create a form to capture all character information -->
+                <form class="ccForm" >
+                    <!-- Row 1: Labels-->
+                    <div class="row">
+                        <div class="col-3 ">
+                            <label class="topics">Character Name:</label>
+
+                        </div>
+                        <div class="col-3">
+                            <label class="topics">Class:</label>
+
+                        </div>
+                        <div class="col-3">
+                            <label class="topics">Race:</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="topics">Level:</label>
+                        </div>
+                    </div>
+
+                    <!-- Row 1: Inputs-->
+                    <div class="row">
+                        <div class="col-3">
+                            <input type="text" class="userInput" id="editNameId">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="userInput" id="editClassId">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="userInput" id="editRaceId">
+                        </div>
+                        <div class="col-3">
+                            <input type="number" class="userInput" id="editLevelId" min="1" max="20" style="width: 10vw">
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Labels-->
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="topics">Health</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="topics">Strength</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="topics">Dexterity</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="topics">Constitution</label>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Inputs-->
+                    <div class="row">
+                        <div class="col-3">
+                            <input type="text" class="userInput" id="editHealthId">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="userInput" id="editStrengthId">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="userInput" id="editDexterityId">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="userInput" id="editConsitutionId">
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Labels-->
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="topics">Intelligence</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="topics">wisdom</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="topics">Charisma</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="topics">Armor Class</label>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Inputs-->
+                    <div class="row">
+                        <div class="col-3">
+                            <input type="text" class="userInput" id="editIntelligenceId">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="userInput" id="editWisdomId">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="userInput" id="editCharismaId">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="userInput" id="editArmorclassId">
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Attack Labels-->
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="topics">Attack 1:</label>
+                        </div>
+                        <div class="col-4">
+                            <label class="topics">Attack 2:</label>
+                        </div>
+                        <div class="col-4">
+                            <label class="topics">Attack 3:</label>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Attack Inputs-->
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" class="userInput" id="editAttack1Id" placeholder="EX: Strength, Great Axe, 1d12+Strength" style="width: 25vw">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="userInput" id="editAttack2Id" placeholder="EX: Strength, Great Axe, 1d12+Strength" style="width: 25vw">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="userInput" id="editAttack3Id" placeholder="Ex: Strength, Great Axe, 1d12+Strength" style="width: 25vw">
+                        </div>
+                    </div>
+
+                    <!-- Row 5: Labels-->
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="topics">Equipment:</label>
+                        </div>
+                        <div class="col-6">
+                            <label class="topics">Other Proficiency:</label>
+                        </div>
+                    </div>
+
+                    <!-- Row 5: Inputs-->
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="text" class="userInput" id="editEquipmentId" placeholder="EX: Fullplate,Greatsword,Longbow,arrows,dungeoner's pack" style="width: 40vw">
+                        </div>
+                        <div class="col-6">
+                            <input type="text" class="userInput" id="editOtherproficiencyId" placeholder="EX: All armor,shields,Simple Weapons,Martial Weapons" style="width: 40vw">
+                        </div>
+                    </div>
+
+                    <!-- Row 6: Labels-->
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="topics">language:</label>
+                        </div>
+                        <div class="col-6">
+                            <label class="topics">Known Saves:</label>
+                        </div>
+                    </div>
+
+                    <!-- Row 6: Inputs-->
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="text" class="userInput" id="editLanguageId" placeholder="EX: Common,Halfling,Elvish" style="width: 40vw">
+                        </div>
+                        <div class="col-6">
+                            <input type="text" class="userInput" id="editKnownsavesId" placeholder="EX: Strength,Constitution" style="width: 40vw">
+                        </div>
+                    </div>
+
+                    <!-- Row 7: Known Skills Label-->
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="topics">Known Skills:</label>
+                        </div>
+                    </div>
+
+                    <!-- Row1: Skills Checkboxes and Labels -->
+                    <div class="row">
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Acrobatics">
+                            <label>Acrobatics</label>
+                        </div>
+
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Animal Handling">
+                            <label>Animal Handling</label>
+                        </div>
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Arcana">
+                            <label>Arcana</label>
+                        </div>
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Athletics">
+                            <label>Athletics</label>
+                        </div>
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Deception">
+                            <label>Deception</label>
+
+                        </div>
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="History">
+                            <label>History</label>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Skills Checkboxes and Labels -->
+                    <div class="row">
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Insight">
+                            <label>Insight</label>
+                        </div>
+
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Intimidation">
+                            <label>Intimidation</label>
+                        </div>
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Investigation">
+                            <label>Investigation</label>
+                        </div>
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="medicine">
+                            <label>Medicine</label>
+                        </div>
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="nature">
+                            <label>Nature</label>
+
+                        </div>
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Perception">
+                            <label>Perception</label>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Skills Checkboxes and Labels -->
+                    <div class="row">
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Performance">
+                            <label>Performance</label>
+                        </div>
+
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Persuasion">
+                            <label>Persuasion</label>
+                        </div>
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Religion">
+                            <label>Religion</label>
+                        </div>
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Sleight Of Hand">
+                            <label>Sleight Of Hand</label>
+                        </div>
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Stealth">
+                            <label>Stealth</label>
+
+                        </div>
+
+                        <div class="col-2">
+                            <input type="checkbox" id="editKnownskillsId" value="Survival">
+                            <label>Survival</label>
+                        </div>
+                    </div>
+                </form>
+
+
+                <!-- add a footer to put buttons to be able to edit and see other character information -->
+                <div class="card-footer">
+                    <div class="d-flex flex-row">
+                        <div class="col-12">
+                            <button type="button">Save Changes</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

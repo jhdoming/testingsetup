@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page</title>
+    <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- midieval font -->
+    <link href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap" rel="stylesheet">
+
+    <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
+    <style type="text/css">
+
+        html, body {
+            background-image: url('http://getwallpapers.com/wallpaper/full/5/d/a/59857.jpg#.Xk2UTrtIIdU.link');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: MedievalSharp;
+            height: 100%;
+            background-color: black;
+        }
+
+        .main {
+            align-content: center;
+            height: 100%;
+        }
+
+        .card {
+            width: 600px;
+            height: 600px;
+            margin-bottom: auto;
+            margin-top: auto;
+            background-color: rgba(255, 174, 0, 0.6);
+            border-color: black;
+            border-width: 1em;
+        }
+
+        .card-header h3 {
+            font-size: 300%;
+            text-align: center;
+            text-decoration: underline;
+            color: black;
+        }
+
+        .card-header {
+            text-align: center;
+        }
+
+        .card-footer {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .input-group-prepend span {
+            border: 0;
+            width: 45px;
+            color: black;
+            background-color: #ffb84d;
+        }
+
+        .createAccount_btn {
+            background-color: #ffb84d;
+            color: black;
+            font-size: 90%;
+            font-weight: bold;
+            float: right;
+            width: 125px;
+        }
+
+            .createAccount_btn:hover {
+                background-color: white;
+                color: black;
+            }
+
+        .returnToLogin {
+            color: white;
+            margin-left: 5px;
+        }
+
+        .row {
+            text-align: center;
+        }
+
+        .topics {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+
+        input {
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <div class="main">
+        <!-- d-flex creates a container, can justify content center, h-100 (can be 25, 50, 75, 0r 100) -->
+        <div class="d-flex justify-content-center h-100">
+            <!-- card is a content container, can have header, body, footer. can also edit -->
+            <div class="card justify-content-around">
+
+                <div class="card-header">
+                    <h3>My Characters</h3>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-4 ">
+                        <label class="topics">Character Name:</label>
+                    </div>
+                    <div class="col-4">
+                        <label class="topics">Class:</label>
+
+                    </div>
+                    <div class="col-4">
+                        <label class="topics">Level:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <input type="text" class="input" id="name1" onclick="functionHere()" disabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="input" id="class1" disabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="input" id="level1" disabled>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <input type="text" class="input" id="name2" onclick="functionHere()" disabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="input" id="class2" disabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="input" id="level2" disabled>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <input type="text" class="input" id="name3" disabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="input" id="class3" disabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="input" id="level3" disabled>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <input type="text" class="input" id="name4" disabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="input" id="class4" disabled>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="input" id="level4" disabled>
+                    </div>
+                </div>
+
+
+                <!-- add a footer to put buttons to be able to edit and see other character information -->
+                <div class="card-footer">
+                    <div class="row">
+                        <div>
+                            <button type="button" , onclick="window.location.href = 'createCharacter.html';">Create New Character</button>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div>
+                            <button type="button" , onclick="window.location.href = '';">Delete Character</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</body>
+</html>
