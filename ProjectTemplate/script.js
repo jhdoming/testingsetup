@@ -65,7 +65,7 @@ function logon() {
     });
 }
 
-function postCharacter() {
+function postCharacterSheet() {
     var webMethod = "ProjectServices.asmx/GetCharacters";
     $.ajax({
         type: "POST",
@@ -75,17 +75,43 @@ function postCharacter() {
         success: function (data) {
             var characterArray = data.d;
             var characterID = localStorage.getItem('charid');
-            $("#charName").val(characterArray[characterID]._charName);
-            $("#class").val(characterArray[characterID]._class);
-            $("#level").val(characterArray[characterID]._level);
-            $("#armorClass").val(characterArray[characterID]._armorClass);
+            $("#nameId").val(characterArray[characterID]._charName);
+            $("#classId").val(characterArray[characterID]._class);
+            $("#levelId").val(characterArray[characterID]._level);
+            $("#armorClassId").val(characterArray[characterID]._armorClass);
             $("#otherProf").val(characterArray[characterID]._otherProf);
-            $("#str").val(characterArray[characterID]._str);
-            $("#dex").val(characterArray[characterID]._dex);
-            $("#con").val(characterArray[characterID]._con);
-            $("#int").val(characterArray[characterID]._int);
-            $("#wis").val(characterArray[characterID]._wis);
-            $("#cha").val(characterArray[characterID]._cha);
+            $("#strengthId").val(characterArray[characterID]._str);
+            $("#dexterityId").val(characterArray[characterID]._dex);
+            $("#constitutionId").val(characterArray[characterID]._con);
+            $("#intelligenceId").val(characterArray[characterID]._int);
+            $("#wisdomId").val(characterArray[characterID]._wis);
+            $("#charismaId").val(characterArray[characterID]._cha);
+        }
+    });
+}
+
+function postTraits() {
+    var webMethod = "ProjectServices.asmx/GetCharacters";
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            var characterArray = data.d;
+            var characterID = localStorage.getItem('charid');
+            var attack1Array = characterArray[characterID]._attackOne.split(",");
+            var attack2Array = characterArray[characterID]._attackTwo.split(",");
+            var attack3Array = characterArray[characterID]._attackThree.split(",");
+            $("#traits-class").val(characterArray[characterID]._class);
+            $("#traits-race").val(characterArray[characterID]._race);
+            $("#attack1").val(attack1Array[1]);
+            $("#damage2").val(attack1Array[2]);
+            $("#attack2").val(attack2Array[1]);
+            $("#damage2").val(attack2Array[2]);
+            $("#attack3").val(attack3Array[1]);
+            $("#damage3").val(attack3Array[2]);
+            $("#equipment").val(characterArray[characterID]._equipment);
         }
     });
 }
