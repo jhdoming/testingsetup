@@ -101,7 +101,9 @@
 </head>
 
 
-<body>
+<body onload="javascript:postCharacterMain()">
+
+
     <div class="main">
         <!-- d-flex creates a container, can justify content center, h-100 (can be 25, 50, 75, 0r 100) -->
         <div class="d-flex justify-content-center h-100">
@@ -185,10 +187,13 @@
                         <div>
                             <button type="button" , onclick="window.location.href = '';">Delete Character</button>
                         </div>
+                        <div>
+                            <button type="button" , onclick="postCharacterMain()">Fill</button>
+                        </div>
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
 
 </body>
 </html>

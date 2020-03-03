@@ -93,3 +93,42 @@ function postCharacter()
         }
     })
 }
+
+// For Main Page
+function postCharacterMain() {
+    var webMethod = "ProjectServices.asmx/GetCharInfo";
+    var characterArray;
+    var characterID;
+
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            characterArray = data;
+            characterID = 0;
+            $("#name1").val(characterArray.d[characterID]._charName);
+            $("#class1").val(characterArray.d[characterID]._class);
+            $("#level1").val(characterArray.d[characterID]._level);
+
+            characterID += 1
+
+            $("#name2").val(characterArray.d[characterID]._charName);
+            $("#class2").val(characterArray.d[characterID]._class);
+            $("#level2").val(characterArray.d[characterID]._level);
+
+            characterID += 1
+
+            $("#name3").val(characterArray.d[characterID]._charName);
+            $("#class3").val(characterArray.d[characterID]._class);
+            $("#level3").val(characterArray.d[characterID]._level);
+
+            characterID += 1
+
+            $("#name4").val(characterArray.d[characterID]._charName);
+            $("#class4").val(characterArray.d[characterID]._class);
+            $("#level4").val(characterArray.d[characterID]._level);
+        }
+    })
+}

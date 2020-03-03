@@ -240,5 +240,44 @@ namespace ProjectTemplate
 				//convert the list of accounts to an array and return!
 				return characters.ToArray();
 		}
+
+        // Display MainPage Character Information when user Logs In
+        [WebMethod(EnableSession = true)]
+        public Character[] GetCharInfo()
+        {
+
+            //WE ONLY SHARE ACCOUNTS WITH LOGGED IN USERS!
+
+            DataTable sqlDt = new DataTable("characters");
+
+            string sqlConnectString = getConString();
+            string sqlSelect = "SELECT * FROM byteme.Character WHERE UserID=@userId";
+
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@userId", Session["userId"]);
+
+            //gonna use this to fill a data table
+            MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+            //filling the data table
+            sqlDa.Fill(sqlDt);
+
+            //loop through each row in the dataset, creating instances
+            //of our container class Account.  Fill each acciount with
+            //data from the rows, then dump them in a list.
+            List<Character> characters = new List<Character>();
+            for (int i = 0; i < sqlDt.Rows.Count; i++)
+            {
+                characters.Add(new Character
+                {
+                    _charName = sqlDt.Rows[i]["charName"].ToString(),
+                    _class = sqlDt.Rows[i]["class"].ToString(),
+                    _level = Convert.ToInt32(sqlDt.Rows[i]["level"])
+                });
+            }
+            //convert the list of accounts to an array and return!
+            return characters.ToArray();
+        }
     }
 }
