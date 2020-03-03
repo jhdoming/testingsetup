@@ -90,6 +90,8 @@
   <ItemGroup>
     <Content Include="characterSheet.html" />
     <Content Include="createAccount.html" />
+    <Content Include="createCharacter.html" />
+    <Content Include="editCharacter.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="login-style.css" />
@@ -97,7 +99,9 @@
     <Content Include="script.js" />
     <Content Include="Web.config" />
     <Content Include="skills.html" />
+    <Content Include="traits.html" />
     <Content Include="mainpage.html" />
+    <Content Include="spells.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
