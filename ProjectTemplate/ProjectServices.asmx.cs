@@ -245,24 +245,46 @@ namespace ProjectTemplate
 		}
 
         //EXAMPLE OF AN UPDATE QUERY WITH PARAMS PASSED IN
-        [WebMethod]
-        public void UpdateCharacter(string UserId, string CharName, string Class, string Race, string Level, string Health, string dex, string Int, string Wis, string Cha, string attackOne, string attackTwo, string attackThree, string armorClass, string equipment, string otherProf, string languages, string knownSkills)
+        [WebMethod(EnableSession = true)]
+        public String UpdateCharacter(string CharName, string Class, string Race, string Level, string Health, string str, string con, string dex, string Int, string Wis, string Cha, string attackOne, string attackTwo, string attackThree, string armorClass, string equipment, string otherProf, string languages, string knownSkills)
         {
-            string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["byteme"].ConnectionString;
+            string sqlConnectString = getConString();
+
             //this is a simple update, with parameters to pass in values
-            string sqlSelect = "update byteme.Character SET Class=@Class, Race=@Race, Level=@Level, Health=@Health, dex=@dex, Int=@Int, Wis=@Wis, Cha=@Cha, attackOne=@attackOne, attackTwo=@attackTwo, attackThree=@attackThree, armorClass=@armorClass, equipment=@equipment, otherProf=@otherProf, languages=@languages, knownSkills=@knownSkills WHERE UserID = @userId AND CharName = @CharName";
+            string sqlUpdate =
+                "UPDATE byteme.Character SET " +
+                "Class=@Class, " +
+                "Race=@Race, " +
+                "Level=@Level, " +
+                "Health=@Health, " +
+                "Dex=@dex, " +
+                "Str=@str, " +
+                "Con=@con, " +
+                "Int=@Int, " +
+                "Wis=@Wis, " +
+                "Cha=@Cha, " +
+                "AttackOne=@attackOne, " +
+                "AttackTwo=@attackTwo, " +
+                "AttackThree=@attackThree, " +
+                "armorClass=@armorClass, " +
+                "equipment=@equipment, otherProf=@otherProf, " +
+                "languages=@languages, " +
+                "knownSkills=@knownSkills " +
+                "WHERE UserID = @userId AND CharName = @CharName";
 
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
-            MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+            MySqlCommand sqlCommand = new MySqlCommand(sqlUpdate, sqlConnection);
 
-            sqlCommand.Parameters.AddWithValue("@UserId", HttpUtility.UrlDecode(UserId));
+            sqlCommand.Parameters.AddWithValue("@userId", Session["userId"]);
             sqlCommand.Parameters.AddWithValue("@CharName", HttpUtility.UrlDecode(CharName));
             sqlCommand.Parameters.AddWithValue("@Class", HttpUtility.UrlDecode(Class));
             sqlCommand.Parameters.AddWithValue("@Race", HttpUtility.UrlDecode(Race));
             sqlCommand.Parameters.AddWithValue("@Level", HttpUtility.UrlDecode(Level));
             sqlCommand.Parameters.AddWithValue("@Health", HttpUtility.UrlDecode(Health));
             sqlCommand.Parameters.AddWithValue("@dex", HttpUtility.UrlDecode(dex));
+            sqlCommand.Parameters.AddWithValue("@str", HttpUtility.UrlDecode(str));
+            sqlCommand.Parameters.AddWithValue("@con", HttpUtility.UrlDecode(con));
             sqlCommand.Parameters.AddWithValue("@Int", HttpUtility.UrlDecode(Int));
             sqlCommand.Parameters.AddWithValue("@Wis", HttpUtility.UrlDecode(Wis));
             sqlCommand.Parameters.AddWithValue("@Cha", HttpUtility.UrlDecode(Cha));
@@ -272,7 +294,6 @@ namespace ProjectTemplate
             sqlCommand.Parameters.AddWithValue("@armorClass", HttpUtility.UrlDecode(armorClass));
             sqlCommand.Parameters.AddWithValue("@equipment", HttpUtility.UrlDecode(equipment));
             sqlCommand.Parameters.AddWithValue("@otherProf", HttpUtility.UrlDecode(otherProf));
-            sqlCommand.Parameters.AddWithValue("@Health", HttpUtility.UrlDecode(Health));
             sqlCommand.Parameters.AddWithValue("@languages", HttpUtility.UrlDecode(languages));
             sqlCommand.Parameters.AddWithValue("@knownSkills", HttpUtility.UrlDecode(knownSkills));
 
@@ -283,11 +304,14 @@ namespace ProjectTemplate
             try
             {
                 sqlCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+                return "success";
             }
             catch (Exception e)
             {
+                sqlConnection.Close();
+                return e.ToString();
             }
-            sqlConnection.Close();
         }
     }
 }

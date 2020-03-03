@@ -68,9 +68,7 @@ function logon() {
 function submitEditCharacter() {
 
     var webMethod = "ProjectServices.asmx/UpdateCharacter";
-
-    var charID = localStorage.getItem('charid');
-    var userID = document.getElementById("editNameId").value;
+    var charName = document.getElementById("editNameId").value;
     var Class = document.getElementById("editClassId").value;
     var Race = document.getElementById("editRaceId").value;
     var AttackOne = document.getElementById("editAttack1Id").value;
@@ -78,20 +76,18 @@ function submitEditCharacter() {
     var AttackThree = document.getElementById("editAttack3Id").value;
     var Level = document.getElementById("editLevelId").value;
     var Health = document.getElementById("editHealthId").value;
-    var Str = document.getElementById("editStrengthId").value;
-    var Dex = document.getElementById("editDexterityId").value;
-    var Con = document.getElementById("editConstitutionId").value;
+    var str = document.getElementById("editStrengthId").value;
+    var dex = document.getElementById("editDexterityId").value;
+    var con = document.getElementById("editConstitutionId").value;
     var Int = document.getElementById("editIntelligenceId").value;
     var Wis = document.getElementById("editWisdomId").value;
     var Cha = document.getElementById("editCharismaId").value;
-    var ArmorClass = document.getElementById("editArmorclassId").value;
+    var armorClass = document.getElementById("editArmorclassId").value;
     var Equipment = document.getElementById("editEquipmentId").value;
     var OtherProf = document.getElementById("editOtherproficiencyId").value;
     var Languages = document.getElementById("editLanguageId").value;
 
-    var parameters = "{\"userID\":\"" + encodeURI(id)
-        + "\", \"charID\":\"" + encodeURI(CharId)
-        + "\", \"CharName\":\"" + encodeURI(charName)
+    var parameters = "{\"CharName\":\"" + encodeURI(charName)
         + "\", \"Class\":\"" + encodeURI(Class)
         + "\", \"Race\":\"" + encodeURI(Race)
         + "\", \"attackOne\":\"" + encodeURI(AttackOne)
@@ -99,13 +95,13 @@ function submitEditCharacter() {
         + "\", \"attackThree\":\"" + encodeURI(AttackThree)
         + "\", \"Level\":\"" + encodeURI(Level)
         + "\", \"Health\":\"" + encodeURI(Health)
-        + "\", \"Str\":\"" + encodeURI(Str)
-        + "\", \"dex\":\"" + encodeURI(Dex)
-        + "\", \"con\":\"" + encodeURI(Con)
+        + "\", \"str\":\"" + encodeURI(str)
+        + "\", \"con\":\"" + encodeURI(con)
+        + "\", \"dex\":\"" + encodeURI(dex)
         + "\", \"Int\":\"" + encodeURI(Int)
         + "\", \"wis\":\"" + encodeURI(Wis)
         + "\", \"cha\":\"" + encodeURI(Cha)
-        + "\", \"armorClass\":\"" + encodeURI(ArmorClass)
+        + "\", \"armorClass\":\"" + encodeURI(armorClass)
         + "\", \"equipment\":\"" + encodeURI(Equipment)
         + "\", \"otherProf\":\"" + encodeURI(OtherProf)
         + "\", \"languages\":\"" + encodeURI(Languages)
@@ -114,34 +110,16 @@ function submitEditCharacter() {
     $.ajax({
         type: "POST",
         url: webMethod,
+        data: parameters,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (data) {
-            var characterArray = data.d;
-            console.log(characterArray)
-            var characterID = localStorage.getItem('charid');
-            $("#editNameId").val(characterArray[characterID]._charName);
-            $("#editClassId").val(characterArray[characterID]._class);
-            $("#editRaceId").val(characterArray[characterID]._race);
-            $("#editAttack1Id").val(characterArray[characterID]._attackOne);
-            $("#editAttack2Id").val(characterArray[characterID]._attackTwo);
-            $("#editAttack3Id").val(characterArray[characterID]._attackThree);
-            $("#editLevelId").val(characterArray[characterID]._level);
-            $("#editHealthId").val(characterArray[characterID]._health);
-            $("#editStrengthId").val(characterArray[characterID]._str);
-            $("#editDexterityId").val(characterArray[characterID]._dex);
-            $("#editConstitutionId").val(characterArray[characterID]._con);
-            $("#editIntelligenceId").val(characterArray[characterID]._int);
-            $("#editWisdomId").val(characterArray[characterID]._wis);
-            $("#editCharismaId").val(characterArray[characterID]._cha);
-            $("#editArmorclassId").val(characterArray[characterID]._armorClass);
-            $("#editEquipmentId").val(characterArray[characterID]._equipment);
-            $("#editOtherproficiencyId").val(characterArray[characterID]._otherProf);
-            $("#editLanguageId").val(characterArray[characterID]._languages);
-            $("#editKnownsavesId").val(characterArray[characterID]._knownSaves);
+        success: function (msg) {
+            var responsefromserver = msg.d;
+            console.log(responsefromserver);
         }
     });
 }
+
 function postEditCharacter() {
     var webMethod = "ProjectServices.asmx/GetCharacters";
     $.ajax({
