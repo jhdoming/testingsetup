@@ -99,7 +99,7 @@ function submitEditCharacter() {
         + "\", \"str\":\"" + encodeURI(str)
         + "\", \"con\":\"" + encodeURI(con)
         + "\", \"dex\":\"" + encodeURI(dex)
-        + "\", \"Int\":\"" + encodeURI(Int)
+        + "\", \"Inti\":\"" + encodeURI(Int)
         + "\", \"Wis\":\"" + encodeURI(Wis)
         + "\", \"Cha\":\"" + encodeURI(Cha)
         + "\", \"armorClass\":\"" + encodeURI(armorClass)

@@ -246,7 +246,7 @@ namespace ProjectTemplate
 
         //EXAMPLE OF AN UPDATE QUERY WITH PARAMS PASSED IN
         [WebMethod(EnableSession = true)]
-        public String UpdateCharacter(string CharName, string Class, string Race, string Level, string Health, string str, string con, string dex, string Int, string Wis, string Cha, string attackOne, string attackTwo, string attackThree, string armorClass, string equipment, string otherProf, string languages, string knownSkills)
+        public String UpdateCharacter(string CharName, string Class, string Race, string Level, string Health, string str, string con, string dex, string Inti, string Wis, string Cha, string attackOne, string attackTwo, string attackThree, string armorClass, string equipment, string otherProf, string languages, string knownSkills)
         {
             string sqlConnectString = getConString();
 
@@ -260,7 +260,7 @@ namespace ProjectTemplate
                 "Dex=@dex, " +
                 "Str=@str, " +
                 "Con=@con, " +
-                "Int=@Int, " +
+                "Inti=@Inti, " +
                 "Wis=@Wis, " +
                 "Cha=@Cha, " +
                 "AttackOne=@attackOne, " +
@@ -284,10 +284,10 @@ namespace ProjectTemplate
             sqlCommand.Parameters.AddWithValue("@Race", HttpUtility.UrlDecode(Race));
             sqlCommand.Parameters.AddWithValue("@Level", HttpUtility.UrlDecode(Level));
             sqlCommand.Parameters.AddWithValue("@Health", HttpUtility.UrlDecode(Health));
-            sqlCommand.Parameters.AddWithValue("@dex", HttpUtility.UrlDecode(dex));
-            sqlCommand.Parameters.AddWithValue("@str", HttpUtility.UrlDecode(str));
-            sqlCommand.Parameters.AddWithValue("@con", HttpUtility.UrlDecode(con));
-            sqlCommand.Parameters.AddWithValue("@Int", HttpUtility.UrlDecode(Int));
+            sqlCommand.Parameters.AddWithValue("@Dex", HttpUtility.UrlDecode(dex));
+            sqlCommand.Parameters.AddWithValue("@Str", HttpUtility.UrlDecode(str));
+            sqlCommand.Parameters.AddWithValue("@Con", HttpUtility.UrlDecode(con));
+            sqlCommand.Parameters.AddWithValue("@Int", HttpUtility.UrlDecode(Inti));
             sqlCommand.Parameters.AddWithValue("@Wis", HttpUtility.UrlDecode(Wis));
             sqlCommand.Parameters.AddWithValue("@Cha", HttpUtility.UrlDecode(Cha));
             sqlCommand.Parameters.AddWithValue("@attackOne", HttpUtility.UrlDecode(attackOne));
@@ -305,7 +305,6 @@ namespace ProjectTemplate
             //by closing the connection and moving on
             try
             {
-                sqlCommand.ExecuteNonQuery();
                 sqlConnection.Close();
                 return "success";
             }
