@@ -65,6 +65,40 @@ function logon() {
     });
 }
 
+function submitEditCharacter() {
+    var webMethod = "ProjectServices.asmx/GetCharacters";
+    var
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            var characterArray = data.d;
+            console.log(characterArray)
+            var characterID = localStorage.getItem('charid');
+            $("#editNameId").val(characterArray[characterID]._charName);
+            $("#editClassId").val(characterArray[characterID]._class);
+            $("#editRaceId").val(characterArray[characterID]._race);
+            $("#editAttack1Id").val(characterArray[characterID]._attackOne);
+            $("#editAttack2Id").val(characterArray[characterID]._attackTwo);
+            $("#editAttack3Id").val(characterArray[characterID]._attackThree);
+            $("#editLevelId").val(characterArray[characterID]._level);
+            $("#editHealthId").val(characterArray[characterID]._health);
+            $("#editStrengthId").val(characterArray[characterID]._str);
+            $("#editDexterityId").val(characterArray[characterID]._dex);
+            $("#editConstitutionId").val(characterArray[characterID]._con);
+            $("#editIntelligenceId").val(characterArray[characterID]._int);
+            $("#editWisdomId").val(characterArray[characterID]._wis);
+            $("#editCharismaId").val(characterArray[characterID]._cha);
+            $("#editArmorclassId").val(characterArray[characterID]._armorClass);
+            $("#editEquipmentId").val(characterArray[characterID]._equipment);
+            $("#editOtherproficiencyId").val(characterArray[characterID]._otherProf);
+            $("#editLanguageId").val(characterArray[characterID]._languages);
+            $("#editKnownsavesId").val(characterArray[characterID]._knownSaves);
+        }
+    });
+}
 function postEditCharacter() {
     var webMethod = "ProjectServices.asmx/GetCharacters";
     $.ajax({
@@ -98,6 +132,7 @@ function postEditCharacter() {
         }
     });
 }
+
 function postCharacterSheet() {
     var webMethod = "ProjectServices.asmx/GetCharacters";
     $.ajax({
@@ -231,3 +266,4 @@ function openCharacterSheet(id) {
     localStorage.setItem('charid', id);
     window.location.href = 'characterSheet.html';
 }
+

@@ -243,5 +243,51 @@ namespace ProjectTemplate
 				//convert the list of accounts to an array and return!
 				return characters.ToArray();
 		}
+
+        //EXAMPLE OF AN UPDATE QUERY WITH PARAMS PASSED IN
+        [WebMethod]
+        public void UpdateCharacter(string UserId, string CharName, string Class, string Race, string Level, string Health, string dex, string Int, string Wis, string Cha, string attackOne, string attackTwo, string attackThree, string armorClass, string equipment, string otherProf, string languages, string knownSkills)
+        {
+            string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["byteme"].ConnectionString;
+            //this is a simple update, with parameters to pass in values
+            string sqlSelect = "update Character set UserId=@userId, CharName=@CharName, Class=@Class, Race=@Race, Level=@Level, Health=@Health, dex=@dex, Int=@Int, Wis=@Wis, Cha=@Cha, attackOne=@attackOne, attackTwo=@attackTwo, attackThree=@attackThree, armorClass=@armorClass, equipment=@equipment, otherProf=@otherProf, languages=@languages, knownSkills=@knownSkills";
+
+
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@UserId", HttpUtility.UrlDecode(UserId));
+            sqlCommand.Parameters.AddWithValue("@CharName", HttpUtility.UrlDecode(CharName));
+            sqlCommand.Parameters.AddWithValue("@Class", HttpUtility.UrlDecode(Class));
+            sqlCommand.Parameters.AddWithValue("@Race", HttpUtility.UrlDecode(Race));
+            sqlCommand.Parameters.AddWithValue("@Level", HttpUtility.UrlDecode(Level));
+            sqlCommand.Parameters.AddWithValue("@Health", HttpUtility.UrlDecode(Health));
+            sqlCommand.Parameters.AddWithValue("@dex", HttpUtility.UrlDecode(dex));
+            sqlCommand.Parameters.AddWithValue("@Int", HttpUtility.UrlDecode(Int));
+            sqlCommand.Parameters.AddWithValue("@Wis", HttpUtility.UrlDecode(Wis));
+            sqlCommand.Parameters.AddWithValue("@Cha", HttpUtility.UrlDecode(Cha));
+            sqlCommand.Parameters.AddWithValue("@attackOne", HttpUtility.UrlDecode(attackOne));
+            sqlCommand.Parameters.AddWithValue("@attackTwo", HttpUtility.UrlDecode(attackTwo));
+            sqlCommand.Parameters.AddWithValue("@attackThree", HttpUtility.UrlDecode(attackThree));
+            sqlCommand.Parameters.AddWithValue("@armorClass", HttpUtility.UrlDecode(armorClass));
+            sqlCommand.Parameters.AddWithValue("@equipment", HttpUtility.UrlDecode(equipment));
+            sqlCommand.Parameters.AddWithValue("@otherProf", HttpUtility.UrlDecode(otherProf));
+            sqlCommand.Parameters.AddWithValue("@Health", HttpUtility.UrlDecode(Health));
+            sqlCommand.Parameters.AddWithValue("@languages", HttpUtility.UrlDecode(languages));
+            sqlCommand.Parameters.AddWithValue("@knownSkills", HttpUtility.UrlDecode(knownSkills));
+
+
+            sqlConnection.Open();
+            //we're using a try/catch so that if the query errors out we can handle it gracefully
+            //by closing the connection and moving on
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+            }
+            sqlConnection.Close();
+        }
     }
 }
