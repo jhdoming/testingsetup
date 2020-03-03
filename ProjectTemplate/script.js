@@ -99,6 +99,8 @@ function postMainPage(){
     var characterArray;
     var characterID;
 
+    alert("program is called");
+
     $.ajax({
         type: "POST",
         url: webMethod,
@@ -107,10 +109,13 @@ function postMainPage(){
         success: function (data) {
             characterArray = data;
 
-            for (i=1 ; i < characterArray.length +1 ; i += 1){
-                $("#name" + i + 1).val(characterArray.d[i])._charName;
-                console.log(i);
-            }
+            ///for (i=1 ; i < characterArray.length + 1 ; i++){
+                $("#name1").val(characterArray.d[1])._charName;
+               // alert(i);
+           /// }
+        },
+        error: function (e) {
+            alert('program is busted');
         }
     })
 }
