@@ -98,6 +98,7 @@
     <Content Include="ProjectServices.asmx" />
     <Content Include="script.js" />
     <Content Include="Web.config" />
+    <Content Include="skills.html" />
     <Content Include="traits.html" />
     <Content Include="mainpage.html" />
     <Content Include="spells.html" />

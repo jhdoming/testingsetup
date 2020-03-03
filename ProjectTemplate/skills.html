@@ -1,0 +1,368 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Skills & Proficiencies</title>
+    <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- midieval font -->
+    <link href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap" rel="stylesheet">
+
+    <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
+    <style type="text/css">
+
+        html, body {
+            background-image: url('http://getwallpapers.com/wallpaper/full/5/d/a/59857.jpg#.Xk2UTrtIIdU.link');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: MedievalSharp;
+            height: 100%;
+            background-color: black;
+        }
+
+        .skillsSheet {
+            align-content: center;
+            height: 100%;
+        }
+
+        .card {
+            width: 600px;
+            height: 600px;
+            margin-bottom: auto;
+            margin-top: auto;
+            background-color: rgba(255, 174, 0, 0.6);
+            border-color: black;
+            border-width: 1em;
+        }
+
+        .card-header h3 {
+            font-size: 300%;
+            text-align: center;
+            text-decoration: underline;
+            color: black;
+        }
+
+        .input-group-prepend span {
+            border: 0;
+            width: 45px;
+            color: black;
+            background-color: #ffb84d;
+        }
+
+        .createAccount_btn {
+            background-color: #ffb84d;
+            color: black;
+            font-size: 90%;
+            font-weight: bold;
+            float: right;
+            width: 125px;
+        }
+
+         .createAccount_btn:hover {
+              background-color: white;
+              color: black;
+          }
+
+        .returnToLogin {
+            color: white;
+            margin-left: 5px;
+        }
+
+        .row {
+            text-align: center;
+        }
+
+
+        .topics {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+
+        input {
+            text-align: center;
+        }
+
+        textarea {
+            overflow-y: scroll;
+            height: 100px;
+            resize: none; /* Remove this if you want the user to resize the textarea */
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+    <div class="skillsSheet">
+        <!-- d-flex creates a container, can justify content center, h-100 (can be 25, 50, 75, 0r 100) -->
+        <div class="d-flex justify-content-center h-100">
+            <!-- card is a content container, can have header, body, footer. can also edit -->
+            <div class="card justify-content-around" style="width:1010px; height:700px; padding-left:10px;">
+
+                <div class="card-header">
+                    <h3>Skills & Proficiencies</h3>
+                </div>
+
+                <!-- Row 1: Skills Label-->
+                <div class="row">
+                    <div class="col-1">
+                        <label class="topics">Skills:</label>
+                    </div>
+                </div>
+
+                <!-- Row 2: Skills 1 - 3-->
+                <div class="row" style="text-align:left;">
+                    <div class="col-2">
+                        <input type="radio" id="radio-acro" disabled>
+                        <label for="radio-acro"> Acrobatics:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-acro" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-animal" disabled>
+                        <label for="radio-animal"> Animal Hndlg:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-animal" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-arcana" disabled>
+                        <label for="radio-arcana"> Arcana:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-arcana" size="4" disabled>
+                    </div>
+                </div>
+
+                <!-- Row 3: Skills 4 - 6-->
+                <div class="row" style="text-align:left;">
+                    <div class="col-2">
+                        <input type="radio" id="radio-athletics" disabled>
+                        <label for="radio-athletics"> Athletics:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-athletics" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-decept" disabled>
+                        <label for="radio-decept"> Deception:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-decept" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-hist" disabled>
+                        <label for="radio-hist"> History:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-hist" size="4" disabled>
+                    </div>
+                </div>
+
+                <!-- Row 4: Skills 7 - 9-->
+                <div class="row" style="text-align:left;">
+                    <div class="col-2">
+                        <input type="radio" id="radio-insight" disabled>
+                        <label for="radio-insight"> Insight:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-insight" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-intimidation" disabled>
+                        <label for="radio-intimidation"> Intimidation:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-intimidation" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-invest" disabled>
+                        <label for="radio-invest"> Investigation:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-invest" size="4" disabled>
+                    </div>
+                </div>
+
+                <!-- Row 5: Skills 10 - 12-->
+                <div class="row" style="text-align:left;">
+                    <div class="col-2">
+                        <input type="radio" id="radio-med" disabled>
+                        <label for="radio-med"> Medicine:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-med" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-nature" disabled>
+                        <label for="radio-nature"> Nature:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-nature" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-percept" disabled>
+                        <label for="radio-percept"> Perception:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-percept" size="4" disabled>
+                    </div>
+                </div>
+
+                <!-- Row 6: Skills 13 - 15-->
+                <div class="row" style="text-align:left;">
+                    <div class="col-2">
+                        <input type="radio" id="radio-perf" disabled>
+                        <label for="radio-perf"> Performance:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-perf" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-persuasion" disabled>
+                        <label for="radio-persuasion"> Persuasion:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-persuasion" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-religion" disabled>
+                        <label for="radio-religion"> Religion:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-religion" size="4" disabled>
+                    </div>
+                </div>
+
+                <!-- Row 7: Skills 16 - 18-->
+                <div class="row" style="text-align:left;">
+                    <div class="col-2">
+                        <input type="radio" id="radio-sleight" disabled>
+                        <label for="radio-sleight"> Sleight of Hand:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-sleight" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-stealth" disabled>
+                        <label for="radio-persuasion"> Stealth:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-stealth" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-survival" disabled>
+                        <label for="radio-survival"> Survival:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="input-survival" size="4" disabled>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Row 8: Label for Saves-->
+                <div class="row">
+                    <div class="col-1">
+                        <label class="topics">Saves:</label>
+                    </div>
+                </div>
+
+                <!-- Row 9: First 3 save values-->
+                <div class="row" style="text-align:left;">
+                    <div class="col-2">
+                        <input type="radio" id="radio-str" disabled>
+                        <label for="radio-str"> Strength:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="saves-str" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-dex" disabled>
+                        <label for="radio-dex"> Dexterity:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="saves-dex" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-con" disabled>
+                        <label for="radio-con"> Constitution:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="saves-con" size="4" disabled>
+                    </div>
+                </div>
+
+                <!-- Row 10: final 3 save values-->
+                <div class="row" style="text-align:left;">
+                    <div class="col-2">
+                        <input type="radio" id="radio-int" disabled>
+                        <label for="radio-int"> Intelligence:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="saves-int" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-wsd" disabled>
+                        <label for="radio-wsd"> wisdom:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="saves-wsd" size="4" disabled>
+                    </div>
+                    <div class="col-2">
+                        <input type="radio" id="radio-cha" disabled>
+                        <label for="radio-cha"> Charisma:</label>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="saves-cha" size="4" disabled>
+                    </div>
+                </div>
+
+                <!-- Row 11: Other prof & langs labels/inputs-->
+                <div class="row">
+                    <div class="col-6">
+                        <label class="topics">Other Proficiencies:</label><br>
+                        <textarea id="other-prof" style="width: 300px; text-align:left;" disabled></textarea>
+                    </div>
+                    <div class="col-6">
+                        <label class="topics">Languages:</label><br>
+                        <textarea id="langs" style="width: 300px; text-align:left;" disabled></textarea>
+                    </div>
+                </div>
+
+                <!-- Footer: Menu buttons-->
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-2">
+                            <button type="button" onclick="mainpage.html">Home</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="button">Edit</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" onclick="characterSheet.html">Character</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" onclick="traits.html">Traits</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="button" onclick="spells.html">Spells</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
