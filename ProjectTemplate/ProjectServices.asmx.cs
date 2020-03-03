@@ -188,7 +188,7 @@ namespace ProjectTemplate
 		[WebMethod(EnableSession = true)]
 		public Character[] GetCharacters()
 		{
-			//check out the return type.  It's an array of Character objects.  You can look at our custom Chracter class in this solution to see that it's
+			//check out the return type.  It's an array of Character objects.  You can look at our custom Character class in this solution to see that it's
 			//just a container for public class-level variables.  It's a simple container that asp.net will have no trouble converting into json.  When we return
 			//sets of information, it's a good idea to create a custom container class to represent instances (or rows) of that information, and then return an array of those objects.
 			//Keeps everything simple.
@@ -211,7 +211,7 @@ namespace ProjectTemplate
 				sqlDa.Fill(sqlDt);
 
 				//loop through each row in the dataset, creating instances
-				//of our container class Account.  Fill each acciount with
+				//of our container class Account.  Fill each account with
 				//data from the rows, then dump them in a list.
 				List<Character> characters = new List<Character>();
 				for (int i = 0; i < sqlDt.Rows.Count; i++)

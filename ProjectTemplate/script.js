@@ -64,11 +64,8 @@ function logon() {
     });
 }
 
+function postCharacter(val) {
 
-// really confused how the .ready function is positioned
-// already have the parameter being passed in
-$('characterSheet.html').ready(function postCharacter(val) {
-    
     var webMethod = "ProjectServices.asmx/GetCharacters";
     var characterArray;
     var characterID;
@@ -95,4 +92,25 @@ $('characterSheet.html').ready(function postCharacter(val) {
 
         }
     })
-});
+}
+
+function postMainPage(){
+    var webMethod = "ProjectServices.asmx/GetCharacters";
+    var characterArray;
+    var characterID;
+
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            characterArray = data;
+
+            for (i=1 ; i < characterArray.length +1 ; i += 1){
+                $("#name" + i + 1).val(characterArray.d[i])._charName;
+                console.log(i);
+            }
+        }
+    })
+}
