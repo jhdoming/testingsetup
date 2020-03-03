@@ -98,27 +98,29 @@ function postMainPage(){
     var webMethod = "ProjectServices.asmx/GetCharacters";
     var characterArray;
 
-    alert("program is called");
-
     $.ajax({
         type: "POST",
         url: webMethod,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            characterArray = data;
             alert("connection made");
-            $("#name1").val(data.d[0])._charName;
-            $("#class1").val(data.d[0])._class;
-            $("#level1").val(data.d[0])._level;
-           // for (i = 0; i < characterArray.length + 1; i++){
-           //     alert(characterArray.d[i])._charName;
-           //     $("#name"+(i+1)).val(characterArray.d[i])._charName;
+            $("#name1").val(data.d[0]._charName);
+            $("#class1").val(data.d[0]._class);
+            $("#level1").val(data.d[0]._level);
 
-           // }
-        },
-        error: function (e) {
-            alert('program is busted');
+            $("#name2").val(data.d[1]._charName);
+            $("#class2").val(data.d[1]._class);
+            $("#level2").val(data.d[1]._level);
+
+            $("#name3").val(data.d[2]._charName);
+            $("#class3").val(data.d[2]._class);
+            $("#level3").val(data.d[2]._level);
+
+            $("#name4").val(data.d[3]._charName);
+            $("#class4").val(data.d[3]._class);
+            $("#level4").val(data.d[3]._level);
+
         }
     })
 }
