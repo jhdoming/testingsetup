@@ -5,6 +5,11 @@
     <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        $(document).ready(function () {
+            postCharacterSheet();
+        });
+    </script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!--Fontawesome CDN-->
@@ -100,53 +105,53 @@
                     <div class="row">
                         <div class="col-4 ">
                             <label class="topics">Character Name:</label>
-                            <input type="text" id="charName" disabled>
+                            <input type="text" id="nameId" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Class:</label>
-                            <input type="text" id ="class" disabled>
+                            <input type="text" id="classId" disabled>
 
                         </div>
                         <div class="col-4">
                             <label class="topics">level:</label>
-                            <input type="text" id="level" disabled>
+                            <input type="text" id="levelId" disabled>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-4">
                             <label class="topics">Armor Class</label>
-                            <input type="text" id="armorClass" disabled>
+                            <input type="text" id="armorClassId" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Initiative</label>
-                            <input type="text" disabled>
+                            <input type="text" id="initiativeId" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Speed</label>
-                            <input type="text" disabled>
+                            <input type="text" id="speedId" disabled>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-4">
                             <label class="topics">Hit Points</label>
-                            <input type="text" disabled>
+                            <input type="text" id="hitPointsId" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Proficiency</label>
-                            <input type="text" id="otherProf" disabled>
+                            <input type="text" id="proficiencyId" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Death Saves</label>
                             <p>
-                            <input type="checkbox" checked>
-                            <input type="checkbox" checked>
-                            <input type="checkbox" checked>
+                            <input type="checkbox" id="deathSaves1" checked>
+                            <input type="checkbox" id="deathSaves2" checked>
+                            <input type="checkbox" id="deathSaves3" checked>
                             /
-                            <input type="checkbox" checked disabled>
-                            <input type="checkbox" checked disabled>
-                            <input type="checkbox" checked disabled>
+                            <input type="checkbox" id="deathSaves4" checked disabled>
+                            <input type="checkbox" id="deathSaves5" checked disabled>
+                            <input type="checkbox" id="deathSaves6" checked disabled>
                             </p>
                         </div>
                     </div>
@@ -154,54 +159,51 @@
                     <div class="row">
                         <div class="col-4">
                             <label class="topics">Strength</label>
-                            <input type="text" id="str" disabled>
+                            <input type="text" id="strengthId" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Dexterity</label>
-                            <input type="text" id="dex" disabled>
+                            <input type="text" id="dexterityId" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Constitution</label>
-                            <input type="text" id="con" disabled>
+                            <input type="text" id="constitutionId" disabled>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-4">
                             <label class="topics">Intelligence</label>
-                            <input type="text" id="int" disabled>
+                            <input type="text" id="intelligenceId" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Wisdom</label>
-                            <input type="text" id="wis"disabled>
+                            <input type="text" id="wisdomId" disabled>
                         </div>
                         <div class="col-4">
                             <label class="topics">Charisma</label>
-                            <input type="text" id="cha" disabled>
+                            <input type="text" id="charismaId" disabled>
                         </div>
                     </div>
-
 
                 <!-- add a footer to put buttons to be able to edit and see other character information -->
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-3">
-                            <button type="button">Edit</button>
-                        </div>
-                        <div class="col-3">
-                            <button type="button">Skills</button>
-                        </div>
-                        <div class="col-3">
-                            <button type="button">Spells</button>
-                        </div>
-                        <div class="col-3">
-                            <button type="button">Traits</button>
-                        </div>
-                    </div>
-
-                    <div class="row" style="margin-top: 10px;">
-                        <div class="col-6">
-                            <button type="button" onclick="postCharacter()">Fill Character</button>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-2">
+                                <button type="button" onclick="window.location.href = 'mainpage.html';">Home</button>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" onclick="window.location.href = 'editCharacter.html';">Edit</button>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" onclick="window.location.href = 'skills.html';">Skills</button>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" onclick="window.location.href = 'traits.html';">Traits</button>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" onclick="spells.html">Spells</button>
+                            </div>
                         </div>
                         <div class="col-6">
                             <!--<a href="#" onclick="LogOff()">log off</a>-->
@@ -212,7 +214,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
 </body>
 </html>
