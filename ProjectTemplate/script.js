@@ -65,6 +65,39 @@ function logon() {
     });
 }
 
+function postEditCharacter() {
+    var webMethod = "ProjectServices.asmx/GetCharacters";
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            var characterArray = data.d;
+            console.log(characterArray)
+            var characterID = localStorage.getItem('charid');
+            $("#editNameId").val(characterArray[characterID]._charName);
+            $("#editClassId").val(characterArray[characterID]._class);
+            $("#editRaceId").val(characterArray[characterID]._race);
+            $("#editAttack1Id").val(characterArray[characterID]._attackOne);
+            $("#editAttack2Id").val(characterArray[characterID]._attackTwo);
+            $("#editAttack3Id").val(characterArray[characterID]._attackThree);
+            $("#editLevelId").val(characterArray[characterID]._level);
+            $("#editHealthId").val(characterArray[characterID]._health);
+            $("#editStrengthId").val(characterArray[characterID]._str);
+            $("#editDexterityId").val(characterArray[characterID]._dex);
+            $("#editConstitutionId").val(characterArray[characterID]._con);
+            $("#editIntelligenceId").val(characterArray[characterID]._int);
+            $("#editWisdomId").val(characterArray[characterID]._wis);
+            $("#editCharismaId").val(characterArray[characterID]._cha);
+            $("#editArmorclassId").val(characterArray[characterID]._armorClass);
+            $("#editEquipmentId").val(characterArray[characterID]._equipment);
+            $("#editOtherproficiencyId").val(characterArray[characterID]._otherProf);
+            $("#editLanguageId").val(characterArray[characterID]._languages);
+            $("#editKnownsavesId").val(characterArray[characterID]._knownSaves);
+        }
+    });
+}
 function postCharacterSheet() {
     var webMethod = "ProjectServices.asmx/GetCharacters";
     $.ajax({
@@ -103,6 +136,30 @@ function postTraits() {
             var attack1Array = characterArray[characterID]._attackOne.split(",");
             var attack2Array = characterArray[characterID]._attackTwo.split(",");
             var attack3Array = characterArray[characterID]._attackThree.split(",");
+            $("#traits-class").val(characterArray[characterID]._class);
+            $("#traits-race").val(characterArray[characterID]._race);
+            $("#attack1").val(attack1Array[1]);
+            $("#damage2").val(attack1Array[2]);
+            $("#attack2").val(attack2Array[1]);
+            $("#damage2").val(attack2Array[2]);
+            $("#attack3").val(attack3Array[1]);
+            $("#damage3").val(attack3Array[2]);
+            $("#equipment").val(characterArray[characterID]._equipment);
+        }
+    });
+}
+
+function postSkills() {
+    var webMethod = "ProjectServices.asmx/GetCharacters";
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            var characterArray = data.d;
+            var characterID = localStorage.getItem('charid');
+            var skillsArray = characterArray[characterID]._knownSkills.split(",");
             $("#traits-class").val(characterArray[characterID]._class);
             $("#traits-race").val(characterArray[characterID]._race);
             $("#attack1").val(attack1Array[1]);
@@ -168,11 +225,6 @@ function postMainPage(){
 
         }
     })
-}
-
-function sessionHoldingTable(characterID=0) {
-        var characterID = characterID;
-    return characterID
 }
 
 function openCharacterSheet(id) {

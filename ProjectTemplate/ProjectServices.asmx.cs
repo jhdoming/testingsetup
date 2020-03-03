@@ -224,17 +224,20 @@ namespace ProjectTemplate
                         _attackOne = sqlDt.Rows[i]["attackOne"].ToString(),
                         _attackTwo = sqlDt.Rows[i]["attackTwo"].ToString(),
                         _attackThree = sqlDt.Rows[i]["attackThree"].ToString(),
+                        _health = Convert.ToInt32(sqlDt.Rows[i]["health"]),
                         _level =Convert.ToInt32(sqlDt.Rows[i]["level"]),
                         _str = Convert.ToInt32(sqlDt.Rows[i]["str"]),
                         _dex = Convert.ToInt32(sqlDt.Rows[i]["dex"]),
                         _int = Convert.ToInt32(sqlDt.Rows[i]["int"]),
                         _wis = Convert.ToInt32(sqlDt.Rows[i]["wis"]),
                         _cha = Convert.ToInt32(sqlDt.Rows[i]["cha"]),
+                        _con = Convert.ToInt32(sqlDt.Rows[i]["con"]),
                         _armorClass = Convert.ToInt32(sqlDt.Rows[i]["armorClass"]),
                         _equipment = sqlDt.Rows[i]["equipment"].ToString().Split(','),
                         _otherProf = sqlDt.Rows[i]["otherProf"].ToString().Split(','),
                         _languages = sqlDt.Rows[i]["languages"].ToString().Split(','),
                         _knownSkills = sqlDt.Rows[i]["knownSkills"].ToString().Split(','),
+                        _knownSaves = sqlDt.Rows[i]["knownSaves"].ToString().Split(','),
                     });
 				}
 				//convert the list of accounts to an array and return!
