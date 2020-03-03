@@ -66,7 +66,10 @@ function logon() {
 }
 
 function submitEditCharacter() {
-    var webMethod = "ProjectServices.asmx/GetCharacters";
+
+    var webMethod = "ProjectServices.asmx/UpdateCharacter";
+
+    var charID = localStorage.getItem('charid');
     var userID = document.getElementById("editNameId").value;
     var Class = document.getElementById("editClassId").value;
     var Race = document.getElementById("editRaceId").value;
@@ -80,12 +83,33 @@ function submitEditCharacter() {
     var Con = document.getElementById("editConstitutionId").value;
     var Int = document.getElementById("editIntelligenceId").value;
     var Wis = document.getElementById("editWisdomId").value;
-    document.getElementById("editCharismaId").value;
-    document.getElementById("editArmorclassId").value;
-    document.getElementById("editEquipmentId").value;
-    document.getElementById("editOtherproficiencyId").value;
-    document.getElementById("editLanguageId").value;
-    document.getElementById("editKnownsavesId").value;
+    var Cha = document.getElementById("editCharismaId").value;
+    var ArmorClass = document.getElementById("editArmorclassId").value;
+    var Equipment = document.getElementById("editEquipmentId").value;
+    var OtherProf = document.getElementById("editOtherproficiencyId").value;
+    var Languages = document.getElementById("editLanguageId").value;
+
+    var parameters = "{\"userID\":\"" + encodeURI(id)
+        + "\", \"charID\":\"" + encodeURI(CharId)
+        + "\", \"CharName\":\"" + encodeURI(charName)
+        + "\", \"Class\":\"" + encodeURI(Class)
+        + "\", \"Race\":\"" + encodeURI(Race)
+        + "\", \"attackOne\":\"" + encodeURI(AttackOne)
+        + "\", \"attackTwo\":\"" + encodeURI(AttackTwo)
+        + "\", \"attackThree\":\"" + encodeURI(AttackThree)
+        + "\", \"Level\":\"" + encodeURI(Level)
+        + "\", \"Health\":\"" + encodeURI(Health)
+        + "\", \"Str\":\"" + encodeURI(Str)
+        + "\", \"dex\":\"" + encodeURI(Dex)
+        + "\", \"con\":\"" + encodeURI(Con)
+        + "\", \"Int\":\"" + encodeURI(Int)
+        + "\", \"wis\":\"" + encodeURI(Wis)
+        + "\", \"cha\":\"" + encodeURI(Cha)
+        + "\", \"armorClass\":\"" + encodeURI(ArmorClass)
+        + "\", \"equipment\":\"" + encodeURI(Equipment)
+        + "\", \"otherProf\":\"" + encodeURI(OtherProf)
+        + "\", \"languages\":\"" + encodeURI(Languages)
+        + "\"}";
 
     $.ajax({
         type: "POST",

@@ -250,7 +250,7 @@ namespace ProjectTemplate
         {
             string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["byteme"].ConnectionString;
             //this is a simple update, with parameters to pass in values
-            string sqlSelect = "update Character set UserId=@userId, CharName=@CharName, Class=@Class, Race=@Race, Level=@Level, Health=@Health, dex=@dex, Int=@Int, Wis=@Wis, Cha=@Cha, attackOne=@attackOne, attackTwo=@attackTwo, attackThree=@attackThree, armorClass=@armorClass, equipment=@equipment, otherProf=@otherProf, languages=@languages, knownSkills=@knownSkills";
+            string sqlSelect = "update byteme.Character SET Class=@Class, Race=@Race, Level=@Level, Health=@Health, dex=@dex, Int=@Int, Wis=@Wis, Cha=@Cha, attackOne=@attackOne, attackTwo=@attackTwo, attackThree=@attackThree, armorClass=@armorClass, equipment=@equipment, otherProf=@otherProf, languages=@languages, knownSkills=@knownSkills WHERE UserID = @userId AND CharName = @CharName";
 
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
