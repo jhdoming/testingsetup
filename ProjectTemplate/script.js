@@ -64,6 +64,33 @@ function logon() {
     });
 }
 
+//logs the user off both at the client and at the server
+		function LogOff() {
+
+            var webMethod = "ProjectServices.asmx/LogOff";
+			$.ajax({
+				type: "POST",
+				url: webMethod,
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (msg) {
+					if (msg.d) {
+						//we logged off, so go back to logon page,
+						//stop checking messages
+						//and clear the chat panel
+						//showPanel('logonPanel');
+                        //HideMenu();
+                        window.location.replace("index.html");
+					}
+					else {
+					}
+				},
+				error: function (e) {
+					alert("boo...");
+				}
+			});
+		}
+
 function postCharacter() 
 {
     var webMethod = "ProjectServices.asmx/GetCharacters";
