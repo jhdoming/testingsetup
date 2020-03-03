@@ -63,12 +63,13 @@ function createAccount() {
 
 
 function createCharacter() {
-    // code to concatenate all the checked boxes into one variable
-    // make a variable to store the concatenated string, and a variable to get all the skills into one variable
+    // variable to store the concatenated character skills
     var charSkills = '';
+
+    // make an empty variable to store the concatenated strings, and a variable to get and store all the skills into one variable by name attribute
     var userInput = document.getElementsByName('knownSkills');
 
-    // use for loop to go through all the checkboxes, if input is checkbos and name is knownskills, if it is checked, concatenate the skills
+    // use for loop to go through all the checkboxes, if the input is checkbox and name is knownskills and if it is checked, concatenate the skills
         for (var x = 0; x < userInput.length; x++) {
             if (userInput[x].type == "checkbox" && userInput[x].name == 'knownSkills') {
                 if (userInput[x].checked == true) {
@@ -76,13 +77,14 @@ function createCharacter() {
                 }
             }
         }
-    // might not need this code (alert is just a check)
+    // might not need this code (alert is just a check that it was concatenated in charSkills variable)
     if (/,$/.test(charSkills)) {
         charSkills = charSkills.replace(/,$/, "")
         }
     alert(charSkills);
 
 
+    // created variables to store all the user input from the create character hmtl, by grabbing all the inputs by Id
     var charName = document.getElementById("newNameId").value;
     var charClass = document.getElementById("newClassId").value;
     var charRace = document.getElementById("newRaceId").value;
@@ -107,14 +109,16 @@ function createCharacter() {
     var charOtherProficiency = document.getElementById("newOtherproficiencyId").value;
 
     var charLanguage = document.getElementById("newLanguageId").value;
-    //figure out how to loop through all checkboxes and concatenate all values and save in a variable
-    //var charSkills = document.getElementById("newAttack2Id").value;
     var charKnownSaves = document.getElementById("newKnownsavesId").value;
 
+    // wasn't sure if to put this here and pass it through the parameters like all the other variables above. I put this line of code in
+    // the ProjectServices.asmx file just after the query
     //var currentSession = Session["userId"]
-    
+
+    // reference the function/webservice here
     var webMethod = "ProjectServices.asmx/createCharacter";
 
+    // pass the info to the server
     var parameters = "{\"CharName\":\"" + encodeURI(charName) + "\",\"Class\":\"" + encodeURI(charClass) +
                         "\",\"Race\":\"" + encodeURI(charRace) + "\",\"Level\":\"" + encodeURI(charLevel) +
                         "\",\"Health\":\"" + encodeURI(charHealth) + "\",\"Str\":\"" + encodeURI(charStrength) +
@@ -133,11 +137,15 @@ function createCharacter() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
+            var responseFromServer = msg.d;
             //showPanel('logonPanel');
             alert("New Character has been Created");
+            alert(responseFromServer);
+
         },
         error: function (e) {
             alert("Error: something went wrong");
+            responseFromServer
         }
     });
 }

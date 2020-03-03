@@ -250,18 +250,21 @@ namespace ProjectTemplate
                                         string proficiency, string languages, string skills, string saves)
             {
                 string sqlConnectString = getConString();
+
                 //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
                 //does is tell mySql server to return the primary key of the last inserted row.
+                // query based off the database attributes
                 string sqlSelect = "INSERT INTO byteme.Character(UserId, CharName, Class, Race, Level, Health, Str, Dex, Con, Int, Wis, Cha, AttackOne, AttackTwo, AttackThree, ArmorClass, Equipment, OtherProf, Languages, KnownSkills, KnownSaves) " +
                     "values(@userIdValue, @charNameValue, @classValue, @raceValue, @levelValue, @healthValue, @strValue, @dexValue, @conValue, @intValue, @wisValue, @chaValue, @attackoneValue, @attacktwoValue, @attackthreeValue, @armorclassValue, @equipmentValue, @otherProfValue, @languagesValue, @knownskillsValue, @knownsavesValue);";
 
-                // get the userId of current session and turn object into a string
+                // get the userId of current session and turn object into a string. THis line of code is if i wasnt sure to put here or in the js file and pass
+                // it in as a paramater rather than assiging it here
                 var currentSessionUserId = Session["userId"].ToString();
 
                 MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
                 MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
                 
-                
+                // put the paramters in parenthesis to be the values in the query
                 sqlCommand.Parameters.AddWithValue("@userIdValue", HttpUtility.UrlDecode(currentSessionUserId));
                 sqlCommand.Parameters.AddWithValue("@charNameValue", HttpUtility.UrlDecode(characterName));
                 sqlCommand.Parameters.AddWithValue("@classValue", HttpUtility.UrlDecode(charClass));
