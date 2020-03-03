@@ -1,3 +1,5 @@
+
+
 function createAccount() {
     var id = document.getElementById("createId").value;
     var pass = document.getElementById("createPass").value;
@@ -51,7 +53,6 @@ function logon() {
         success: function (msg) {
             var responseFromServer = msg.d;
             if (responseFromServer == true) {
-
                 location.href ="mainpage.html";
             }
             else {
@@ -64,32 +65,91 @@ function logon() {
     });
 }
 
-function postCharacter() 
-{
+function postCharacter() {
+    var webMethod = "ProjectServices.asmx/GetCharacters";
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            var characterArray = data.d;
+            var characterID = localStorage.getItem('charid');
+            $("#charName").val(characterArray[characterID]._charName);
+            $("#class").val(characterArray[characterID]._class);
+            $("#level").val(characterArray[characterID]._level);
+            $("#armorClass").val(characterArray[characterID]._armorClass);
+            $("#otherProf").val(characterArray[characterID]._otherProf);
+            $("#str").val(characterArray[characterID]._str);
+            $("#dex").val(characterArray[characterID]._dex);
+            $("#con").val(characterArray[characterID]._con);
+            $("#int").val(characterArray[characterID]._int);
+            $("#wis").val(characterArray[characterID]._wis);
+            $("#cha").val(characterArray[characterID]._cha);
+        }
+    });
+}
+
+function postMainPage(){
     var webMethod = "ProjectServices.asmx/GetCharacters";
     var characterArray;
-    var characterID;
 
     $.ajax({
         type: "POST",
         url: webMethod,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function(data) {
-            characterArray = data;
-            characterID = 0;
-            $("#charName").val(characterArray.d[characterID]._charName);
-            $("#class").val(characterArray.d[characterID]._class);
-            $("#level").val(characterArray.d[characterID]._level);
-            $("#armorClass").val(characterArray.d[characterID]._armorClass);
-            $("#otherProf").val(characterArray.d[characterID]._otherProf);
-            $("#str").val(characterArray.d[characterID]._str);
-            $("#dex").val(characterArray.d[characterID]._dex);
-            $("#con").val(characterArray.d[characterID]._con);
-            $("#int").val(characterArray.d[characterID]._int);
-            $("#wis").val(characterArray.d[characterID]._wis);
-            $("#cha").val(characterArray.d[characterID]._cha);
+        success: function (data) {
+            var characterArray = data.d;
+            switch (characterArray.length) {
+                default:
+                    break;
+                case 1:
+                    $("#openchar1").prop("disabled", false);
+                    break;
+                case 2:
+                    $("#openchar1").prop("disabled", false);
+                    $("#openchar2").prop("disabled", false);
+                    break;
+                case 3:
+                    $("#openchar1").prop("disabled", false);
+                    $("#openchar2").prop("disabled", false);
+                    $("#openchar3").prop("disabled", false);
+                    break;
+                case 4:
+                    $("#openchar1").prop("disabled", false);
+                    $("#openchar2").prop("disabled", false);
+                    $("#openchar3").prop("disabled", false);
+                    $("#openchar4").prop("disabled", false);
+                    break;
+            }
+
+            $("#name1").val(characterArray[0]._charName);
+            $("#class1").val(characterArray[0]._class);
+            $("#level1").val(characterArray[0]._level);
+
+            $("#name2").val(characterArray[1]._charName);
+            $("#class2").val(characterArray[1]._class);
+            $("#level2").val(characterArray[1]._level);
+
+            $("#name3").val(characterArray[2]._charName);
+            $("#class3").val(characterArray[2]._class);
+            $("#level3").val(characterArray[2]._level);
+
+            $("#name4").val(characterArray[3]._charName);
+            $("#class4").val(characterArray[3]._class);
+            $("#level4").val(characterArray[3]._level);
 
         }
     })
+}
+
+function sessionHoldingTable(characterID=0) {
+        var characterID = characterID;
+    return characterID
+}
+
+function openCharacterSheet(id) {
+    localStorage.setItem('charid', id);
+    window.location.href = 'characterSheet.html';
 }
