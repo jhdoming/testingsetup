@@ -110,9 +110,11 @@ function createCharacter() {
     //figure out how to loop through all checkboxes and concatenate all values and save in a variable
     //var charSkills = document.getElementById("newAttack2Id").value;
     var charKnownSaves = document.getElementById("newKnownsavesId").value;
-    
 
-    var webMethod = "AccountServices.asmx/RequestAccount";
+    //var currentSession = Session["userId"]
+    
+    var webMethod = "ProjectServices.asmx/createCharacter";
+
     var parameters = "{\"CharName\":\"" + encodeURI(charName) + "\",\"Class\":\"" + encodeURI(charClass) +
                         "\",\"Race\":\"" + encodeURI(charRace) + "\",\"Level\":\"" + encodeURI(charLevel) +
                         "\",\"Health\":\"" + encodeURI(charHealth) + "\",\"Str\":\"" + encodeURI(charStrength) +

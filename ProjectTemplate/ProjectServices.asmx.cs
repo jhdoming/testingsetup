@@ -240,5 +240,74 @@ namespace ProjectTemplate
 				//convert the list of accounts to an array and return!
 				return characters.ToArray();
 		}
+
+
+            //EXAMPLE OF AN INSERT QUERY WITH PARAMS PASSED IN.  BONUS GETTING THE INSERTED ID FROM THE DB!
+            [WebMethod(EnableSession = true)]
+            public void CreateCharacter(string characterName, string charClass, string race, string level, string health,
+                                        string strength, string dexterity, string constitution, string intelligence, string wisdom, 
+                                        string charisma, string attack1, string attack2, string attack3, string armor, string equipment, 
+                                        string proficiency, string languages, string skills, string saves)
+            {
+                string sqlConnectString = getConString();
+                //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
+                //does is tell mySql server to return the primary key of the last inserted row.
+                string sqlSelect = "INSERT INTO byteme.Character(UserId, CharName, Class, Race, Level, Health, Str, Dex, Con, Int, Wis, Cha, AttackOne, AttackTwo, AttackThree, ArmorClass, Equipment, OtherProf, Languages, KnownSkills, KnownSaves) " +
+                    "values(@userIdValue, @charNameValue, @classValue, @raceValue, @levelValue, @healthValue, @strValue, @dexValue, @conValue, @intValue, @wisValue, @chaValue, @attackoneValue, @attacktwoValue, @attackthreeValue, @armorclassValue, @equipmentValue, @otherProfValue, @languagesValue, @knownskillsValue, @knownsavesValue);";
+
+                // get the userId of current session and turn object into a string
+                var currentSessionUserId = Session["userId"].ToString();
+
+                MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+                MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+                
+                
+                sqlCommand.Parameters.AddWithValue("@userIdValue", HttpUtility.UrlDecode(currentSessionUserId));
+                sqlCommand.Parameters.AddWithValue("@charNameValue", HttpUtility.UrlDecode(characterName));
+                sqlCommand.Parameters.AddWithValue("@classValue", HttpUtility.UrlDecode(charClass));
+                sqlCommand.Parameters.AddWithValue("@raceValue", HttpUtility.UrlDecode(race));
+                sqlCommand.Parameters.AddWithValue("@levelValue", HttpUtility.UrlDecode(level));
+
+                sqlCommand.Parameters.AddWithValue("@healthValue", HttpUtility.UrlDecode(health));
+                sqlCommand.Parameters.AddWithValue("@strValue", HttpUtility.UrlDecode(strength));
+                sqlCommand.Parameters.AddWithValue("@dexValue", HttpUtility.UrlDecode(dexterity));
+                sqlCommand.Parameters.AddWithValue("@conValue", HttpUtility.UrlDecode(constitution));
+                sqlCommand.Parameters.AddWithValue("@intValue", HttpUtility.UrlDecode(intelligence));
+
+                sqlCommand.Parameters.AddWithValue("@wisValue", HttpUtility.UrlDecode(wisdom));
+                sqlCommand.Parameters.AddWithValue("@chaValue", HttpUtility.UrlDecode(charisma));
+                sqlCommand.Parameters.AddWithValue("@attackoneValue", HttpUtility.UrlDecode(attack1));
+                sqlCommand.Parameters.AddWithValue("@attacktwoValue", HttpUtility.UrlDecode(attack2));
+                sqlCommand.Parameters.AddWithValue("@attackthreeValue", HttpUtility.UrlDecode(attack3));
+
+                sqlCommand.Parameters.AddWithValue("@armorclassValue", HttpUtility.UrlDecode(armor));
+                sqlCommand.Parameters.AddWithValue("@equipmentValue", HttpUtility.UrlDecode(equipment));
+                sqlCommand.Parameters.AddWithValue("@otherProfValue", HttpUtility.UrlDecode(proficiency));
+                sqlCommand.Parameters.AddWithValue("@languagesValue", HttpUtility.UrlDecode(languages));
+                sqlCommand.Parameters.AddWithValue("@knownskillsValue", HttpUtility.UrlDecode(skills));
+                sqlCommand.Parameters.AddWithValue("@knownsavesValue", HttpUtility.UrlDecode(saves));
+
+            //this time, we're not using a data adapter to fill a data table.  We're just
+            //opening the connection, telling our command to "executescalar" which says basically
+            //execute the query and just hand me back the number the query returns (the ID, remember?).
+            //don't forget to close the connection!
+            sqlConnection.Open();
+                //we're using a try/catch so that if the query errors out we can handle it gracefully
+                //by closing the connection and moving on
+                try
+                {
+                    int accountID = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                    //here, you could use this accountID for additional queries regarding
+                    //the requested account.  Really this is just an example to show you
+                    //a query where you get the primary key of the inserted row back from
+                    //the database!
+                }
+                catch (Exception e)
+                {
+                }
+                sqlConnection.Close();
+            }
+
+
     }
 }
