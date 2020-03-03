@@ -1,8 +1,4 @@
-let characterSessionID = class {
-    constructor(id) {
-        this.id = 0;
-    }
-};
+
 
 function createAccount() {
     var id = document.getElementById("createId").value;
@@ -57,7 +53,6 @@ function logon() {
         success: function (msg) {
             var responseFromServer = msg.d;
             if (responseFromServer == true) {
-
                 location.href ="mainpage.html";
             }
             else {
@@ -70,37 +65,28 @@ function logon() {
     });
 }
 
-function postCharacter(characterID) {
+function postCharacter() {
     var webMethod = "ProjectServices.asmx/GetCharacters";
-    window.location.href = 'characterSheet.html';
-    $(document).ready(function(){
-        $.ajax({
-            type: "POST",
-            url: webMethod,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                var characterArray = data.d;
-                alert("connection made");
-                console.log(characterArray);
-                alert(characterArray[characterID]._charName);
-                $("#charName").val(characterArray[characterID]._charName);
-                $("#class").val(characterArray[characterID]._class);
-                $("#level").val(characterArray[characterID]._level);
-                $("#armorClass").val(characterArray[characterID]._armorClass);
-                $("#otherProf").val(characterArray[characterID]._otherProf);
-                $("#str").val(characterArray[characterID]._str);
-                $("#dex").val(characterArray[characterID]._dex);
-                $("#con").val(characterArray[characterID]._con);
-                $("#int").val(characterArray[characterID]._int);
-                $("#wis").val(characterArray[characterID]._wis);
-                $("#cha").val(characterArray[characterID]._cha);
-
-            }
-        });
-
-
-        alert("made it here");
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            var characterArray = data.d;
+            var characterID = localStorage.getItem('charid');
+            $("#charName").val(characterArray[characterID]._charName);
+            $("#class").val(characterArray[characterID]._class);
+            $("#level").val(characterArray[characterID]._level);
+            $("#armorClass").val(characterArray[characterID]._armorClass);
+            $("#otherProf").val(characterArray[characterID]._otherProf);
+            $("#str").val(characterArray[characterID]._str);
+            $("#dex").val(characterArray[characterID]._dex);
+            $("#con").val(characterArray[characterID]._con);
+            $("#int").val(characterArray[characterID]._int);
+            $("#wis").val(characterArray[characterID]._wis);
+            $("#cha").val(characterArray[characterID]._cha);
+        }
     });
 }
 
@@ -161,4 +147,9 @@ function postMainPage(){
 function sessionHoldingTable(characterID=0) {
         var characterID = characterID;
     return characterID
+}
+
+function openCharacterSheet(id) {
+    localStorage.setItem('charid', id);
+    window.location.href = 'characterSheet.html';
 }
