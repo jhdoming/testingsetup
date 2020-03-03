@@ -87,6 +87,7 @@ function submitEditCharacter() {
     var OtherProf = document.getElementById("editOtherproficiencyId").value;
     var Languages = document.getElementById("editLanguageId").value;
 
+
     var parameters = "{\"CharName\":\"" + encodeURI(charName)
         + "\", \"Class\":\"" + encodeURI(Class)
         + "\", \"Race\":\"" + encodeURI(Race)
@@ -99,8 +100,8 @@ function submitEditCharacter() {
         + "\", \"con\":\"" + encodeURI(con)
         + "\", \"dex\":\"" + encodeURI(dex)
         + "\", \"Int\":\"" + encodeURI(Int)
-        + "\", \"wis\":\"" + encodeURI(Wis)
-        + "\", \"cha\":\"" + encodeURI(Cha)
+        + "\", \"Wis\":\"" + encodeURI(Wis)
+        + "\", \"Cha\":\"" + encodeURI(Cha)
         + "\", \"armorClass\":\"" + encodeURI(armorClass)
         + "\", \"equipment\":\"" + encodeURI(Equipment)
         + "\", \"otherProf\":\"" + encodeURI(OtherProf)
