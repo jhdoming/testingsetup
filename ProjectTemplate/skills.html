@@ -4,7 +4,10 @@
     <title>Skills & Proficiencies</title>
     <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        $(document).ready(function () {
+            Skills();
+        });</script>
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -350,13 +353,13 @@
                             <button type="button" onclick="window.location.href = 'editCharacter.html';">Edit</button>
                         </div>
                         <div class="col-2">
-                            <button type="button" onclick="characterSheet.html">Character</button>
+                            <button type="button" onclick="window.location.href = 'characterSheet.html';">Character</button>
                         </div>
                         <div class="col-2">
                             <button type="button" onclick="window.location.href = 'traits.html';">Traits</button>
                         </div>
                         <div class="col-2">
-                            <button type="button" onclick="spells.html">Spells</button>
+                            <button type="button" onclick="window.location.href = 'spells.html';">Spells</button>
                         </div>
                     </div>
                 </div>

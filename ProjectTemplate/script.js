@@ -173,6 +173,23 @@ function postSkills() {
     });
 }
 
+function Skills() {
+    var webMethod = "ProjectServices.asmx/GetCharacters";
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            var characterArray = data.d;
+            var characterID = localStorage.getItem('charid');
+
+            $("#other-prof").val(characterArray[characterID]._otherProf);
+            $("#langs").val(characterArray[characterID]._languages);
+        }
+    });
+}
+
 function postMainPage(){
     var webMethod = "ProjectServices.asmx/GetCharacters";
     var characterArray;
