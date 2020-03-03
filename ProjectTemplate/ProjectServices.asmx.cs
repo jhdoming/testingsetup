@@ -266,11 +266,13 @@ namespace ProjectTemplate
                 "AttackOne=@attackOne, " +
                 "AttackTwo=@attackTwo, " +
                 "AttackThree=@attackThree, " +
-                "armorClass=@armorClass, " +
-                "equipment=@equipment, otherProf=@otherProf, " +
-                "languages=@languages, " +
-                "knownSkills=@knownSkills " +
-                "WHERE UserID = @userId AND CharName = @CharName";
+                "ArmorClass=@armorClass, " +
+                "Equipment=@equipment, " +
+                "OtherProf=@otherProf, " +
+                "Languages=@languages, " +
+                "KnownSkills=@knownSkills " +
+                "WHERE " +
+                "UserID = @userId AND CharName = @CharName";
 
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
