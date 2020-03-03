@@ -67,7 +67,26 @@ function logon() {
 
 function submitEditCharacter() {
     var webMethod = "ProjectServices.asmx/GetCharacters";
-    var
+    var userID = document.getElementById("editNameId").value;
+    var Class = document.getElementById("editClassId").value;
+    var Race = document.getElementById("editRaceId").value;
+    var AttackOne = document.getElementById("editAttack1Id").value;
+    var AttackTwo = document.getElementById("editAttack2Id").value;
+    var AttackThree = document.getElementById("editAttack3Id").value;
+    var Level = document.getElementById("editLevelId").value;
+    var Health = document.getElementById("editHealthId").value;
+    var Str = document.getElementById("editStrengthId").value;
+    var Dex = document.getElementById("editDexterityId").value;
+    var Con = document.getElementById("editConstitutionId").value;
+    var Int = document.getElementById("editIntelligenceId").value;
+    var Wis = document.getElementById("editWisdomId").value;
+    document.getElementById("editCharismaId").value;
+    document.getElementById("editArmorclassId").value;
+    document.getElementById("editEquipmentId").value;
+    document.getElementById("editOtherproficiencyId").value;
+    document.getElementById("editLanguageId").value;
+    document.getElementById("editKnownsavesId").value;
+
     $.ajax({
         type: "POST",
         url: webMethod,
