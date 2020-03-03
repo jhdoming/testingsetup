@@ -1,3 +1,9 @@
+let characterSessionID = class {
+    constructor(id) {
+        this.id = 0;
+    }
+};
+
 function createAccount() {
     var id = document.getElementById("createId").value;
     var pass = document.getElementById("createPass").value;
@@ -65,33 +71,37 @@ function logon() {
 }
 
 function postCharacter(characterID) {
-
     var webMethod = "ProjectServices.asmx/GetCharacters";
-    var characterArray;
+    window.location.href = 'characterSheet.html';
+    $(document).ready(function(){
+        $.ajax({
+            type: "POST",
+            url: webMethod,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                var characterArray = data.d;
+                alert("connection made");
+                console.log(characterArray);
+                alert(characterArray[characterID]._charName);
+                $("#charName").val(characterArray[characterID]._charName);
+                $("#class").val(characterArray[characterID]._class);
+                $("#level").val(characterArray[characterID]._level);
+                $("#armorClass").val(characterArray[characterID]._armorClass);
+                $("#otherProf").val(characterArray[characterID]._otherProf);
+                $("#str").val(characterArray[characterID]._str);
+                $("#dex").val(characterArray[characterID]._dex);
+                $("#con").val(characterArray[characterID]._con);
+                $("#int").val(characterArray[characterID]._int);
+                $("#wis").val(characterArray[characterID]._wis);
+                $("#cha").val(characterArray[characterID]._cha);
 
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            characterArray = data;
-            alert("connection made");
-            alert(data.d[characterID]._charName);
-            $("#charName").val(data.d[characterID]._charName);
-            $("#class").val(characterArray.d[characterID]._class);
-            $("#level").val(characterArray.d[characterID]._level);
-            $("#armorClass").val(characterArray.d[characterID]._armorClass);
-            $("#otherProf").val(characterArray.d[characterID]._otherProf);
-            $("#str").val(characterArray.d[characterID]._str);
-            $("#dex").val(characterArray.d[characterID]._dex);
-            $("#con").val(characterArray.d[characterID]._con);
-            $("#int").val(characterArray.d[characterID]._int);
-            $("#wis").val(characterArray.d[characterID]._wis);
-            $("#cha").val(characterArray.d[characterID]._cha);
+            }
+        });
 
-        }
-    })
+
+        alert("made it here");
+    });
 }
 
 function postMainPage(){
@@ -146,4 +156,9 @@ function postMainPage(){
 
         }
     })
+}
+
+function sessionHoldingTable(characterID=0) {
+        var characterID = characterID;
+    return characterID
 }
