@@ -5,7 +5,12 @@
     <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="script.js"></script>
-    <script> $(document).ready(postCharacter())</script>
+    <script>
+        $(document).ready(function () {
+            postCharacter(1);
+            alert("program working");
+        });
+    </script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!--Fontawesome CDN-->
@@ -199,7 +204,7 @@
                             <button type="button">Traits</button>
                         </div>
                         <div class="col-3">
-                            <button type="button" onclick="postCharacter1()">Fill Character</button>
+                            <button type="button" onclick="postCharacter(1)">Fill Character</button>
                         </div>
                     </div>
                 </div>

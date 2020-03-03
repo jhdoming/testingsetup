@@ -64,11 +64,10 @@ function logon() {
     });
 }
 
-function postCharacter(val) {
+function postCharacter(characterID) {
 
     var webMethod = "ProjectServices.asmx/GetCharacters";
     var characterArray;
-    var characterID;
 
     $.ajax({
         type: "POST",
@@ -77,8 +76,9 @@ function postCharacter(val) {
         dataType: "json",
         success: function (data) {
             characterArray = data;
-            characterID = val;
-            $("#charName").val(characterArray.d[characterID]._charName);
+            alert("connection made");
+            alert(data.d[characterID]._charName);
+            $("#charName").val(data.d[characterID]._charName);
             $("#class").val(characterArray.d[characterID]._class);
             $("#level").val(characterArray.d[characterID]._level);
             $("#armorClass").val(characterArray.d[characterID]._armorClass);
@@ -97,7 +97,6 @@ function postCharacter(val) {
 function postMainPage(){
     var webMethod = "ProjectServices.asmx/GetCharacters";
     var characterArray;
-    var characterID;
 
     alert("program is called");
 
@@ -108,11 +107,15 @@ function postMainPage(){
         dataType: "json",
         success: function (data) {
             characterArray = data;
+            alert("connection made");
+            $("#name1").val(data.d[0])._charName;
+            $("#class1").val(data.d[0])._class;
+            $("#level1").val(data.d[0])._level;
+           // for (i = 0; i < characterArray.length + 1; i++){
+           //     alert(characterArray.d[i])._charName;
+           //     $("#name"+(i+1)).val(characterArray.d[i])._charName;
 
-            ///for (i=1 ; i < characterArray.length + 1 ; i++){
-                $("#name1").val(characterArray.d[1])._charName;
-               // alert(i);
-           /// }
+           // }
         },
         error: function (e) {
             alert('program is busted');
