@@ -8,7 +8,6 @@
     <script>
         $(document).ready(function () {
             postMainPage();
-            alert("program working");
         });
     </script>
 
@@ -38,7 +37,7 @@
         }
 
         .card {
-            width: 600px;
+            width: 800px;
             height: 600px;
             margin-bottom: auto;
             margin-top: auto;
@@ -79,10 +78,10 @@
             width: 125px;
         }
 
-            .createAccount_btn:hover {
-                background-color: white;
-                color: black;
-            }
+        .createAccount_btn:hover {
+            background-color: white;
+            color: black;
+        }
 
         .returnToLogin {
             color: white;
@@ -120,64 +119,79 @@
 
 
                 <div class="row">
-                    <div class="col-4 ">
+                    <div class="col">
                         <label class="topics">Character Name:</label>
                     </div>
-                    <div class="col-4">
+                    <div class="col">
                         <label class="topics">Class:</label>
 
                     </div>
-                    <div class="col-4">
+                    <div class="col">
                         <label class="topics">Level:</label>
                     </div>
+                    <div class="col">
+                        <label class="topics">Open Character</label>
+                    </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col">
                         <!-- This is just to test to make sure it works -->
-                        <input type="text" class="input" id="name1" disabled>
+                        <input type="text" class="input" id="name1" onclick='location.href ="characterSheet.html"; ' disabled>
                     </div>
-                    <div class="col-4">
+                    <div class="col">
                         <input type="text" class="input" id="class1" disabled>
                     </div>
-                    <div class="col-4">
+                    <div class="col">
                         <input type="text" class="input" id="level1" disabled>
                     </div>
+                    <div class="col">
+                        <button disabled type="button" id="openchar1" , onclick="window.location.href = 'characterSheet.html';">Open Character 1 </button>
+                    </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-4">
-                        <input type="text" class="input" id="name2" onclick="postCharacter(1)" disabled>
+                    <div class="col">
+                        <input type="text" class="input" id="name2" disabled>
                     </div>
-                    <div class="col-4">
+                    <div class="col">
                         <input type="text" class="input" id="class2" disabled>
                     </div>
-                    <div class="col-4">
+                    <div class="col">
                         <input type="text" class="input" id="level2" disabled>
                     </div>
+                    <div class="col">
+                        <button disabled type="button" id="openchar2" , onclick="window.location.href = 'characterSheet.html';">Open Character 2 </button>
+                    </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-4">
-                        <input type="text" class="input" id="name3" onclick="postCharacter(2)" disabled>
+                    <div class="col">
+                        <input type="text" class="input" id="name3" disabled>
                     </div>
-                    <div class="col-4">
+                    <div class="col">
                         <input type="text" class="input" id="class3" disabled>
                     </div>
-                    <div class="col-4">
+                    <div class="col">
                         <input type="text" class="input" id="level3" disabled>
+                    </div>
+                    <div class="col">
+                        <button disabled type="button" id="openchar3" , onclick="window.location.href = 'characterSheet.html';">Open Character 3</button>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-4">
-                        <input type="text" class="input" id="name4" onclick="postCharacter(3)" disabled>
+                    <div class="col">
+                        <input type="text" class="input" id="name4" disabled>
                     </div>
-                    <div class="col-4">
+                    <div class="col">
                         <input type="text" class="input" id="class4" disabled>
                     </div>
-                    <div class="col-4">
+                    <div class="col">
                         <input type="text" class="input" id="level4" disabled>
+                    </div>
+                    <div class="col">
+                        <button disabled type="button" id="openchar4" , onclick="window.location.href = 'characterSheet.html';">Open Character 4 </button>
                     </div>
                 </div>
 

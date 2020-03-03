@@ -104,22 +104,45 @@ function postMainPage(){
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            alert("connection made");
-            $("#name1").val(data.d[0]._charName);
-            $("#class1").val(data.d[0]._class);
-            $("#level1").val(data.d[0]._level);
+            var characterArray = data.d;
+            switch (characterArray.length) {
+                default:
+                    break;
+                case 1:
+                    $("#openchar1").prop("disabled", false);
+                    break;
+                case 2:
+                    $("#openchar1").prop("disabled", false);
+                    $("#openchar2").prop("disabled", false);
+                    break;
+                case 3:
+                    $("#openchar1").prop("disabled", false);
+                    $("#openchar2").prop("disabled", false);
+                    $("#openchar3").prop("disabled", false);
+                    break;
+                case 4:
+                    $("#openchar1").prop("disabled", false);
+                    $("#openchar2").prop("disabled", false);
+                    $("#openchar3").prop("disabled", false);
+                    $("#openchar4").prop("disabled", false);
+                    break;
+            }
 
-            $("#name2").val(data.d[1]._charName);
-            $("#class2").val(data.d[1]._class);
-            $("#level2").val(data.d[1]._level);
+            $("#name1").val(characterArray[0]._charName);
+            $("#class1").val(characterArray[0]._class);
+            $("#level1").val(characterArray[0]._level);
 
-            $("#name3").val(data.d[2]._charName);
-            $("#class3").val(data.d[2]._class);
-            $("#level3").val(data.d[2]._level);
+            $("#name2").val(characterArray[1]._charName);
+            $("#class2").val(characterArray[1]._class);
+            $("#level2").val(characterArray[1]._level);
 
-            $("#name4").val(data.d[3]._charName);
-            $("#class4").val(data.d[3]._class);
-            $("#level4").val(data.d[3]._level);
+            $("#name3").val(characterArray[2]._charName);
+            $("#class3").val(characterArray[2]._class);
+            $("#level3").val(characterArray[2]._level);
+
+            $("#name4").val(characterArray[3]._charName);
+            $("#class4").val(characterArray[3]._class);
+            $("#level4").val(characterArray[3]._level);
 
         }
     })
