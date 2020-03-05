@@ -271,6 +271,10 @@ function postEditCharacter() {
         dataType: "json",
         success: function (data) {
             var characterArray = data.d;
+            var characterID = localStorage.getItem('charid');
+            var skillsArray = characterArray[characterID]._knownSkills;
+
+
             console.log(characterArray)
             var characterID = localStorage.getItem('charid');
             $("#editNameId").val(characterArray[characterID]._charName);
@@ -292,6 +296,12 @@ function postEditCharacter() {
             $("#editOtherproficiencyId").val(characterArray[characterID]._otherProf);
             $("#editLanguageId").val(characterArray[characterID]._languages);
             $("#editKnownsavesId").val(characterArray[characterID]._knownSaves);
+
+            for (i = 0; i < skillsArray.length; i++) {
+                $("input[name='editKnownskillsId']").filter(function () {
+                    return skillsArray[i].indexOf(this.value) != -1;
+                }).prop("checked", true);
+            }
         }
     });
 }
