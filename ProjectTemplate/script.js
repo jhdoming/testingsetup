@@ -331,6 +331,7 @@ function postTraits() {
             var attack1Array = characterArray[characterID]._attackOne.split(",");
             var attack2Array = characterArray[characterID]._attackTwo.split(",");
             var attack3Array = characterArray[characterID]._attackThree.split(",");
+            console.log(attack1Array);
             $("#traits-class").val(characterArray[characterID]._class);
             $("#traits-race").val(characterArray[characterID]._race);
             $("#attack1").val(attack1Array[1]);
@@ -354,16 +355,45 @@ function postSkills() {
         success: function (data) {
             var characterArray = data.d;
             var characterID = localStorage.getItem('charid');
-            var skillsArray = characterArray[characterID]._knownSkills.split(",");
-            $("#traits-class").val(characterArray[characterID]._class);
-            $("#traits-race").val(characterArray[characterID]._race);
-            $("#attack1").val(attack1Array[1]);
-            $("#damage2").val(attack1Array[2]);
-            $("#attack2").val(attack2Array[1]);
-            $("#damage2").val(attack2Array[2]);
-            $("#attack3").val(attack3Array[1]);
-            $("#damage3").val(attack3Array[2]);
-            $("#equipment").val(characterArray[characterID]._equipment);
+            var skillsArray = characterArray[characterID]._knownSkills;
+            
+            console.log(characterArray)
+            console.log(characterID)
+            console.log(skillsArray);
+            //<input type="checkbox" name="tag_1" id="tag_1" value="yes" php echo ($dbvalue['tag_1'] == 1 ? 'checked' : '');?>>
+            //      if (skillsArray.startswith("Checked")) {
+            //    Checkbox2.Checked = true;
+            //}
+            //else {
+            //    Checkbox2.Checked = false;
+            //}
+
+         
+                if (skillsArray[0].name == "knownSkills") {
+                    //if (skillsArray[x].checked == true) {
+                    //    Checkbox2.Checked = true;
+                    //}
+                    print("yes");
+                }
+            
+
+            //var skillsArray = characterArray[characterID]._knownSkills.split(",");
+            //var attack1Array = characterArray[characterID]._attackOne.split(",");
+
+            
+            //$("#traits-class").val(characterArray[characterID]._class);
+            //$("#traits-race").val(characterArray[characterID]._race);
+            //$("#attack1").val(attack1Array[1]);
+            //$("#damage2").val(attack1Array[2]);
+            //$("#attack2").val(attack2Array[1]);
+            //$("#damage2").val(attack2Array[2]);
+            //$("#attack3").val(attack3Array[1]);
+            //$("#damage3").val(attack3Array[2]);
+            //$("#equipment").val(characterArray[characterID]._equipment);
+
+
+
+
         }
     });
 }
