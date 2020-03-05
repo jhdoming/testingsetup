@@ -9,61 +9,61 @@ using System.Data;
 
 namespace ProjectTemplate
 {
-	[WebService(Namespace = "http://tempuri.org/")]
-	[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-	[System.ComponentModel.ToolboxItem(false)]
-	[System.Web.Script.Services.ScriptService]
+    [WebService(Namespace = "http://tempuri.org/")]
+    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [System.ComponentModel.ToolboxItem(false)]
+    [System.Web.Script.Services.ScriptService]
 
-	public class ProjectServices : System.Web.Services.WebService
-	{
-		////////////////////////////////////////////////////////////////////////
-		///replace the values of these variables with your database credentials
-		////////////////////////////////////////////////////////////////////////
-		private string dbID = "byteme";
-		private string dbPass = "!!Byteme";
-		private string dbName = "byteme";
-		////////////////////////////////////////////////////////////////////////
+    public class ProjectServices : System.Web.Services.WebService
+    {
+        ////////////////////////////////////////////////////////////////////////
+        ///replace the values of these variables with your database credentials
+        ////////////////////////////////////////////////////////////////////////
+        private string dbID = "byteme";
+        private string dbPass = "!!Byteme";
+        private string dbName = "byteme";
+        ////////////////////////////////////////////////////////////////////////
 
-		////////////////////////////////////////////////////////////////////////
-		///call this method anywhere that you need the connection string!
-		////////////////////////////////////////////////////////////////////////
-		private string getConString()
+        ////////////////////////////////////////////////////////////////////////
+        ///call this method anywhere that you need the connection string!
+        ////////////////////////////////////////////////////////////////////////
+        private string getConString()
         {
-			return "SERVER=107.180.1.16; PORT=3306; DATABASE=" + dbName+"; UID=" + dbID + "; PASSWORD=" + dbPass;
-		}
-		////////////////////////////////////////////////////////////////////////
+            return "SERVER=107.180.1.16; PORT=3306; DATABASE=" + dbName + "; UID=" + dbID + "; PASSWORD=" + dbPass;
+        }
+        ////////////////////////////////////////////////////////////////////////
 
 
 
-		/////////////////////////////////////////////////////////////////////////
-		//don't forget to include this decoration above each method that you want
-		//to be exposed as a web service!
-		[WebMethod(EnableSession = true)]
-		/////////////////////////////////////////////////////////////////////////
-		public string TestConnection()
-		{
-			try
-			{
+        /////////////////////////////////////////////////////////////////////////
+        //don't forget to include this decoration above each method that you want
+        //to be exposed as a web service!
+        [WebMethod(EnableSession = true)]
+        /////////////////////////////////////////////////////////////////////////
+        public string TestConnection()
+        {
+            try
+            {
 
-				string testQuery = "select * from Login";
+                string testQuery = "select * from Login";
 
-				////////////////////////////////////////////////////////////////////////
-				///here's an example of using the getConString method!
-				////////////////////////////////////////////////////////////////////////
-				MySqlConnection con = new MySqlConnection(getConString());
-				////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////////
+                ///here's an example of using the getConString method!
+                ////////////////////////////////////////////////////////////////////////
+                MySqlConnection con = new MySqlConnection(getConString());
+                ////////////////////////////////////////////////////////////////////////
 
-				MySqlCommand cmd = new MySqlCommand(testQuery, con);
-				MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-				DataTable table = new DataTable();
-				adapter.Fill(table);
-				return "Success!";
-			}
-			catch (Exception e)
-			{
-				return "Something went wrong, please check your credentials and db name and try again.  Error: "+e.Message;
-			}
-		}
+                MySqlCommand cmd = new MySqlCommand(testQuery, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return "Success!";
+            }
+            catch (Exception e)
+            {
+                return "Something went wrong, please check your credentials and db name and try again.  Error: " + e.Message;
+            }
+        }
 
         [WebMethod(EnableSession = true)] //NOTICE: gotta enable session on each individual method
         public bool LogOn(string uid, string pass)
@@ -195,68 +195,68 @@ namespace ProjectTemplate
 
         }
 
-    //EXAMPLE OF A SELECT, AND RETURNING "COMPLEX" DATA TYPES
-		[WebMethod(EnableSession = true)]
-		public Character[] GetCharacters()
-		{
-			//check out the return type.  It's an array of Character objects.  You can look at our custom Character class in this solution to see that it's
-			//just a container for public class-level variables.  It's a simple container that asp.net will have no trouble converting into json.  When we return
-			//sets of information, it's a good idea to create a custom container class to represent instances (or rows) of that information, and then return an array of those objects.
-			//Keeps everything simple.
+        //EXAMPLE OF A SELECT, AND RETURNING "COMPLEX" DATA TYPES
+        [WebMethod(EnableSession = true)]
+        public Character[] GetCharacters()
+        {
+            //check out the return type.  It's an array of Character objects.  You can look at our custom Character class in this solution to see that it's
+            //just a container for public class-level variables.  It's a simple container that asp.net will have no trouble converting into json.  When we return
+            //sets of information, it's a good idea to create a custom container class to represent instances (or rows) of that information, and then return an array of those objects.
+            //Keeps everything simple.
 
-			//WE ONLY SHARE ACCOUNTS WITH LOGGED IN USERS!
+            //WE ONLY SHARE ACCOUNTS WITH LOGGED IN USERS!
 
-				DataTable sqlDt = new DataTable("characters");
+            DataTable sqlDt = new DataTable("characters");
 
-				string sqlConnectString = getConString();
-				string sqlSelect = "SELECT * FROM byteme.Character WHERE UserID=@userId";
+            string sqlConnectString = getConString();
+            string sqlSelect = "SELECT * FROM byteme.Character WHERE UserID=@userId";
 
-                MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
-				MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
 
-                sqlCommand.Parameters.AddWithValue("@userId", Session["userId"]);
+            sqlCommand.Parameters.AddWithValue("@userId", Session["userId"]);
 
-                //gonna use this to fill a data table
-                MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
-				//filling the data table
-				sqlDa.Fill(sqlDt);
+            //gonna use this to fill a data table
+            MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+            //filling the data table
+            sqlDa.Fill(sqlDt);
 
-				//loop through each row in the dataset, creating instances
-				//of our container class Account.  Fill each account with
-				//data from the rows, then dump them in a list.
-				List<Character> characters = new List<Character>();
-				for (int i = 0; i < sqlDt.Rows.Count; i++)
-				{
-                    characters.Add(new Character
-                    {
-                        _charName = sqlDt.Rows[i]["charName"].ToString(),
-                        _class = sqlDt.Rows[i]["class"].ToString(),
-                        _race = sqlDt.Rows[i]["race"].ToString(),
-                        _attackOne = sqlDt.Rows[i]["attackOne"].ToString(),
-                        _attackTwo = sqlDt.Rows[i]["attackTwo"].ToString(),
-                        _attackThree = sqlDt.Rows[i]["attackThree"].ToString(),
-                        _health = Convert.ToInt32(sqlDt.Rows[i]["health"]),
-                        _level =Convert.ToInt32(sqlDt.Rows[i]["level"]),
-                        _str = Convert.ToInt32(sqlDt.Rows[i]["str"]),
-                        _dex = Convert.ToInt32(sqlDt.Rows[i]["dex"]),
-                        _int = Convert.ToInt32(sqlDt.Rows[i]["inte"]),
-                        _wis = Convert.ToInt32(sqlDt.Rows[i]["wis"]),
-                        _cha = Convert.ToInt32(sqlDt.Rows[i]["cha"]),
-                        _con = Convert.ToInt32(sqlDt.Rows[i]["con"]),
-                        _armorClass = Convert.ToInt32(sqlDt.Rows[i]["armorClass"]),
-                        _equipment = sqlDt.Rows[i]["equipment"].ToString().Split(','),
-                        _otherProf = sqlDt.Rows[i]["otherProf"].ToString().Split(','),
-                        _languages = sqlDt.Rows[i]["languages"].ToString().Split(','),
-                        _knownSkills = sqlDt.Rows[i]["knownSkills"].ToString().Split(','),
-                        _knownSaves = sqlDt.Rows[i]["knownSaves"].ToString().Split(','),
-                    });
-				}
-				//convert the list of accounts to an array and return!
-				return characters.ToArray();
-		}
+            //loop through each row in the dataset, creating instances
+            //of our container class Account.  Fill each account with
+            //data from the rows, then dump them in a list.
+            List<Character> characters = new List<Character>();
+            for (int i = 0; i < sqlDt.Rows.Count; i++)
+            {
+                characters.Add(new Character
+                {
+                    _charName = sqlDt.Rows[i]["charName"].ToString(),
+                    _class = sqlDt.Rows[i]["class"].ToString(),
+                    _race = sqlDt.Rows[i]["race"].ToString(),
+                    _attackOne = sqlDt.Rows[i]["attackOne"].ToString(),
+                    _attackTwo = sqlDt.Rows[i]["attackTwo"].ToString(),
+                    _attackThree = sqlDt.Rows[i]["attackThree"].ToString(),
+                    _health = Convert.ToInt32(sqlDt.Rows[i]["health"]),
+                    _level = Convert.ToInt32(sqlDt.Rows[i]["level"]),
+                    _str = Convert.ToInt32(sqlDt.Rows[i]["str"]),
+                    _dex = Convert.ToInt32(sqlDt.Rows[i]["dex"]),
+                    _int = Convert.ToInt32(sqlDt.Rows[i]["inte"]),
+                    _wis = Convert.ToInt32(sqlDt.Rows[i]["wis"]),
+                    _cha = Convert.ToInt32(sqlDt.Rows[i]["cha"]),
+                    _con = Convert.ToInt32(sqlDt.Rows[i]["con"]),
+                    _armorClass = Convert.ToInt32(sqlDt.Rows[i]["armorClass"]),
+                    _equipment = sqlDt.Rows[i]["equipment"].ToString().Split(','),
+                    _otherProf = sqlDt.Rows[i]["otherProf"].ToString().Split(','),
+                    _languages = sqlDt.Rows[i]["languages"].ToString().Split(','),
+                    _knownSkills = sqlDt.Rows[i]["knownSkills"].ToString().Split(','),
+                    _knownSaves = sqlDt.Rows[i]["knownSaves"].ToString().Split(','),
+                });
+            }
+            //convert the list of accounts to an array and return!
+            return characters.ToArray();
+        }
 
 
-            //EXAMPLE OF AN INSERT QUERY WITH PARAMS PASSED IN.  BONUS GETTING THE INSERTED ID FROM THE DB!
+        //EXAMPLE OF AN INSERT QUERY WITH PARAMS PASSED IN.  BONUS GETTING THE INSERTED ID FROM THE DB!
         [WebMethod(EnableSession = true)]
         public string CreateCharacter(string characterName, string charClass, string race, string level, string health,
                                     string strength, string dexterity, string constitution, string intelligence, string wisdom,
@@ -276,11 +276,7 @@ namespace ProjectTemplate
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
             MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
-            var currentSessionUserId = sqlCommand.Parameters.AddWithValue("@userId", Session["userId"]).ToString();
-
-
-        // put the parameters in parenthesis to be the values in the query
-            sqlCommand.Parameters.AddWithValue("@userIdValue", currentSessionUserId);
+            sqlCommand.Parameters.AddWithValue("@userIdValue", Session["userId"]);
             sqlCommand.Parameters.AddWithValue("@charNameValue", HttpUtility.UrlDecode(characterName));
             sqlCommand.Parameters.AddWithValue("@classValue", HttpUtility.UrlDecode(charClass));
             sqlCommand.Parameters.AddWithValue("@raceValue", HttpUtility.UrlDecode(race));
@@ -310,7 +306,7 @@ namespace ProjectTemplate
             try
             {
                 int checkRow = sqlCommand.ExecuteNonQuery();
-                if(checkRow.Equals(1))
+                if (checkRow.Equals(1))
                 {
                     sqlConnection.Close();
                     return "Account Added";
@@ -396,7 +392,8 @@ namespace ProjectTemplate
             {
                 int rowCheck = sqlCommand.ExecuteNonQuery();
                 sqlConnection.Close();
-                if (rowCheck.Equals(1)) {
+                if (rowCheck.Equals(1))
+                {
                     return "success";
                 }
                 else
@@ -411,5 +408,38 @@ namespace ProjectTemplate
             }
         }
 
+
+        [WebMethod(EnableSession = true)]
+        public String DeleteCharacter(string charName)
+        {
+            string sqlConnectString = getConString();
+            string sqlSelect = "DELETE FROM byteme.Character WHERE UserId = @UserId AND CharName = @charName";
+
+            //set up our connection object to be ready to use our connection string
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            //set up our command object to use our connection, and our query
+            MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+            //tell our command to replace the @parameters with real values
+            //we decode them because they came to us via the web so they were encoded
+            //for transmission (funky characters escaped, mostly)
+            sqlCommand.Parameters.AddWithValue("@UserId", Session["userId"]);
+            sqlCommand.Parameters.AddWithValue("@charName", HttpUtility.UrlDecode(charName));
+
+            sqlConnection.Open();
+
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+                return "Success!";
+            }
+            catch (Exception e)
+            {
+                sqlConnection.Close();
+                return e.ToString();
+            }
+
+        }
     }
 }
