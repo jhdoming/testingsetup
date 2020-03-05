@@ -254,17 +254,18 @@ namespace ProjectTemplate
                 //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
                 //does is tell mySql server to return the primary key of the last inserted row.
                 // query based off the database attributes
-                string sqlSelect = "INSERT INTO byteme.Character(UserId, CharName, Class, Race, Level, Health, Str, Dex, Con, Int, Wis, Cha, AttackOne, AttackTwo, AttackThree, ArmorClass, Equipment, OtherProf, Languages, KnownSkills, KnownSaves) " +
-                    "values(@userIdValue, @charNameValue, @classValue, @raceValue, @levelValue, @healthValue, @strValue, @dexValue, @conValue, @intValue, @wisValue, @chaValue, @attackoneValue, @attacktwoValue, @attackthreeValue, @armorclassValue, @equipmentValue, @otherProfValue, @languagesValue, @knownskillsValue, @knownsavesValue);";
+                string sqlSelect = "INSERT INTO byteme.Character(UserId, CharName, Class, Race, Level, Health, Str, Dex, Con, Inte, Wis, Cha, AttackOne, AttackTwo, AttackThree, ArmorClass, Equipment, OtherProf, Languages, KnownSkills, KnownSaves) values(@userIdValue, @charNameValue, @classValue, @raceValue, @levelValue, @healthValue, @strValue, @dexValue, @conValue, @inteValue, @wisValue, @chaValue, @attackoneValue, @attacktwoValue, @attackthreeValue, @armorclassValue, @equipmentValue, @otherProfValue, @languagesValue, @knownskillsValue, @knownsavesValue);";
 
                 // get the userId of current session and turn object into a string. THis line of code is if i wasnt sure to put here or in the js file and pass
                 // it in as a paramater rather than assiging it here
-                var currentSessionUserId = Session["userId"].ToString();
+                //var currentSessionUserId = Session["userId"].ToString();
 
                 MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
                 MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
-                
-                // put the paramters in parenthesis to be the values in the query
+                var currentSessionUserId = sqlCommand.Parameters.AddWithValue("@userId", Session["userId"]).ToString();
+
+
+            // put the paramters in parenthesis to be the values in the query
                 sqlCommand.Parameters.AddWithValue("@userIdValue", HttpUtility.UrlDecode(currentSessionUserId));
                 sqlCommand.Parameters.AddWithValue("@charNameValue", HttpUtility.UrlDecode(characterName));
                 sqlCommand.Parameters.AddWithValue("@classValue", HttpUtility.UrlDecode(charClass));
@@ -275,7 +276,7 @@ namespace ProjectTemplate
                 sqlCommand.Parameters.AddWithValue("@strValue", HttpUtility.UrlDecode(strength));
                 sqlCommand.Parameters.AddWithValue("@dexValue", HttpUtility.UrlDecode(dexterity));
                 sqlCommand.Parameters.AddWithValue("@conValue", HttpUtility.UrlDecode(constitution));
-                sqlCommand.Parameters.AddWithValue("@intValue", HttpUtility.UrlDecode(intelligence));
+                sqlCommand.Parameters.AddWithValue("@inteValue", HttpUtility.UrlDecode(intelligence));
 
                 sqlCommand.Parameters.AddWithValue("@wisValue", HttpUtility.UrlDecode(wisdom));
                 sqlCommand.Parameters.AddWithValue("@chaValue", HttpUtility.UrlDecode(charisma));

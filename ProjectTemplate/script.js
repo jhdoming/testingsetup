@@ -81,7 +81,7 @@ function createCharacter() {
     if (/,$/.test(charSkills)) {
         charSkills = charSkills.replace(/,$/, "")
         }
-    alert(charSkills);
+    //alert(charSkills);
 
 
     // created variables to store all the user input from the create character hmtl, by grabbing all the inputs by Id
@@ -111,19 +111,41 @@ function createCharacter() {
     var charLanguage = document.getElementById("newLanguageId").value;
     var charKnownSaves = document.getElementById("newKnownsavesId").value;
 
+    alert(charName);
+    alert(charClass);
+    alert(charRace);
+    alert(charLevel);
+    alert(charHealth);
+    alert(charStrength);
+    alert(charDexterity);
+    alert(charConstitution);
+    alert(charIntelligence);
+    alert(charWisdom);
+    alert(charCharisma);
+    alert(charAttack1);
+    alert(charAttack2);
+    alert(charAttack3);
+    alert(charArmorclass);
+    alert(charEquipment);
+    alert(charOtherProficiency);
+    alert(charLanguage);
+    alert(charKnownSaves);
+    alert(charSkills);
+
+
     // wasn't sure if to put this here and pass it through the parameters like all the other variables above. I put this line of code in
     // the ProjectServices.asmx file just after the query
     //var currentSession = Session["userId"]
 
     // reference the function/webservice here
-    var webMethod = "ProjectServices.asmx/createCharacter";
+    var webMethod = "ProjectServices.asmx/CreateCharacter";
 
     // pass the info to the server
     var parameters = "{\"CharName\":\"" + encodeURI(charName) + "\",\"Class\":\"" + encodeURI(charClass) +
                         "\",\"Race\":\"" + encodeURI(charRace) + "\",\"Level\":\"" + encodeURI(charLevel) +
                         "\",\"Health\":\"" + encodeURI(charHealth) + "\",\"Str\":\"" + encodeURI(charStrength) +
                         "\",\"Dex\":\"" + encodeURI(charDexterity) + "\",\"Con\":\"" + encodeURI(charConstitution) +
-                        "\",\"Int\":\"" + encodeURI(charIntelligence) + "\",\"Wis\":\"" + encodeURI(charWisdom) +
+                        "\",\"Inte\":\"" + encodeURI(charIntelligence) + "\",\"Wis\":\"" + encodeURI(charWisdom) +
                         "\",\"Cha\":\"" + encodeURI(charCharisma) + "\",\"AttackOne\":\"" + encodeURI(charAttack1) +
                         "\",\"AttackTwo\":\"" + encodeURI(charAttack2) + "\",\"AttackThree\":\"" + encodeURI(charAttack3) +
                         "\",\"ArmorClass\":\"" + encodeURI(charArmorclass) + "\",\"Equipment\":\"" + encodeURI(charEquipment) +
@@ -145,7 +167,7 @@ function createCharacter() {
         },
         error: function (e) {
             alert("Error: something went wrong");
-            responseFromServer
+            //responseFromServer
         }
     });
 }
