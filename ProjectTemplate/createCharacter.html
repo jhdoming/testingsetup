@@ -4,7 +4,8 @@
     <title>Create Account</title>
     <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="script.js"></script></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="script.js"></script>
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -17,6 +18,44 @@
 
     <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
 
+        function createAccount() {
+            var id = document.getElementById("createId").value;
+            var pass = document.getElementById("createPass").value;
+
+            var webMethod = "ProjectServices.asmx/createAccount";
+
+            var parameters = "{\"uid\":\"" + encodeURI(id) + "\", \"pass\":\"" + encodeURI(pass) + "\"}";
+
+
+            //jQuery ajax method
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    var responseFromServer = msg.d;
+                    if (responseFromServer == true) {
+                        alert(responseFromServer);
+                        //window.location.replace("index.html");
+                    }
+                    else {
+                        alert(responseFromServer);
+                    }
+                    //after creating an account, sends you back to the login page (works here but also works when password isnt set right)
+                    //window.location.replace("index.html");
+                },
+                error: function (e) {
+                    alert("this code will only execute if javascript is unable to access the webservice");
+                }
+            });
+        }
+
+
+
+
+    </script>
 
     <style type="text/css">
 
@@ -77,24 +116,22 @@
             margin-left: 5px;
         }
 
-        .row{
+        .row {
             text-align: left;
         }
 
-        .topics{
+        .topics {
             text-decoration: underline;
             font-weight: bold;
         }
 
         input {
             text-align: center;
-
         }
 
-        .ccForm{
+        .ccForm {
             margin-left: 5px;
         }
-
     </style>
 
 </head>
@@ -288,34 +325,34 @@
                     <!-- Row1: Skills Checkboxes and Labels -->
                     <div class="row">
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Acrobatics">
+                            <input type="checkbox" name="knownSkills" value="Acrobatics">
                             <label>Acrobatics</label>
                         </div>
 
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Animal Handling">
+                            <input type="checkbox" name="knownSkills" value="Animal Handling">
                             <label>Animal Handling</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Arcana">
+                            <input type="checkbox" name="knownSkills" value="Arcana">
                             <label>Arcana</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Athletics">
+                            <input type="checkbox" name="knownSkills" value="Athletics">
                             <label>Athletics</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Deception">
+                            <input type="checkbox" name="knownSkills" value="Deception">
                             <label>Deception</label>
 
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="History">
+                            <input type="checkbox" name="knownSkills" value="History">
                             <label>History</label>
                         </div>
                     </div>
@@ -323,34 +360,34 @@
                     <!-- Row 2: Skills Checkboxes and Labels -->
                     <div class="row">
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Insight">
+                            <input type="checkbox" name="knownSkills" value="Insight">
                             <label>Insight</label>
                         </div>
 
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Intimidation">
+                            <input type="checkbox" name="knownSkills" value="Intimidation">
                             <label>Intimidation</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Investigation">
+                            <input type="checkbox" name="knownSkills" value="Investigation">
                             <label>Investigation</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="medicine">
+                            <input type="checkbox" name="knownSkills" value="medicine">
                             <label>Medicine</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="nature">
+                            <input type="checkbox" name="knownSkills" value="nature">
                             <label>Nature</label>
 
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Perception">
+                            <input type="checkbox" name="knownSkills" value="Perception">
                             <label>Perception</label>
                         </div>
                     </div>
@@ -358,34 +395,34 @@
                     <!-- Row 3: Skills Checkboxes and Labels -->
                     <div class="row">
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Performance">
+                            <input type="checkbox" name="knownSkills" value="Performance">
                             <label>Performance</label>
                         </div>
 
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Persuasion">
+                            <input type="checkbox" name="knownSkills" value="Persuasion">
                             <label>Persuasion</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Religion">
+                            <input type="checkbox" name="knownSkills" value="Religion">
                             <label>Religion</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Sleight Of Hand">
+                            <input type="checkbox" name="knownSkills" value="Sleight Of Hand">
                             <label>Sleight Of Hand</label>
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Stealth">
+                            <input type="checkbox" name="knownSkills" value="Stealth">
                             <label>Stealth</label>
 
                         </div>
 
                         <div class="col-2">
-                            <input type="checkbox" id="newKnownskillsId" value="Survival">
+                            <input type="checkbox" name="knownSkills" value="Survival">
                             <label>Survival</label>
                         </div>
                     </div>
@@ -396,7 +433,8 @@
                 <div class="card-footer">
                     <div class="d-flex flex-row">
                         <div class="col-12">
-                            <button type="button">Submit</button>
+                            <!-- when clicking the button it will run the createCharacter function in the script.js file -->
+                            <button type="button" class="btn createAccount_btn" onclick="javascript: createCharacter();">Submit</button>
                         </div>
 
                     </div>
