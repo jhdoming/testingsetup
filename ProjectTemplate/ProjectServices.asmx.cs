@@ -324,7 +324,7 @@ namespace ProjectTemplate
             catch (Exception e)
             {
                 sqlConnection.Close();
-                return ("Character not created, check all values are valid and try again");
+                return ("Character not created, check all values are valid and try again" + e.ToString());
             }
         }
 
