@@ -357,6 +357,12 @@ function postSkills() {
             var characterID = localStorage.getItem('charid');
             var skillsArray = characterArray[characterID]._knownSkills;
             var savesArray = characterArray[characterID]._knownSaves;
+            var profArray = characterArray[characterID]._otherProf;
+            var languagesArray = characterArray[characterID]._languages;
+
+
+
+
 
 
             
@@ -364,24 +370,9 @@ function postSkills() {
             console.log(characterID)
             console.log(skillsArray);
             console.log(savesArray)
-            //<input type="checkbox" name="tag_1" id="tag_1" value="yes" php echo ($dbvalue['tag_1'] == 1 ? 'checked' : '');?>>
-            //      if (skillsArray.startswith("Checked")) {
-            //    Checkbox2.Checked = true;
-            //}
-            //else {
-            //    Checkbox2.Checked = false;
-            //}
-
-         
-            //if (skillsArray[0] == "Persuasion") {
-            //        //if (skillsArray[x].checked == true) {
-            //        //    Checkbox2.Checked = true;
-            //        //}
-            //    console.log("yes");
-            //    $('input[name="knownSkills"]').prop("checked", true);
-
-            //    //known.Checked = true;
-            //    }
+            console.log(profArray);
+            console.log(languagesArray);
+            
 
             for (i = 0; i < skillsArray.length; i++) {
                 $("input[name='knownSkills']").filter(function () {
@@ -395,8 +386,16 @@ function postSkills() {
                 }).prop("checked", true);
             }
 
-            //var skillsArray = characterArray[characterID]._knownSkills.split(",");
-            //var attack1Array = characterArray[characterID]._attackOne.split(",");
+            // create variable to store other proficiency text area id, then join the values in array into the text area
+            // each in a new line. console.log to see that it captures values. 
+            var otherProfTextarea = document.getElementById("otherProfi");
+            otherProfTextarea.value = profArray.join("\n");
+            console.log(otherProfTextarea.value);
+
+            var languagesTextarea = document.getElementById("languages");
+            languagesTextarea.value = languagesArray.join("\n");
+            console.log(languagesTextarea.value);
+
 
             
             //$("#traits-class").val(characterArray[characterID]._class);
