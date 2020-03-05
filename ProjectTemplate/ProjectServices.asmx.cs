@@ -238,7 +238,7 @@ namespace ProjectTemplate
                         _level =Convert.ToInt32(sqlDt.Rows[i]["level"]),
                         _str = Convert.ToInt32(sqlDt.Rows[i]["str"]),
                         _dex = Convert.ToInt32(sqlDt.Rows[i]["dex"]),
-                        _int = Convert.ToInt32(sqlDt.Rows[i]["int"]),
+                        _int = Convert.ToInt32(sqlDt.Rows[i]["inte"]),
                         _wis = Convert.ToInt32(sqlDt.Rows[i]["wis"]),
                         _cha = Convert.ToInt32(sqlDt.Rows[i]["cha"]),
                         _con = Convert.ToInt32(sqlDt.Rows[i]["con"]),
@@ -256,7 +256,7 @@ namespace ProjectTemplate
 
         //EXAMPLE OF AN UPDATE QUERY WITH PARAMS PASSED IN
         [WebMethod(EnableSession = true)]
-        public String UpdateCharacter(string CharName, string Class, string Race, string Level, string Health, string str, string con, string dex, string Inti, string Wis, string Cha, string attackOne, string attackTwo, string attackThree, string armorClass, string equipment, string otherProf, string languages, string knownSkills)
+        public String UpdateCharacter(string CharName, string Class, string Race, string Level, string Health, string str, string con, string dex, string Inte, string Wis, string Cha, string attackOne, string attackTwo, string attackThree, string armorClass, string equipment, string otherProf, string languages)//, string knownSkills)
         {
             string sqlConnectString = getConString();
 
@@ -270,7 +270,7 @@ namespace ProjectTemplate
                 "Dex=@dex, " +
                 "Str=@str, " +
                 "Con=@con, " +
-                "Inti=@Inti, " +
+                "Inte=@Inte, " +
                 "Wis=@Wis, " +
                 "Cha=@Cha, " +
                 "AttackOne=@attackOne, " +
@@ -279,10 +279,13 @@ namespace ProjectTemplate
                 "ArmorClass=@armorClass, " +
                 "Equipment=@equipment, " +
                 "OtherProf=@otherProf, " +
-                "Languages=@languages, " +
-                "KnownSkills=@knownSkills " +
+                "Languages=@languages " +
                 "WHERE " +
-                "UserID = @userId AND CharName = @CharName";
+                "UserID = @userId " +
+                "AND " +
+                "CharName = @CharName";
+            //COMMENTING TO CHECK IF QUERY WORKS
+            //"KnownSkills=@knownSkills " +
 
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
@@ -297,7 +300,7 @@ namespace ProjectTemplate
             sqlCommand.Parameters.AddWithValue("@Dex", HttpUtility.UrlDecode(dex));
             sqlCommand.Parameters.AddWithValue("@Str", HttpUtility.UrlDecode(str));
             sqlCommand.Parameters.AddWithValue("@Con", HttpUtility.UrlDecode(con));
-            sqlCommand.Parameters.AddWithValue("@Int", HttpUtility.UrlDecode(Inti));
+            sqlCommand.Parameters.AddWithValue("@Inte", HttpUtility.UrlDecode(Inte));
             sqlCommand.Parameters.AddWithValue("@Wis", HttpUtility.UrlDecode(Wis));
             sqlCommand.Parameters.AddWithValue("@Cha", HttpUtility.UrlDecode(Cha));
             sqlCommand.Parameters.AddWithValue("@attackOne", HttpUtility.UrlDecode(attackOne));
@@ -307,7 +310,7 @@ namespace ProjectTemplate
             sqlCommand.Parameters.AddWithValue("@equipment", HttpUtility.UrlDecode(equipment));
             sqlCommand.Parameters.AddWithValue("@otherProf", HttpUtility.UrlDecode(otherProf));
             sqlCommand.Parameters.AddWithValue("@languages", HttpUtility.UrlDecode(languages));
-            sqlCommand.Parameters.AddWithValue("@knownSkills", HttpUtility.UrlDecode(knownSkills));
+            //sqlCommand.Parameters.AddWithValue("@knownSkills", HttpUtility.UrlDecode(knownSkills));
 
 
             sqlConnection.Open();
@@ -315,8 +318,15 @@ namespace ProjectTemplate
             //by closing the connection and moving on
             try
             {
+                int rowCheck = sqlCommand.ExecuteNonQuery();
                 sqlConnection.Close();
-                return "success";
+                if (rowCheck.Equals(1)) {
+                    return "success";
+                }
+                else
+                {
+                    return "no rows changed";
+                }
             }
             catch (Exception e)
             {

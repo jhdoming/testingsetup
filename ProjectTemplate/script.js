@@ -107,7 +107,7 @@ function submitEditCharacter() {
     var str = document.getElementById("editStrengthId").value;
     var dex = document.getElementById("editDexterityId").value;
     var con = document.getElementById("editConstitutionId").value;
-    var Int = document.getElementById("editIntelligenceId").value;
+    var Inte = document.getElementById("editIntelligenceId").value;
     var Wis = document.getElementById("editWisdomId").value;
     var Cha = document.getElementById("editCharismaId").value;
     var armorClass = document.getElementById("editArmorclassId").value;
@@ -127,7 +127,7 @@ function submitEditCharacter() {
         + "\", \"str\":\"" + encodeURI(str)
         + "\", \"con\":\"" + encodeURI(con)
         + "\", \"dex\":\"" + encodeURI(dex)
-        + "\", \"Inti\":\"" + encodeURI(Int)
+        + "\", \"Inte\":\"" + encodeURI(Inte)
         + "\", \"Wis\":\"" + encodeURI(Wis)
         + "\", \"Cha\":\"" + encodeURI(Cha)
         + "\", \"armorClass\":\"" + encodeURI(armorClass)
