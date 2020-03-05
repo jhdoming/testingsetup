@@ -111,6 +111,16 @@ namespace ProjectTemplate
             return success;
         }
 
+        [WebMethod(EnableSession = true)]
+        public bool LogOff()
+        {
+            //if they log off, then we remove the session.  That way, if they access
+            //again later they have to log back on in order for their ID to be back
+            //in the session!
+            Session.Abandon();
+            return true;
+        }
+
         [WebMethod] //NOTICE: gotta enable session on each individual method
         public String CreateAccount(string uid, string pass)
         {
@@ -188,7 +198,7 @@ namespace ProjectTemplate
 		[WebMethod(EnableSession = true)]
 		public Character[] GetCharacters()
 		{
-			//check out the return type.  It's an array of Character objects.  You can look at our custom Chracter class in this solution to see that it's
+			//check out the return type.  It's an array of Character objects.  You can look at our custom Character class in this solution to see that it's
 			//just a container for public class-level variables.  It's a simple container that asp.net will have no trouble converting into json.  When we return
 			//sets of information, it's a good idea to create a custom container class to represent instances (or rows) of that information, and then return an array of those objects.
 			//Keeps everything simple.
@@ -211,7 +221,7 @@ namespace ProjectTemplate
 				sqlDa.Fill(sqlDt);
 
 				//loop through each row in the dataset, creating instances
-				//of our container class Account.  Fill each acciount with
+				//of our container class Account.  Fill each account with
 				//data from the rows, then dump them in a list.
 				List<Character> characters = new List<Character>();
 				for (int i = 0; i < sqlDt.Rows.Count; i++)
@@ -224,17 +234,20 @@ namespace ProjectTemplate
                         _attackOne = sqlDt.Rows[i]["attackOne"].ToString(),
                         _attackTwo = sqlDt.Rows[i]["attackTwo"].ToString(),
                         _attackThree = sqlDt.Rows[i]["attackThree"].ToString(),
+                        _health = Convert.ToInt32(sqlDt.Rows[i]["health"]),
                         _level =Convert.ToInt32(sqlDt.Rows[i]["level"]),
                         _str = Convert.ToInt32(sqlDt.Rows[i]["str"]),
                         _dex = Convert.ToInt32(sqlDt.Rows[i]["dex"]),
-                        _int = Convert.ToInt32(sqlDt.Rows[i]["int"]),
+                        _int = Convert.ToInt32(sqlDt.Rows[i]["inte"]),
                         _wis = Convert.ToInt32(sqlDt.Rows[i]["wis"]),
                         _cha = Convert.ToInt32(sqlDt.Rows[i]["cha"]),
+                        _con = Convert.ToInt32(sqlDt.Rows[i]["con"]),
                         _armorClass = Convert.ToInt32(sqlDt.Rows[i]["armorClass"]),
                         _equipment = sqlDt.Rows[i]["equipment"].ToString().Split(','),
                         _otherProf = sqlDt.Rows[i]["otherProf"].ToString().Split(','),
                         _languages = sqlDt.Rows[i]["languages"].ToString().Split(','),
                         _knownSkills = sqlDt.Rows[i]["knownSkills"].ToString().Split(','),
+                        _knownSaves = sqlDt.Rows[i]["knownSaves"].ToString().Split(','),
                     });
 				}
 				//convert the list of accounts to an array and return!
@@ -312,6 +325,88 @@ namespace ProjectTemplate
                 sqlConnection.Close();
             }
 
+
+
+        //EXAMPLE OF AN UPDATE QUERY WITH PARAMS PASSED IN
+        [WebMethod(EnableSession = true)]
+        public String UpdateCharacter(string CharName, string Class, string Race, string Level, string Health, string str, string con, string dex, string Inte, string Wis, string Cha, string attackOne, string attackTwo, string attackThree, string armorClass, string equipment, string otherProf, string languages)//, string knownSkills)
+        {
+            string sqlConnectString = getConString();
+
+            //this is a simple update, with parameters to pass in values
+            string sqlUpdate =
+                "UPDATE byteme.Character SET " +
+                "Class=@Class, " +
+                "Race=@Race, " +
+                "Level=@Level, " +
+                "Health=@Health, " +
+                "Dex=@dex, " +
+                "Str=@str, " +
+                "Con=@con, " +
+                "Inte=@Inte, " +
+                "Wis=@Wis, " +
+                "Cha=@Cha, " +
+                "AttackOne=@attackOne, " +
+                "AttackTwo=@attackTwo, " +
+                "AttackThree=@attackThree, " +
+                "ArmorClass=@armorClass, " +
+                "Equipment=@equipment, " +
+                "OtherProf=@otherProf, " +
+                "Languages=@languages " +
+                "WHERE " +
+                "UserID = @userId " +
+                "AND " +
+                "CharName = @CharName";
+            //COMMENTING TO CHECK IF QUERY WORKS
+            //"KnownSkills=@knownSkills " +
+
+
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            MySqlCommand sqlCommand = new MySqlCommand(sqlUpdate, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@userId", Session["userId"]);
+            sqlCommand.Parameters.AddWithValue("@CharName", HttpUtility.UrlDecode(CharName));
+            sqlCommand.Parameters.AddWithValue("@Class", HttpUtility.UrlDecode(Class));
+            sqlCommand.Parameters.AddWithValue("@Race", HttpUtility.UrlDecode(Race));
+            sqlCommand.Parameters.AddWithValue("@Level", HttpUtility.UrlDecode(Level));
+            sqlCommand.Parameters.AddWithValue("@Health", HttpUtility.UrlDecode(Health));
+            sqlCommand.Parameters.AddWithValue("@Dex", HttpUtility.UrlDecode(dex));
+            sqlCommand.Parameters.AddWithValue("@Str", HttpUtility.UrlDecode(str));
+            sqlCommand.Parameters.AddWithValue("@Con", HttpUtility.UrlDecode(con));
+            sqlCommand.Parameters.AddWithValue("@Inte", HttpUtility.UrlDecode(Inte));
+            sqlCommand.Parameters.AddWithValue("@Wis", HttpUtility.UrlDecode(Wis));
+            sqlCommand.Parameters.AddWithValue("@Cha", HttpUtility.UrlDecode(Cha));
+            sqlCommand.Parameters.AddWithValue("@attackOne", HttpUtility.UrlDecode(attackOne));
+            sqlCommand.Parameters.AddWithValue("@attackTwo", HttpUtility.UrlDecode(attackTwo));
+            sqlCommand.Parameters.AddWithValue("@attackThree", HttpUtility.UrlDecode(attackThree));
+            sqlCommand.Parameters.AddWithValue("@armorClass", HttpUtility.UrlDecode(armorClass));
+            sqlCommand.Parameters.AddWithValue("@equipment", HttpUtility.UrlDecode(equipment));
+            sqlCommand.Parameters.AddWithValue("@otherProf", HttpUtility.UrlDecode(otherProf));
+            sqlCommand.Parameters.AddWithValue("@languages", HttpUtility.UrlDecode(languages));
+            //sqlCommand.Parameters.AddWithValue("@knownSkills", HttpUtility.UrlDecode(knownSkills));
+
+
+            sqlConnection.Open();
+            //we're using a try/catch so that if the query errors out we can handle it gracefully
+            //by closing the connection and moving on
+            try
+            {
+                int rowCheck = sqlCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+                if (rowCheck.Equals(1)) {
+                    return "success";
+                }
+                else
+                {
+                    return "no rows changed";
+                }
+            }
+            catch (Exception e)
+            {
+                sqlConnection.Close();
+                return e.ToString();
+            }
+        }
 
     }
 }

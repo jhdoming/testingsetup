@@ -4,6 +4,12 @@
     <title>Features & Traits</title>
     <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function () {
+            postTraits();
+        });
+    </script>
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -14,62 +20,6 @@
     <!-- midieval font -->
     <link href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap" rel="stylesheet">
 
-    <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
-    <script type="text/javascript">function TestButtonHandler() {
-            var webMethod = "ProjectServices.asmx/TestConnection";
-            var parameters = "{}";
-
-            //jQuery ajax method
-            //adding comment to test
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    alert(responseFromServer);
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-        }
-
-        function createAccount() {
-            var id = document.getElementById("createId").value;
-            var pass = document.getElementById("createPass").value;
-
-            var webMethod = "ProjectServices.asmx/createAccount";
-
-            var parameters = "{\"uid\":\"" + encodeURI(id) + "\", \"pass\":\"" + encodeURI(pass) + "\"}";
-
-
-            //jQuery ajax method
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    if (responseFromServer == true) {
-                        alert(responseFromServer);
-                        //window.location.replace("index.html");
-                    }
-                    else {
-                        alert(responseFromServer);
-                    }
-                    //after creating an account, sends you back to the login page (works here but also works when password isnt set right)
-                    //window.location.replace("index.html");
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-        }</script>
 
     <style type="text/css">
 
@@ -148,8 +98,6 @@
             height: 100px;
             resize: none; /* Remove this if you want the user to resize the textarea */
         }
-
-
     </style>
 
 </head>
@@ -231,19 +179,19 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-2">
-                            <button type="button" onclick="mainpage.html">Home</button>
+                            <button type="button" onclick="window.location.href = 'mainpage.html';">Home</button>
                         </div>
                         <div class="col-2">
-                            <button type="button">Edit</button>
+                            <button type="button" onclick="window.location.href = 'editCharacter.html';">Edit</button>
                         </div>
                         <div class="col-2">
-                            <button type="button" onclick="characterSheet.html">Chracter</button>
+                            <button type="button" onclick="window.location.href = 'characterSheet.html';">Character</button>
                         </div>
                         <div class="col-2">
-                            <button type="button" onclick="skills.html">Skills</button>
+                            <button type="button" onclick="window.location.href = 'skills.html';">Skills</button>
                         </div>
                         <div class="col-2">
-                            <button type="button" onclick="spells.html">Spells</button>
+                            <button type="button" onclick="window.location.href = 'spells.html';">Spells</button>
                         </div>
                     </div>
                 </div>

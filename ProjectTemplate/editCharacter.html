@@ -4,7 +4,12 @@
     <title>Create Account</title>
     <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function () {
+            postEditCharacter();
+        });
+    </script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -14,64 +19,6 @@
     <!-- midieval font -->
     <link href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap" rel="stylesheet">
 
-    <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
-    <script type="text/javascript">
-        function TestButtonHandler() {
-            var webMethod = "ProjectServices.asmx/TestConnection";
-            var parameters = "{}";
-
-            //jQuery ajax method
-            //adding comment to test
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    alert(responseFromServer);
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-        }
-
-        function createAccount() {
-            var id = document.getElementById("createId").value;
-            var pass = document.getElementById("createPass").value;
-
-            var webMethod = "ProjectServices.asmx/createAccount";
-
-            var parameters = "{\"uid\":\"" + encodeURI(id) + "\", \"pass\":\"" + encodeURI(pass) + "\"}";
-
-
-            //jQuery ajax method
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    if (responseFromServer == true) {
-                        alert(responseFromServer);
-                        //window.location.replace("index.html");
-                    }
-                    else {
-                        alert(responseFromServer);
-                    }
-                    //after creating an account, sends you back to the login page (works here but also works when password isnt set right)
-                    //window.location.replace("index.html");
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-        }
-    </script>
 
     <style type="text/css">
 
@@ -90,7 +37,7 @@
         }
 
         .card {
-            width: 1300px;
+            width: 1800px;
             height: 700px;
             margin-bottom: auto;
             margin-top: auto;
@@ -132,11 +79,11 @@
             margin-left: 5px;
         }
 
-        .row{
+        .row {
             text-align: left;
         }
 
-        .topics{
+        .topics {
             text-decoration: underline;
             font-weight: bold;
         }
@@ -145,13 +92,11 @@
         }*/
         input {
             text-align: center;
-
         }
 
-        .ccForm{
+        .ccForm {
             margin-left: 5px;
         }
-
     </style>
 
 </head>
@@ -166,7 +111,7 @@
 
                 <!-- Header for the form -->
                 <div class="card-header">
-                    <h3>Create A Character</h3>
+                    <h3>Edit Character</h3>
                 </div>
 
                 <!-- Create a form to capture all character information -->
@@ -192,7 +137,7 @@
                     <!-- Row 1: Inputs-->
                     <div class="row">
                         <div class="col-3">
-                            <input type="text" class="userInput" id="editNameId">
+                            <input type="text" class="userInput" id="editNameId" disabled>
                         </div>
                         <div class="col-3">
                             <input type="text" class="userInput" id="editClassId">
@@ -233,7 +178,7 @@
                             <input type="text" class="userInput" id="editDexterityId">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="userInput" id="editConsitutionId">
+                            <input type="text" class="userInput" id="editConstitutionId">
                         </div>
                     </div>
 
@@ -243,7 +188,7 @@
                             <label class="topics">Intelligence</label>
                         </div>
                         <div class="col-3">
-                            <label class="topics">wisdom</label>
+                            <label class="topics">Wisdom</label>
                         </div>
                         <div class="col-3">
                             <label class="topics">Charisma</label>
@@ -453,9 +398,9 @@
                 <div class="card-footer">
                     <div class="d-flex flex-row">
                         <div class="col-12">
-                            <button type="button">Save Changes</button>
+                            <button type="button" onclick="submitEditCharacter()">Save Changes</button>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
