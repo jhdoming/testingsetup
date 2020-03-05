@@ -257,7 +257,7 @@ function submitEditCharacter() {
             var responsefromserver = msg.d;
             alert(responsefromserver);
             window.location.href = 'characterSheet.html';
-        }
+        },
     });
 }
 
@@ -321,14 +321,15 @@ function postCharacterSheet() {
 }
 
 function postTraits() {
-    var webMethod = "ProjectServices.asmx/GetCharacters";
+
     $.ajax({
         type: "POST",
-        url: webMethod,
+        url: "ProjectServices.asmx/GetCharacters",
+
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (data) {
-            var characterArray = data.d;
+        success: function (data1) {
+            var characterArray = data1.d;
             var characterID = localStorage.getItem('charid');
             var attack1Array = characterArray[characterID]._attackOne.split(",");
             var attack2Array = characterArray[characterID]._attackTwo.split(",");
@@ -342,6 +343,24 @@ function postTraits() {
             $("#attack3").val(attack3Array[1]);
             $("#damage3").val(attack3Array[2]);
             $("#equipment").val(characterArray[characterID]._equipment);
+
+            var parameters = "{\"charclass\":\"" + encodeURI(characterArray[characterID]._class) + "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: "ProjectServices.asmx/GetFeatures",
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data2) {
+                    var featuresArray = data2.d;
+                    var features = featuresArray[characterArray[characterID]._level]._features;
+                    $("#features").val(features);
+                },
+                error: function (e) {
+                    alert(e.toString());
+                }
+            });
         }
     });
 }
@@ -481,3 +500,4 @@ function deleteCharacter(slot) {
         window.location.reload(true);
     }
 }
+
