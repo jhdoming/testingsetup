@@ -354,16 +354,27 @@ function postTraits() {
             var attack1Array = characterArray[characterID]._attackOne.split(",");
             var attack2Array = characterArray[characterID]._attackTwo.split(",");
             var attack3Array = characterArray[characterID]._attackThree.split(",");
+            var equpimentArray = characterArray[characterID]._equipment;
+
             console.log(attack1Array);
+            console.log(equpimentArray);
+
             $("#traits-class").val(characterArray[characterID]._class);
             $("#traits-race").val(characterArray[characterID]._race);
-            $("#attack1").val(attack1Array[1]);
-            $("#damage2").val(attack1Array[2]);
-            $("#attack2").val(attack2Array[1]);
+            $("#attack1").val(attack1Array[0]);
+            $("#bonus1").val(attack1Array[1]);
+            $("#damage1").val(attack1Array[2]);
+            $("#attack2").val(attack2Array[0]);
+            $("#bonus2").val(attack2Array[1]);
             $("#damage2").val(attack2Array[2]);
-            $("#attack3").val(attack3Array[1]);
+            $("#attack3").val(attack3Array[0]);
+            $("#bonus3").val(attack3Array[1]);
             $("#damage3").val(attack3Array[2]);
-            $("#equipment").val(characterArray[characterID]._equipment);
+            //$("#equipment").val(characterArray[characterID]._equipment);
+
+            var equipmentTextarea = document.getElementById("equipment");
+            equipmentTextarea.value = equpimentArray.join("\n");
+            console.log(equipmentTextarea.value);
         }
     });
 }
