@@ -356,10 +356,14 @@ function postSkills() {
             var characterArray = data.d;
             var characterID = localStorage.getItem('charid');
             var skillsArray = characterArray[characterID]._knownSkills;
+            var savesArray = characterArray[characterID]._knownSaves;
+
+
             
             console.log(characterArray)
             console.log(characterID)
             console.log(skillsArray);
+            console.log(savesArray)
             //<input type="checkbox" name="tag_1" id="tag_1" value="yes" php echo ($dbvalue['tag_1'] == 1 ? 'checked' : '');?>>
             //      if (skillsArray.startswith("Checked")) {
             //    Checkbox2.Checked = true;
@@ -369,13 +373,27 @@ function postSkills() {
             //}
 
          
-                if (skillsArray[0].name == "knownSkills") {
-                    //if (skillsArray[x].checked == true) {
-                    //    Checkbox2.Checked = true;
-                    //}
-                    print("yes");
-                }
-            
+            //if (skillsArray[0] == "Persuasion") {
+            //        //if (skillsArray[x].checked == true) {
+            //        //    Checkbox2.Checked = true;
+            //        //}
+            //    console.log("yes");
+            //    $('input[name="knownSkills"]').prop("checked", true);
+
+            //    //known.Checked = true;
+            //    }
+
+            for (i = 0; i < skillsArray.length; i++) {
+                $("input[name='knownSkills']").filter(function () {
+                    return skillsArray[i].indexOf(this.value) != -1;
+                }).prop("checked", true);
+            }
+
+            for (i = 0; i < savesArray.length; i++) {
+                $("input[name='knownSaves']").filter(function () {
+                    return savesArray[i].indexOf(this.value) != -1;
+                }).prop("checked", true);
+            }
 
             //var skillsArray = characterArray[characterID]._knownSkills.split(",");
             //var attack1Array = characterArray[characterID]._attackOne.split(",");
