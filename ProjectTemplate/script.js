@@ -354,6 +354,7 @@ function postTraits() {
             var attack1Array = characterArray[characterID]._attackOne.split(",");
             var attack2Array = characterArray[characterID]._attackTwo.split(",");
             var attack3Array = characterArray[characterID]._attackThree.split(",");
+            console.log(attack1Array);
             $("#traits-class").val(characterArray[characterID]._class);
             $("#traits-race").val(characterArray[characterID]._race);
             $("#attack1").val(attack1Array[1]);
@@ -377,16 +378,62 @@ function postSkills() {
         success: function (data) {
             var characterArray = data.d;
             var characterID = localStorage.getItem('charid');
-            var skillsArray = characterArray[characterID]._knownSkills.split(",");
-            $("#traits-class").val(characterArray[characterID]._class);
-            $("#traits-race").val(characterArray[characterID]._race);
-            $("#attack1").val(attack1Array[1]);
-            $("#damage2").val(attack1Array[2]);
-            $("#attack2").val(attack2Array[1]);
-            $("#damage2").val(attack2Array[2]);
-            $("#attack3").val(attack3Array[1]);
-            $("#damage3").val(attack3Array[2]);
-            $("#equipment").val(characterArray[characterID]._equipment);
+            var skillsArray = characterArray[characterID]._knownSkills;
+            var savesArray = characterArray[characterID]._knownSaves;
+            var profArray = characterArray[characterID]._otherProf;
+            var languagesArray = characterArray[characterID]._languages;
+
+
+
+
+
+
+            
+            console.log(characterArray)
+            console.log(characterID)
+            console.log(skillsArray);
+            console.log(savesArray)
+            console.log(profArray);
+            console.log(languagesArray);
+            
+
+            for (i = 0; i < skillsArray.length; i++) {
+                $("input[name='knownSkills']").filter(function () {
+                    return skillsArray[i].indexOf(this.value) != -1;
+                }).prop("checked", true);
+            }
+
+            for (i = 0; i < savesArray.length; i++) {
+                $("input[name='knownSaves']").filter(function () {
+                    return savesArray[i].indexOf(this.value) != -1;
+                }).prop("checked", true);
+            }
+
+            // create variable to store other proficiency text area id, then join the values in array into the text area
+            // each in a new line. console.log to see that it captures values. 
+            var otherProfTextarea = document.getElementById("otherProfi");
+            otherProfTextarea.value = profArray.join("\n");
+            console.log(otherProfTextarea.value);
+
+            var languagesTextarea = document.getElementById("languages");
+            languagesTextarea.value = languagesArray.join("\n");
+            console.log(languagesTextarea.value);
+
+
+            
+            //$("#traits-class").val(characterArray[characterID]._class);
+            //$("#traits-race").val(characterArray[characterID]._race);
+            //$("#attack1").val(attack1Array[1]);
+            //$("#damage2").val(attack1Array[2]);
+            //$("#attack2").val(attack2Array[1]);
+            //$("#damage2").val(attack2Array[2]);
+            //$("#attack3").val(attack3Array[1]);
+            //$("#damage3").val(attack3Array[2]);
+            //$("#equipment").val(characterArray[characterID]._equipment);
+
+
+
+
         }
     });
 }
