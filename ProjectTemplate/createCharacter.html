@@ -17,28 +17,6 @@
     <link href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap" rel="stylesheet">
 
     <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
-    <script type="text/javascript">
-        function TestButtonHandler() {
-            var webMethod = "ProjectServices.asmx/TestConnection";
-            var parameters = "{}";
-
-            //jQuery ajax method
-            //adding comment to test
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    var responseFromServer = msg.d;
-                    alert(responseFromServer);
-                },
-                error: function (e) {
-                    alert("this code will only execute if javascript is unable to access the webservice");
-                }
-            });
-        }
 
         function createAccount() {
             var id = document.getElementById("createId").value;
@@ -82,7 +60,7 @@
     <style type="text/css">
 
         html, body {
-            background-image: url('http://getwallpapers.com/wallpaper/full/5/d/a/59857.jpg#.Xk2UTrtIIdU.link');
+            background-image: url('application_background.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             font-family: MedievalSharp;
@@ -456,9 +434,9 @@
                     <div class="d-flex flex-row">
                         <div class="col-12">
                             <!-- when clicking the button it will run the createCharacter function in the script.js file -->
-                            <button type="button" class="btn createAccount_btn" onclick="javascript: createCharacter();">Submit</button>
+                            <button type="button" class="btn createAccount_btn" onclick="createCharacter();">Submit</button>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
