@@ -37,7 +37,7 @@
         }
 
         .card {
-            width: 800px;
+            width: 1000px;
             height: 600px;
             margin-bottom: auto;
             margin-top: auto;
@@ -120,6 +120,9 @@
 
                 <div class="row">
                     <div class="col">
+                        <label class="topics">Deletion</label>
+                    </div>
+                    <div class="col">
                         <label class="topics">Character Name:</label>
                     </div>
                     <div class="col">
@@ -136,8 +139,10 @@
 
                 <div class="row">
                     <div class="col">
-                        <!-- This is just to test to make sure it works -->
-                        <input type="text" class="input" id="name1" onclick='location.href ="characterSheet.html";' disabled>
+                        <button disabled type="button" id="delete1" , onclick="deleteCharacter(0)">Delete Character 1 </button>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="input" id="name1" disabled>
                     </div>
                     <div class="col">
                         <input type="text" class="input" id="class1" disabled>
@@ -151,6 +156,9 @@
                 </div>
 
                 <div class="row">
+                    <div class="col">
+                        <button disabled type="button" id="delete2" , onclick="deleteCharacter(1)">Delete Character 2 </button>
+                    </div>
                     <div class="col">
                         <input type="text" class="input" id="name2" disabled>
                     </div>
@@ -167,6 +175,10 @@
 
                 <div class="row">
                     <div class="col">
+                        <!-- This is just to test to make sure it works -->
+                        <button disabled type="button" id="delete3" , onclick="deleteCharacter(2)">Delete Character 3 </button>
+                    </div>
+                    <div class="col">
                         <input type="text" class="input" id="name3" disabled>
                     </div>
                     <div class="col">
@@ -182,6 +194,9 @@
 
                 <div class="row">
                     <div class="col">
+                        <button disabled type="button" id="delete4" , onclick="deleteCharacter(3)">Delete Character 4 </button>
+                    </div>
+                    <div class="col">
                         <input type="text" class="input" id="name4" disabled>
                     </div>
                     <div class="col">
@@ -191,7 +206,7 @@
                         <input type="text" class="input" id="level4" disabled>
                     </div>
                     <div class="col">
-                        <button disabled type="button" id="openchar4" , onclick="openCharacterSheet(3)">Open Character 4 </button>
+                        <button disabled type="button" id="openchar4" onclick="openCharacterSheet(3)">Open Character 4 </button>
                     </div>
                 </div>
 
@@ -200,15 +215,16 @@
                 <div class="card-footer">
                     <div class="row">
                         <div>
-                            <button type="button" , onclick="window.location.href = 'createCharacter.html';">Create New Character</button>
+                            <button type="button"  id="createNewCharacter" onclick="window.location.href = 'createCharacter.html';">Create New Character</button>
                         </div>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <div>
-                            <button type="button" , onclick="window.location.href = '';">Delete Character</button>
+                        <!---<div>
+                            <button type="button"  onclick="window.location.href = '';">Delete Character</button>
                         </div>
+                        --->
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <div>
-                            <button type="button" , onclick="logOff()">Log Off</button>
+                            <button type="button"  onclick="logOff()">Log Off</button>
                         </div>
                     </div>
                 </div>

@@ -106,26 +106,26 @@ function createCharacter() {
     var webMethod = "ProjectServices.asmx/CreateCharacter";
 
     // pass the info to the server
-    var parameters = "{\"CharName\":\"" + encodeURI(charName) +
-                      "\",\"Class\":\"" + encodeURI(charClass) +
-                      "\",\"Race\":\"" + encodeURI(charRace) +
-                      "\",\"Level\":\"" + encodeURI(charLevel) +
-                      "\",\"Health\":\"" + encodeURI(charHealth) +
-                      "\",\"Str\":\"" + encodeURI(charStrength) +
-                      "\",\"Dex\":\"" + encodeURI(charDexterity) +
-                      "\",\"Con\":\"" + encodeURI(charConstitution) +
-                      "\",\"Inte\":\"" + encodeURI(charIntelligence) +
-                      "\",\"Wis\":\"" + encodeURI(charWisdom) +
-                      "\",\"Cha\":\"" + encodeURI(charCharisma) +
-                      "\",\"AttackOne\":\"" + encodeURI(charAttack1) +
-                      "\",\"AttackTwo\":\"" + encodeURI(charAttack2) +
-                      "\",\"AttackThree\":\"" + encodeURI(charAttack3) +
-                      "\",\"ArmorClass\":\"" + encodeURI(charArmorclass) +
-                      "\",\"Equipment\":\"" + encodeURI(charEquipment) +
-                      "\",\"OtherProf\":\"" + encodeURI(charOtherProficiency) +
-                      "\",\"Languages\":\"" + encodeURI(charLanguage) +
-                      "\",\"KnownSkills\":\"" + encodeURI(charSkills) +
-                      "\",\"KnownSaves\":\"" + encodeURI(charKnownSaves) +
+    var parameters = "{\"characterName\":\"" + encodeURI(charName) +
+                      "\",\"charClass\":\"" + encodeURI(charClass) +
+                      "\",\"race\":\"" + encodeURI(charRace) +
+                      "\",\"level\":\"" + encodeURI(charLevel) +
+                      "\",\"health\":\"" + encodeURI(charHealth) +
+                      "\",\"strength\":\"" + encodeURI(charStrength) +
+                      "\",\"dexterity\":\"" + encodeURI(charDexterity) +
+                      "\",\"constitution\":\"" + encodeURI(charConstitution) +
+                      "\",\"intelligence\":\"" + encodeURI(charIntelligence) +
+                      "\",\"wisdom\":\"" + encodeURI(charWisdom) +
+                      "\",\"charisma\":\"" + encodeURI(charCharisma) +
+                      "\",\"attack1\":\"" + encodeURI(charAttack1) +
+                      "\",\"attack2\":\"" + encodeURI(charAttack2) +
+                      "\",\"attack3\":\"" + encodeURI(charAttack3) +
+                      "\",\"armor\":\"" + encodeURI(charArmorclass) +
+                      "\",\"equipment\":\"" + encodeURI(charEquipment) +
+                      "\",\"proficiency\":\"" + encodeURI(charOtherProficiency) +
+                      "\",\"languages\":\"" + encodeURI(charLanguage) +
+                      "\",\"skills\":\"" + encodeURI(charSkills) +
+                      "\",\"saves\":\"" + encodeURI(charKnownSaves) +
                       "\"}";
 
     $.ajax({
@@ -136,10 +136,11 @@ function createCharacter() {
         dataType: "json",
         success: function (msg) {
             var responseFromServer = msg.d;
-            alert(msg.d);
+            alert(responseFromServer);
+            location.href = 'mainpage.html';
         },
         error: function (e) {
-            alert("Error: something went wrong");
+            alert(e.toString());
         }
     });
 }
@@ -175,7 +176,6 @@ function logon() {
         }
     });
 }
-
 
 //logs the user off both at the client and at the server
 function logOff() {
@@ -255,7 +255,7 @@ function submitEditCharacter() {
         dataType: "json",
         success: function (msg) {
             var responsefromserver = msg.d;
-            console.log(responsefromserver);
+            alert(responsefromserver);
             window.location.href = 'characterSheet.html';
         }
     });
@@ -387,21 +387,31 @@ function postMainPage(){
                     break;
                 case 1:
                     $("#openchar1").prop("disabled", false);
+                    $("#delete1").prop("disabled", false);
                     break;
                 case 2:
                     $("#openchar1").prop("disabled", false);
+                    $("#delete1").prop("disabled", false);
                     $("#openchar2").prop("disabled", false);
+                    $("#delete2").prop("disabled", false);
                     break;
                 case 3:
                     $("#openchar1").prop("disabled", false);
+                    $("#delete1").prop("disabled", false);
                     $("#openchar2").prop("disabled", false);
+                    $("#delete2").prop("disabled", false);
                     $("#openchar3").prop("disabled", false);
+                    $("#delete3").prop("disabled", false);
                     break;
                 case 4:
                     $("#openchar1").prop("disabled", false);
+                    $("#delete1").prop("disabled", false);
                     $("#openchar2").prop("disabled", false);
+                    $("#delete2").prop("disabled", false);
                     $("#openchar3").prop("disabled", false);
+                    $("#delete3").prop("disabled", false);
                     $("#openchar4").prop("disabled", false);
+                    $("#delete4").prop("disabled", false);
                     break;
             }
 
@@ -421,6 +431,7 @@ function postMainPage(){
             $("#class4").val(characterArray[3]._class);
             $("#level4").val(characterArray[3]._level);
 
+            $("#createNewCharacter").prop("disabled", true);
         }
     })
 }
@@ -430,3 +441,43 @@ function openCharacterSheet(id) {
     window.location.href = 'characterSheet.html';
 }
 
+function deleteCharacter(slot) {
+    switch (slot) {
+        case 0:
+            var charName = document.getElementById("name1").value;
+            break
+        case 1:
+            var charName = document.getElementById("name2").value;
+            break
+        case 2:
+            var charName = document.getElementById("name3").value;
+            break
+        case 3:
+            var charName = document.getElementById("name4").value;
+            break
+    }
+    console.log(charName);
+    var parameters = "{\"charName\":\"" + encodeURI(charName) + "\"}";
+    var webMethod = "ProjectServices.asmx/DeleteCharacter";
+    var check = confirm("Are you sure you want to delete this character? There is no return...");
+
+    if (check == true) {
+        $.ajax({
+            type: "POST",
+            url: webMethod,
+            data: parameters,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                var responseFromServer = msg.d;
+                if (responseFromServer == true) {
+                    console.log(responseFromServer);
+                }
+                else {
+                    alert(responseFromServer);
+                }
+            }
+        });
+        window.location.reload(true);
+    }
+}
