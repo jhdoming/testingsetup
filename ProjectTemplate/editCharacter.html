@@ -23,7 +23,7 @@
     <style type="text/css">
 
         html, body {
-            background-image: url('http://getwallpapers.com/wallpaper/full/5/d/a/59857.jpg#.Xk2UTrtIIdU.link');
+            background-image: url('application_background.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             font-family: MedievalSharp;
@@ -137,13 +137,36 @@
                     <!-- Row 1: Inputs-->
                     <div class="row">
                         <div class="col-3">
-                            <input type="text" class="userInput" id="editNameId">
+                            <input type="text" class="userInput" id="editNameId" disabled>
                         </div>
                         <div class="col-3">
-                            <input type="text" class="userInput" id="editClassId">
+                            <select id="editClassId">
+                                <option value="Barbarian">Barbarian</option>
+                                <option value="Bard">Bard</option>
+                                <option value="Cleric">Cleric</option>
+                                <option value="Druid">Druid</option>
+                                <option value="Fighter">Fighter</option>
+                                <option value="Monk">Monk</option>
+                                <option value="Paladin">Paladin</option>
+                                <option value="Ranger">Ranger</option>
+                                <option value="Rogue">Rogue</option>
+                                <option value="Sorcerer">Sorcerer</option>
+                                <option value="Warlock">Warlock</option>
+                                <option value="Wizard">Wizard</option>
+                            </select>
                         </div>
                         <div class="col-3">
-                            <input type="text" class="userInput" id="editRaceId">
+                            <select id="editRaceId">
+                                <option value="Dragonborn">Dragonborn</option>
+                                <option value="Dwarf">Dwarf</option>
+                                <option value="Elf">Elf</option>
+                                <option value="Gnome">Gnome</option>
+                                <option value="Half-Elf">Half-Elf</option>
+                                <option value="Half-Orc">Half-Orc</option>
+                                <option value="Halfling">Halfling</option>
+                                <option value="Human">Human</option>
+                                <option value="Tiefling">Tiefling</option>
+                            </select>
                         </div>
                         <div class="col-3">
                             <input type="number" class="userInput" id="editLevelId" min="1" max="20" style="width: 10vw">
@@ -283,7 +306,7 @@
                     <!-- Row 7: Known Skills Label-->
                     <div class="row">
                         <div class="col-12">
-                            <label class="topics">Known Skills:</label>
+                            <label class="topics">Known Skills (Select Three):</label>
                         </div>
                     </div>
 
@@ -398,7 +421,7 @@
                 <div class="card-footer">
                     <div class="d-flex flex-row">
                         <div class="col-12">
-                            <button type="button">Save Changes</button>
+                            <button type="button" onclick="submitEditCharacter()">Save Changes</button>
                         </div>
 
                     </div>

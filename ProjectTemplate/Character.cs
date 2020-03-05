@@ -32,6 +32,9 @@ namespace ProjectTemplate
         public string[] _languages {get; set;}
         public string[] _knownSkills {get; set;}
         public string[] _knownSaves { get; set; }
+        public string[] _features { get; set; }
+        public string[] _traits { get; set; }
+
 
 
     }
