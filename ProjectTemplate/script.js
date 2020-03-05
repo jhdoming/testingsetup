@@ -145,6 +145,7 @@ function submitEditCharacter() {
         success: function (msg) {
             var responsefromserver = msg.d;
             console.log(responsefromserver);
+            window.location.href = 'characterSheet.html';
         }
     });
 }
