@@ -27,7 +27,7 @@ function createAccount() {
             //window.location.replace("index.html");
         },
         error: function (e) {
-            alert("this code will only execute if javascript is unable to access the webservice");
+            console.log("this code will only execute if javascript is unable to access the webservice");
         }
     });
 }
@@ -140,7 +140,8 @@ function createCharacter() {
             location.href = 'mainpage.html';
         },
         error: function (e) {
-            alert(e.toString());
+            alert("Error. Please Try again Later.");
+            console.log(e.toString());
         }
     });
 }
@@ -168,11 +169,11 @@ function logon() {
                 location.href ="mainpage.html";
             }
             else {
-                alert("bad credentials");
+                alert("Either Username or Password is Incorrect. Please try again.");
             }
         },
         error: function (e) {
-            alert("this code will only execute if javascript is unable to access the webservice");
+            console.log("this code will only execute if javascript is unable to access the webservice");
         }
     });
 }
@@ -193,13 +194,13 @@ function logOff() {
 				//showPanel('logonPanel');
                 //HideMenu();
                 window.location.replace("index.html");
-                alert(msg.d);
+                console.log(msg.d);
 			}
 			else {
 			}
 		},
 		error: function (e) {
-			alert("boo...");
+			console.log("boo...");
 		}
 	});
 }
@@ -255,7 +256,7 @@ function submitEditCharacter() {
         dataType: "json",
         success: function (msg) {
             var responsefromserver = msg.d;
-            alert(responsefromserver);
+            console.log(responsefromserver);
             window.location.href = 'characterSheet.html';
         },
     });
@@ -316,6 +317,25 @@ function postCharacterSheet() {
             $("#intelligenceId").val(characterArray[characterID]._int);
             $("#wisdomId").val(characterArray[characterID]._wis);
             $("#charismaId").val(characterArray[characterID]._cha);
+            $("#hitPointsId").val(characterArray[characterID]._health);
+            var x = characterArray[characterID]._level
+            switch (true) {
+                case (x < 5):
+                    $("#proficiencyId").val(+2);
+                    break;
+                case (x < 9):
+                    $("#proficiencyId").val(+3);
+                    break;
+                case (x < 13):
+                    $("#proficiencyId").val(+4);
+                    break;
+                case (x < 17):
+                    $("#proficiencyId").val(+5);
+                    break;
+                case (x < 20):
+                    $("#proficiencyId").val(+6);
+                    break;
+            }
         }
     });
 }
@@ -343,24 +363,6 @@ function postTraits() {
             $("#attack3").val(attack3Array[1]);
             $("#damage3").val(attack3Array[2]);
             $("#equipment").val(characterArray[characterID]._equipment);
-
-            var parameters = "{\"charclass\":\"" + encodeURI(characterArray[characterID]._class) + "\"}";
-
-            $.ajax({
-                type: "POST",
-                url: "ProjectServices.asmx/GetFeatures",
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data2) {
-                    var featuresArray = data2.d;
-                    var features = featuresArray[characterArray[characterID]._level]._features;
-                    $("#features").val(features);
-                },
-                error: function (e) {
-                    alert(e.toString());
-                }
-            });
         }
     });
 }
@@ -490,7 +492,7 @@ function deleteCharacter(slot) {
             success: function (msg) {
                 var responseFromServer = msg.d;
                 if (responseFromServer == true) {
-                    console.log(responseFromServer);
+                    alert(responseFromServer);
                 }
                 else {
                     alert(responseFromServer);

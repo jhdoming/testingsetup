@@ -436,11 +436,11 @@ namespace ProjectTemplate
                 sqlConnection.Close();
                 if (rowCheck.Equals(1))
                 {
-                    return "success";
+                    return "Successfully Edited Character";
                 }
                 else
                 {
-                    return "no rows changed";
+                    return "Changes Failed";
                 }
             }
             catch (Exception e)
